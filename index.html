@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>The Number</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: #080810; color: #f0eee8; font-family: Georgia, serif; min-height: 100vh; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.3} }
+@keyframes glow  { 0%,100%{text-shadow:0 0 40px rgba(245,200,66,.3)} 50%{text-shadow:0 0 80px rgba(245,200,66,.8)} }
+@keyframes drift { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-6px)} }
+@keyframes fadein{ from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
+.wrap { max-width: 540px; margin: 0 auto; padding: 48px 20px 60px; text-align: center; }
+.stamp { font-family: monospace; font-size: 10px; letter-spacing: .3em; color: #444; text-transform: uppercase; border: 1px solid #222; padding: 4px 14px; border-radius: 3px; display: inline-block; margin-bottom: 36px; }
+h1 { font-size: clamp(24px,7vw,52px); line-height: 1.15; margin-bottom: 20px; }
+.gold { color: #f5c842; }
+.hook { font-family: monospace; font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 36px; }
+.hook em { color: #aaa; font-style: normal; }
+.teaser { position: relative; width: 220px; height: 120px; margin: 0 auto 32px; display: flex; align-items: center; justify-content: center; }
+.tnum { font-size: 88px; font-weight: 900; color: #f5c842; filter: blur(13px); opacity: .45; user-select: none; animation: glow 3s ease-in-out infinite, drift 4s ease-in-out infinite; }
+.tover { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; }
+.tlock { font-size: 20px; animation: drift 3s ease-in-out infinite; }
+.thint { font-family: monospace; font-size: 9px; letter-spacing: .25em; color: #444; text-transform: uppercase; }
+.watchers { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,60,60,.07); border: 1px solid rgba(255,60,60,.2); border-radius: 100px; padding: 6px 16px; font-family: monospace; font-size: 12px; color: #ff6b6b; margin-bottom: 28px; }
+.wdot { width: 7px; height: 7px; border-radius: 50%; background: #ff4444; animation: pulse 1.2s infinite; }
+.testis { display: flex; flex-direction: column; gap: 10px; margin-bottom: 32px; }
+.testi { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.07); border-left: 2px solid #f5c842; border-radius: 8px; padding: 11px 14px; text-align: left; font-size: 12px; color: #888; line-height: 1.6; }
+.testi b { color: #bbb; display: block; margin-bottom: 3px; font-size: 11px; }
+.tiers { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+.tier { padding: 12px 16px; border-radius: 8px; border: 1px solid rgba(255,255,255,.1); background: rgba(255,255,255,.03); cursor: pointer; font-family: monospace; font-size: 11px; color: #666; transition: all .2s; text-align: center; min-width: 110px; }
+.tier.on { border-color: #f5c842; color: #f5c842; background: rgba(245,200,66,.08); box-shadow: 0 0 18px rgba(245,200,66,.2); }
+.tp { font-family: Georgia,serif; font-size: 22px; font-weight: 900; display: block; margin-bottom: 3px; }
+.tn { font-size: 9px; letter-spacing: .15em; text-transform: uppercase; display: block; margin-bottom: 5px; opacity: .7; }
+.td { font-size: 10px; color: #555; }
+.consent { display: flex; align-items: center; gap: 8px; justify-content: center; margin-bottom: 18px; }
+.consent input { accent-color: #f5c842; cursor: pointer; }
+.consent label { font-family: monospace; font-size: 10px; color: #444; cursor: pointer; }
+.consent a { color: #555; }
+#paybtn { display: block; width: 100%; max-width: 320px; margin: 0 auto 10px; padding: 17px 32px; background: #f5c842; color: #080810; font-family: Georgia,serif; font-size: 17px; font-weight: 900; border: none; border-radius: 4px; cursor: pointer; transition: all .15s; box-shadow: 0 0 30px rgba(245,200,66,.3); }
+#paybtn:active { transform: scale(.97); }
+.skip { font-family: monospace; font-size: 11px; color: #333; margin-bottom: 44px; margin-top: 6px; }
+.skip span { cursor: pointer; text-decoration: underline; color: #444; }
+.ftitle { font-family: monospace; font-size: 10px; letter-spacing: .3em; color: #333; text-transform: uppercase; margin-bottom: 12px; }
+.fi { display: flex; align-items: center; gap: 10px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,.04); font-family: monospace; font-size: 12px; }
+.ff { font-size: 15px; } .fn { flex: 1; color: #777; }
+.fb { font-size: 9px; text-transform: uppercase; background: rgba(245,200,66,.1); color: #f5c842; padding: 2px 6px; border-radius: 100px; }
+.fa { font-size: 10px; color: #333; }
+#reveal { display: none; min-height: 100vh; flex-direction: column; align-items: center; justify-content: center; padding: 60px 20px; text-align: center; }
+#reveal.on { display: flex; }
+.rtag { font-family: monospace; font-size: 10px; letter-spacing: .5em; color: #444; text-transform: uppercase; margin-bottom: 40px; opacity: 0; transition: opacity .6s; }
+.rtag.v { opacity: 1; }
+.rnum { font-size: clamp(90px,22vw,170px); font-weight: 900; color: #f5c842; line-height: 1; animation: glow 2s infinite; opacity: 0; transform: scale(.6); transition: all .8s cubic-bezier(.34,1.56,.64,1); }
+.rnum.v { opacity: 1; transform: scale(1); }
+.rsub { font-family: monospace; font-size: 13px; color: #666; margin: 10px 0 48px; opacity: 0; transition: opacity .5s .4s; }
+.rsub.v { opacity: 1; }
+.rcard { background: rgba(255,255,255,.03); border: 1px solid rgba(255,255,255,.08); border-radius: 16px; padding: 24px 28px; max-width: 340px; width: 100%; margin-bottom: 28px; text-align: left; font-family: monospace; font-size: 12px; color: #666; line-height: 1.8; opacity: 0; transform: translateY(14px); transition: all .6s ease; }
+.rcard.v { opacity: 1; transform: translateY(0); }
+.rbtns { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.rb { padding: 12px 22px; border-radius: 4px; font-family: monospace; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer; opacity: 0; transition: opacity .5s .4s; }
+.rb.v { opacity: 1; }
+.rbp { background: #f5c842; color: #080810; border: none; }
+.rbs { background: transparent; border: 1px solid #333; color: #555; }
+footer { padding: 20px; text-align: center; font-family: monospace; font-size: 10px; color: #333; border-top: 1px solid rgba(255,255,255,.05); line-height: 1.8; }
+footer a { color: #444; }
+</style>
+</head>
+<body>
+
+<div id="landing">
+<div class="wrap">
+  <div class="stamp">classified · one-time digital access</div>
+  <h1>There is a number.<br><span class="gold">You don't know it.</span><br>Everyone else does.</h1>
+  <p class="hook">Thousands of people already saw it.<br>They paid <em>exactly 1 euro</em> to find out.<br>You haven't. <em>Doesn't that bother you?</em></p>
+  <div class="teaser">
+    <div class="tnum" id="tnum">2,847</div>
+    <div class="tover"><div class="tlock">locked</div><div class="thint">pay to reveal</div></div>
+  </div>
+  <div class="watchers"><span class="wdot"></span><span id="wcount">23</span> people watching right now</div>
+  <div class="testis">
+    <div class="testi"><b>Jordan M. 🇺🇸 · 2 hours ago</b>"I told myself I wouldn't. I paid. No regrets. The number is insane."</div>
+    <div class="testi"><b>Chiara B. 🇮🇹 · 4 hours ago</b>"Sent it to my sister. She called me immediately. She paid too."</div>
+    <div class="testi"><b>Anon 🇩🇪 · 6 hours ago</b>"It's a euro. You'll spend more just thinking about whether to pay."</div>
+  </div>
+  <div class="tiers">
+    <div class="tier on" id="t0" onclick="pick(0)"><span class="tp">1</span><span class="tn">The Count</span><span class="td">The number. Nothing else.</span></div>
+    <div class="tier" id="t1" onclick="pick(1)"><span class="tp" style="color:#42d4f5">3</span><span class="tn">The Feed</span><span class="td">Number + who paid recently.</span></div>
+    <div class="tier" id="t2" onclick="pick(2)"><span class="tp" style="color:#d442f5">5</span><span class="tn">Leaderboard</span><span class="td">Full stats + countries.</span></div>
+  </div>
+  <div class="consent">
+    <input type="checkbox" id="ok"/>
+    <label for="ok">I agree to instant digital delivery.</label>
+  </div>
+  <button id="paybtn" onclick="pay()">Show me the number</button>
+  <div class="skip"><span onclick="skip()">or close this page and never know</span></div>
+  <hr style="border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 28px;max-width:320px"/>
+  <div class="ftitle">paying right now</div>
+  <div id="feed"></div>
+</div>
+</div>
+
+<div id="reveal">
+  <div class="rtag" id="rtag">access granted</div>
+  <div class="rnum" id="rnum">0</div>
+  <div class="rsub" id="rsub">people paid before you.</div>
+  <div class="rcard" id="rcard">Each of them faced the same choice.<br>Curiosity won. <span style="color:#f5c842">It always does.</span><br><br><span id="rex"></span></div>
+  <div class="rbtns">
+    <button class="rb rbp" id="rb1" onclick="shr()">Send to someone who won't pay</button>
+    <button class="rb rbs" id="rb2" onclick="bk()">Back</button>
+  </div>
+</div>
+
+<footer id="footer">The Number &middot; Digital content &middot; No refunds after delivery.</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var LK=["https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00","https://buy.stripe.com/test_7sY8wO9vRbRo56xbdfc7u01","https://buy.stripe.com/test_9B65kC37t5t02Ypdlnc7u02"];
+var SU="https://aesthetic-chimera-847866.netlify.app";
+var PR=["1 euro","3 euro","5 euro"];
+var CL=["#f5c842","#42d4f5","#d442f5"];
+var NM=["Marco R.","Sophie L.","Tyler K.","Yuki T.","Elena V.","James O.","Priya S.","Lucas M.","Ana B.","Chen W.","Nadia F.","Omar H.","Giulia P.","Sam D.","Felix B.","Leila Z."];
+var FL=["IT","US","DE","FR","GB","JP","BR","ES","CA","NL"];
+var tier=0, count=2847, w=20;
+try{var s=localStorage.getItem("tn");if(s)count=parseInt(s);}catch(e){}
+
+function qp(k){try{return new URLSearchParams(location.search).get(k);}catch(e){return null;}}
+
+if(qp("paid")==="true"){
+  count++;try{localStorage.setItem("tn",count);}catch(e){}
+  tier=parseInt(qp("tier")||"0");
+  document.getElementById("landing").style.display="none";
+  reveal();
+} else {
+  for(var i=0;i<5;i++) row(Math.floor(Math.random()*55)+5);
+  setInterval(function(){row(0);},3900);
+  setInterval(function(){w+=Math.random()>.5?1:-1;w=Math.max(8,Math.min(44,w));document.getElementById("wcount").textContent=Math.round(w);},3100);
+}
+
+function rnd(a){return a[Math.floor(Math.random()*a.length)];}
+function row(ago){
+  var d=document.createElement("div");d.className="fi";
+  var a=ago===0?"just now":ago<60?ago+"s ago":Math.floor(ago/60)+"m ago";
+  d.innerHTML='<span class="ff">'+rnd(FL)+'</span><span class="fn">'+rnd(NM)+'</span><span class="fb">paid</span><span class="fa">'+a+'</span>';
+  var f=document.getElementById("feed");
+  f.insertBefore(d,f.firstChild);
+  if(f.children.length>7)f.removeChild(f.lastChild);
+}
+
+function pick(i){
+  tier=i;
+  for(var j=0;j<3;j++)document.getElementById("t"+j).className="tier"+(j===i?" on":"");
+  document.getElementById("paybtn").style.background=CL[i];
+}
+
+function pay(){
+  if(!document.getElementById("ok").checked){alert("Please check the box to continue.");return;}
+  var a=document.createElement("a");
+  a.href=LK[tier];
+  a.target="_self";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+function skip(){
+  document.querySelector("h1").innerHTML='Are you sure?<br><span class="gold">One euro.</span><br>You will think about this.';
+  var el=document.querySelector(".skip");
+  el.innerHTML='<span style="color:#444">Ok, I would rather not know.</span>';
+  setTimeout(function(){el.innerHTML='<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">Ok fine. Show me.</span>';},2200);
+}
+
+function reveal(){
+  document.getElementById("reveal").className="on";
+  var c=CL[tier];
+  document.getElementById("rnum").style.color=c;
+  document.getElementById("rnum").style.textShadow="0 0 60px "+c+"88";
+  document.getElementById("rsub").textContent="people paid "+PR[tier]+" before you.";
+  setTimeout(function(){document.getElementById("rtag").className="rtag v";},300);
+  setTimeout(function(){
+    document.getElementById("rnum").className="rnum v";
+    document.getElementById("rsub").className="rsub v";
+    var s=Date.now();(function go(){var p=Math.min((Date.now()-s)/2000,1),e=1-Math.pow(1-p,4);document.getElementById("rnum").textContent=Math.floor(e*count).toLocaleString();if(p<1)requestAnimationFrame(go);})();
+  },600);
+  setTimeout(function(){
+    var h="";
+    if(tier===0)h='Now you know. <span style="color:#f5c842">Send this to a friend who won\'t pay.</span>';
+    else{h="Recent payers:<br><br>";for(var i=0;i<4;i++)h+=rnd(FL)+" "+rnd(NM)+"<br>";
+    if(tier>=2){h+="<br>Countries:<br>";[["US","34%"],["GB","18%"],["DE","11%"],["IT","9%"],["JP","7%"]].forEach(function(x){h+=x[0]+' <span style="color:'+c+'">'+x[1]+'</span><br>';});}}
+    document.getElementById("rex").innerHTML=h;
+    document.getElementById("rcard").className="rcard v";
+  },2800);
+  setTimeout(function(){document.getElementById("rb1").className="rb rbp v";document.getElementById("rb2").className="rb rbs v";},3300);
+}
+
+function shr(){
+  var m="There is a number. Thousands of people paid to see it. I know what it is. You don't.";
+  if(navigator.share)navigator.share({title:"The Number",text:m,url:SU});
+  else window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(m)+"&url="+enco
