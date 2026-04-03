@@ -203,6 +203,15 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
     <span id="btntxt">Show me the number &mdash; &#8364;1</span>
   </button>
   <div class="skip"><span onclick="skip()" id="s-skip">or close this page and never know</span></div>
+  <div style="margin-bottom:16px">
+    <select id="lang-sel" onchange="changeLang(this.value)" style="background:#111;color:#555;border:1px solid #222;border-radius:4px;padding:4px 10px;font-family:monospace;font-size:11px;cursor:pointer">
+      <option value="en">🇬🇧 EN</option>
+      <option value="it">🇮🇹 IT</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="es">🇪🇸 ES</option>
+    </select>
+  </div>
 
   <hr class="div"/>
   <div class="ftitle" id="s-feed-title">&#9654; paying right now</div>
@@ -422,7 +431,7 @@ function applyLang() {
 var PR = ["\u20AC1","\u20AC3","\u20AC5"];
 var CL = ["#f5c842","#42d4f5","#d442f5"];
 var NAMES = ["Marco R.","Sophie L.","Tyler K.","Yuki T.","Elena V.","James O.","Priya S.","Lucas M.","Ana B.","Chen W.","Nadia F.","Omar H.","Giulia P.","Sam D.","Felix B.","Leila Z.","Ryo I.","Mia C.","Noah A.","Zara P."];
-var FLAGS = ["\uD83C\uDDEE\uD83C\uDDF9","\uD83C\uDDFA\uD83C\uDDF8","\uD83C\uDDE9\uD83C\uDDEA","\uD83C\uDDEB\uD83C\uDDF7","\uD83C\uDDEC\uD83C\uDDE7","\uD83C\uDDEF\uD83C\uDDF5","\uD83C\uDDE7\uD83C\uDDF7","\uD83C\uDDEA\uD83C\uDDF8","\uD83C\uDDE8\uD83C\uDDE6","\uD83C\uDDF3\uD83C\uDDF1","\uD83C\uDDE6\uD83C\uDDFA","\uD83C\uDDF0\uD83C\uDDF7","\uD83C\uDDF8\uD83C\uDDEA","\uD83C\uDDF5\uD83C\uDDF9"];
+var FLAGS = ["🇮🇹","🇺🇸","🇩🇪","🇫🇷","🇬🇧","🇯🇵","🇧🇷","🇪🇸","🇨🇦","🇳🇱","🇦🇺","🇰🇷","🇸🇪","🇵🇹"];
 var COUNTRIES = [["🇺🇸 USA","34%",34],["🇬🇧 UK","18%",18],["🇩🇪 Germany","11%",11],["🇮🇹 Italy","9%",9],["🇯🇵 Japan","7%",7],["🇧🇷 Brazil","5%",5],["🇨🇦 Canada","4%",4],["Other","12%",12]];
 var SPOILER_WORDS = ["thousand","hundred","million","billion","mille","cento","mila","milion","tausend","cent","millon","millier","cien","mil ","hundert","trilion","billion","dozens","dozens","scores","many","few","lots","hundreds","thousands","millions"];
 
@@ -443,6 +452,7 @@ function qp(k) {
 
 // ═══ INIT ═══
 applyLang();
+try { document.getElementById("lang-sel").value = lang; } catch(e) {}
 document.getElementById("hook1txt").innerHTML = t.hook1 + "<br>" + t.hook2 + "<br>";
 
 if (qp("paid") === "true") {
@@ -464,6 +474,12 @@ if (qp("paid") === "true") {
     w = Math.max(9, Math.min(46, w));
     document.getElementById("wcount").textContent = Math.round(w);
   }, 3100);
+}
+
+function changeLang(l) {
+  lang = l; t = T[l];
+  applyLang();
+  document.getElementById("hook1txt").innerHTML = t.hook1+"<br>"+t.hook2+"<br>";
 }
 
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
