@@ -107,23 +107,23 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
 </style>
 </head>
 <body>
- 
+
 <div id="landing">
 <div class="wrap">
   <div style="text-align:right;margin-bottom:12px">
     <span style="font-family:monospace;font-size:10px;color:#444;margin-right:8px;text-transform:uppercase;letter-spacing:.1em">Language</span>
     <select onchange="changeLang(this.value)" id="langdrop" style="background:#111;color:#aaa;border:1px solid #333;border-radius:4px;padding:4px 10px;font-family:monospace;font-size:11px;cursor:pointer">
-      <option value="en">🇬🇧 EN</option>
-      <option value="it">🇮🇹 IT</option>
-      <option value="de">🇩🇪 DE</option>
-      <option value="fr">🇫🇷 FR</option>
-      <option value="es">🇪🇸 ES</option>
+      <option value="en"><img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle"> EN</option>
+      <option value="it"><img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> IT</option>
+      <option value="de"><img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> DE</option>
+      <option value="fr"><img src="https://flagcdn.com/16x12/fr.png" style="width:16px;vertical-align:middle"> FR</option>
+      <option value="es"><img src="https://flagcdn.com/16x12/es.png" style="width:16px;vertical-align:middle"> ES</option>
     </select>
   </div>
   <div class="stamp" id="el-stamp">classified · one-time digital access</div>
   <h1 id="el-h1">There is a number.<br><span class="gold">You don't know it.</span><br>Everyone else does.</h1>
   <p class="hook" id="el-hook">Thousands of people already saw it.<br>They paid <em>exactly €1</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em></p>
- 
+
   <div class="teaser">
     <div class="tnum" id="tnum">2,847</div>
     <div class="tover">
@@ -131,18 +131,18 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
       <div class="thint" id="el-payreveal">pay to reveal</div>
     </div>
   </div>
- 
+
   <div class="watchers">
     <span class="wdot"></span>
     <span id="wcount">23</span>&nbsp;<span id="el-watching">people watching right now</span>
   </div>
- 
+
   <div class="testis">
-    <div class="testi"><b id="el-t1w">Jordan M. 🇺🇸 · 2 hours ago</b><span id="el-t1t">"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</span></div>
-    <div class="testi"><b id="el-t2w">Chiara B. 🇮🇹 · 4 hours ago</b><span id="el-t2t">"Sent it to my sister. She called me immediately. She paid too."</span></div>
-    <div class="testi"><b id="el-t3w">Anon 🇩🇪 · 6 hours ago</b><span id="el-t3t">"It's a euro. You will spend more just thinking about whether to pay."</span></div>
+    <div class="testi"><b id="el-t1w">Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · 2 hours ago</b><span id="el-t1t">"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</span></div>
+    <div class="testi"><b id="el-t2w">Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · 4 hours ago</b><span id="el-t2t">"Sent it to my sister. She called me immediately. She paid too."</span></div>
+    <div class="testi"><b id="el-t3w">Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · 6 hours ago</b><span id="el-t3t">"It's a euro. You will spend more just thinking about whether to pay."</span></div>
   </div>
- 
+
   <div class="tiers">
     <div class="tier on0" id="t0" onclick="pick(0)">
       <span class="tp">€1</span>
@@ -160,27 +160,27 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
       <span class="td" id="el-t2d">Full stats,<br>countries & peak hour.</span>
     </div>
   </div>
- 
+
   <div class="consent">
     <input type="checkbox" id="ok"/>
     <label for="ok" id="el-consent">I agree to instant digital delivery.</label>
   </div>
- 
+
   <button id="paybtn" onclick="pay()">
     <div class="rpl"></div>
     <span id="el-btn">Show me the number — €1</span>
   </button>
- 
+
   <div class="skip"><span onclick="skip()" id="el-skip">or close this page and never know</span></div>
- 
- 
- 
+
+
+
   <hr class="div"/>
   <div class="ftitle" id="el-feedtitle">▶ paying right now</div>
   <div id="feed"></div>
 </div>
 </div>
- 
+
 <div id="reveal">
   <div class="rtag" id="rtag">✦ access granted ✦</div>
   <div class="rnum" id="rnum">0</div>
@@ -209,9 +209,9 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
     </div>
   </div>
 </div>
- 
+
 <footer>The Number · Digital content · No refunds after delivery.</footer>
- 
+
 <script>
 var LINKS = [
   "https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00",
@@ -220,26 +220,41 @@ var LINKS = [
 ];
 var SU = "https://simoleon93.github.io/TheNumber";
 var CL = ["#f5c842","#42d4f5","#d442f5"];
-var FLAGS = ["🇮🇹","🇺🇸","🇩🇪","🇫🇷","🇬🇧","🇯🇵","🇧🇷","🇪🇸","🇨🇦","🇳🇱","🇦🇺","🇰🇷","🇸🇪","🇵🇹"];
+var FLAGS = [
+  '<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/fr.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/jp.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/br.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/es.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/ca.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/nl.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/au.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/kr.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/se.png" style="width:16px;vertical-align:middle">',
+  '<img src="https://flagcdn.com/16x12/pt.png" style="width:16px;vertical-align:middle">'
+];
 var NAMES = ["Marco R.","Sophie L.","Tyler K.","Yuki T.","Elena V.","James O.","Priya S.","Lucas M.","Ana B.","Chen W.","Nadia F.","Omar H.","Giulia P.","Sam D.","Felix B.","Leila Z.","Ryo I.","Mia C."];
-var COUNTRIES = [["🇺🇸 USA","34%",34],["🇬🇧 UK","18%",18],["🇩🇪 Germany","11%",11],["🇮🇹 Italy","9%",9],["🇯🇵 Japan","7%",7],["🇧🇷 Brazil","5%",5],["Other","16%",16]];
+var COUNTRIES = [["<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> USA","34%",34],["<img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle"> UK","18%",18],["<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> Germany","11%",11],["<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> Italy","9%",9],["<img src="https://flagcdn.com/16x12/jp.png" style="width:16px;vertical-align:middle"> Japan","7%",7],["<img src="https://flagcdn.com/16x12/br.png" style="width:16px;vertical-align:middle"> Brazil","5%",5],["Other","16%",16]];
 var SPOILERS = ["thousand","hundred","million","billion","mille","cento","mila","milion","tausend","cent","hundert","scores","dozens","hundreds","thousands","millions","trilion"];
- 
+
 var tier = 0;
 var count = 2847;
 var lang = "en";
 try { var ss = localStorage.getItem("tn"); if(ss) count = parseInt(ss); } catch(e){}
- 
+
 var T = {
-  en:{stamp:"classified · one-time digital access",h1:"There is a number.<br><span class=\"gold\">You don't know it.</span><br>Everyone else does.",hook:"Thousands of people already saw it.<br>They paid <em>exactly €1</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em>",payreveal:"pay to reveal",watching:"people watching right now",t1w:"Jordan M. 🇺🇸 · 2 hours ago",t1t:'"I told myself I wouldn\'t. I paid. Zero regrets. The number is insane."',t2w:"Chiara B. 🇮🇹 · 4 hours ago",t2t:'"Sent it to my sister. She called me immediately. She paid too."',t3w:"Anon 🇩🇪 · 6 hours ago",t3t:'"It\'s a euro. You will spend more just thinking about whether to pay."',t0n:"🔢 The Count",t0d:"The number.<br>Nothing else.",t1n:"👥 The Feed",t1d:"Number + names<br>of recent payers.",t2n:"🏆 Leaderboard",t2d:"Full stats,<br>countries & peak hour.",consent:"I agree to instant digital delivery.",btn:"Show me the number",skip:"or close this page and never know",feedtitle:"▶ paying right now",ctitle:"💬 What others said (no spoilers)",nocomm:"Be the first to comment.",cftitle:"Leave your reaction",cwarn:"🔒 No spoilers — do not reveal the number.",csubmit:"Post reaction",nameph:"Your name",countryph:"🌍 Country",textph:"Share your reaction without revealing the number...",cerr:"🔒 Spoiler detected. No numbers allowed.",rsub:"people paid before you.",sharebtn:"Send to someone who won't pay",skip2:"Yeah, I'd rather not know.",skip3:"Ok fine. Show me.",suretitle:"Are you sure?",sure2:"One euro.",sure3:"You will think about this."},
-  it:{stamp:"classificato · accesso digitale una tantum",h1:"C'è un numero.<br><span class=\"gold\">Tu non lo sai.</span><br>Tutti gli altri sì.",hook:"Migliaia di persone lo hanno già visto.<br>Hanno pagato <em>esattamente €1</em> per scoprirlo.<br>Tu non l'hai ancora fatto. <em>Non ti dà fastidio?</em>",payreveal:"paga per scoprire",watching:"persone stanno guardando ora",t1w:"Jordan M. 🇺🇸 · 2 ore fa",t1t:'"Mi ero detto che non avrei pagato. Ho pagato. Zero rimpianti. Il numero è assurdo."',t2w:"Chiara B. 🇮🇹 · 4 ore fa",t2t:'"L\'ho mandato a mia sorella. Mi ha chiamato subito. Ha pagato anche lei."',t3w:"Anonimo 🇩🇪 · 6 ore fa",t3t:'"È un euro. Spenderai di più solo a pensare se pagare o no."',t0n:"🔢 Il Numero",t0d:"Solo il numero.<br>Niente altro.",t1n:"👥 Il Feed",t1d:"Numero + nomi<br>di chi ha pagato.",t2n:"🏆 Classifica",t2d:"Statistiche complete,<br>paesi e ora di punta.",consent:"Acconsento alla consegna digitale immediata.",btn:"Mostrami il numero",skip:"oppure chiudi e non saperlo mai",feedtitle:"▶ stanno pagando ora",ctitle:"💬 Cosa dicono gli altri (zero spoiler)",nocomm:"Sii il primo a commentare.",cftitle:"Lascia la tua reazione",cwarn:"🔒 Nessuno spoiler — non rivelare il numero.",csubmit:"Pubblica reazione",nameph:"Il tuo nome",countryph:"🌍 Paese",textph:"Condividi la tua reazione senza rivelare il numero...",cerr:"🔒 Spoiler rilevato. Nessun numero consentito.",rsub:"persone hanno pagato prima di te.",sharebtn:"Mandalo a qualcuno che non pagherà",skip2:"Sì, preferisco non saperlo.",skip3:"Ok va bene. Mostrami.",suretitle:"Sei sicuro?",sure2:"Un euro.",sure3:"Ci penserai."},
-  de:{stamp:"klassifiziert · einmaliger digitaler Zugang",h1:"Es gibt eine Zahl.<br><span class=\"gold\">Du weißt sie nicht.</span><br>Alle anderen schon.",hook:"Tausende Menschen haben sie bereits gesehen.<br>Sie zahlten <em>genau €1</em> dafür.<br>Du noch nicht. <em>Stört dich das nicht?</em>",payreveal:"zahlen um zu sehen",watching:"Personen schauen jetzt zu",t1w:"Jordan M. 🇺🇸 · vor 2 Stunden",t1t:'"Ich hatte mir gesagt, ich zahle nicht. Dann tat ich es. Keine Reue. Die Zahl ist unglaublich."',t2w:"Chiara B. 🇮🇹 · vor 4 Stunden",t2t:'"Ich schickte es meiner Schwester. Sie rief mich sofort an. Sie hat auch gezahlt."',t3w:"Anon 🇩🇪 · vor 6 Stunden",t3t:'"Es ist ein Euro. Du wirst mehr damit verbringen, darüber nachzudenken."',t0n:"🔢 Die Zahl",t0d:"Nur die Zahl.<br>Nichts anderes.",t1n:"👥 Der Feed",t1d:"Zahl + Namen<br>von Zahlern.",t2n:"🏆 Rangliste",t2d:"Vollst. Statistiken,<br>Länder & Spitzenstunde.",consent:"Ich stimme der sofortigen digitalen Lieferung zu.",btn:"Zeig mir die Zahl",skip:"oder schließ diese Seite und wisse es nie",feedtitle:"▶ zahlen gerade jetzt",ctitle:"💬 Was andere sagten (keine Spoiler)",nocomm:"Sei der Erste, der kommentiert.",cftitle:"Hinterlasse deine Reaktion",cwarn:"🔒 Keine Spoiler — verrate die Zahl nicht.",csubmit:"Reaktion posten",nameph:"Dein Name",countryph:"🌍 Land",textph:"Teile deine Reaktion, ohne die Zahl zu verraten...",cerr:"🔒 Spoiler erkannt. Keine Zahlen erlaubt.",rsub:"Personen haben vor dir gezahlt.",sharebtn:"Sende es jemandem, der nicht zahlt",skip2:"Ja, ich möchte es lieber nicht wissen.",skip3:"Ok, zeig mir es.",suretitle:"Bist du sicher?",sure2:"Ein Euro.",sure3:"Du wirst darüber nachdenken."},
-  fr:{stamp:"classifié · accès numérique unique",h1:"Il y a un nombre.<br><span class=\"gold\">Tu ne le sais pas.</span><br>Tout le monde d'autre si.",hook:"Des milliers de personnes l'ont déjà vu.<br>Ils ont payé <em>exactement €1</em> pour le savoir.<br>Pas toi encore. <em>Ça ne te dérange pas?</em>",payreveal:"payer pour révéler",watching:"personnes regardent maintenant",t1w:"Jordan M. 🇺🇸 · il y a 2h",t1t:'"Je m\'étais dit que non. J\'ai payé. Zéro regret. Le nombre est dingue."',t2w:"Chiara B. 🇮🇹 · il y a 4h",t2t:'"Envoyé à ma sœur. Elle m\'a appelé immédiatement. Elle a payé aussi."',t3w:"Anon 🇩🇪 · il y a 6h",t3t:'"C\'est un euro. Tu passeras plus de temps à y réfléchir."',t0n:"🔢 Le Nombre",t0d:"Le nombre.<br>Rien d'autre.",t1n:"👥 Le Feed",t1d:"Nombre + noms<br>des derniers payeurs.",t2n:"🏆 Classement",t2d:"Stats complètes,<br>pays & heure de pointe.",consent:"J'accepte la livraison numérique immédiate.",btn:"Montrez-moi le nombre",skip:"ou fermer cette page et ne jamais savoir",feedtitle:"▶ paient en ce moment",ctitle:"💬 Ce que les autres ont dit (sans spoilers)",nocomm:"Sois le premier à commenter.",cftitle:"Laisse ta réaction",cwarn:"🔒 Pas de spoilers — ne révèle pas le nombre.",csubmit:"Poster la réaction",nameph:"Ton nom",countryph:"🌍 Pays",textph:"Partage ta réaction sans révéler le nombre...",cerr:"🔒 Spoiler détecté. Pas de chiffres.",rsub:"personnes ont payé avant toi.",sharebtn:"Envoyer à quelqu'un qui ne paiera pas",skip2:"Oui, je préfère ne pas savoir.",skip3:"Ok, montre-moi.",suretitle:"Tu es sûr?",sure2:"Un euro.",sure3:"Tu y penseras."},
-  es:{stamp:"clasificado · acceso digital único",h1:"Hay un número.<br><span class=\"gold\">Tú no lo sabes.</span><br>Todos los demás sí.",hook:"Miles de personas ya lo han visto.<br>Pagaron <em>exactamente €1</em> para descubrirlo.<br>Tú todavía no. <em>¿No te molesta eso?</em>",payreveal:"paga para revelar",watching:"personas mirando ahora",t1w:"Jordan M. 🇺🇸 · hace 2 horas",t1t:'"Me dije que no pagaría. Pagué. Cero arrepentimientos. El número es una locura."',t2w:"Chiara B. 🇮🇹 · hace 4 horas",t2t:'"Se lo mandé a mi hermana. Me llamó enseguida. Ella también pagó."',t3w:"Anon 🇩🇪 · hace 6 horas",t3t:'"Es un euro. Gastarás más sólo pensando si pagar o no."',t0n:"🔢 El Número",t0d:"El número.<br>Nada más.",t1n:"👥 El Feed",t1d:"Número + nombres<br>de pagadores recientes.",t2n:"🏆 Clasificación",t2d:"Estadísticas completas,<br>países y hora punta.",consent:"Acepto la entrega digital inmediata.",btn:"Muéstrame el número",skip:"o cierra esta página y no saberlo nunca",feedtitle:"▶ pagando ahora mismo",ctitle:"💬 Lo que dijeron otros (sin spoilers)",nocomm:"Sé el primero en comentar.",cftitle:"Deja tu reacción",cwarn:"🔒 Sin spoilers — no reveles el número.",csubmit:"Publicar reacción",nameph:"Tu nombre",countryph:"🌍 País",textph:"Comparte tu reacción sin revelar el número...",cerr:"🔒 Spoiler detectado. No incluyas números.",rsub:"personas pagaron antes que tú.",sharebtn:"Envíalo a alguien que no pagará",skip2:"Sí, prefiero no saber.",skip3:"Ok, muéstrame.",suretitle:"¿Estás seguro?",sure2:"Un euro.",sure3:"Lo pensarás."}
+  en:{stamp:"classified · one-time digital access",h1:"There is a number.<br><span class=\"gold\">You don't know it.</span><br>Everyone else does.",hook:"Thousands of people already saw it.<br>They paid <em>exactly €1</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em>",payreveal:"pay to reveal",watching:"people watching right now",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · 2 hours ago",t1t:'"I told myself I wouldn\'t. I paid. Zero regrets. The number is insane."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · 4 hours ago",t2t:'"Sent it to my sister. She called me immediately. She paid too."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · 6 hours ago",t3t:'"It\'s a euro. You will spend more just thinking about whether to pay."',t0n:"🔢 The Count",t0d:"The number.<br>Nothing else.",t1n:"👥 The Feed",t1d:"Number + names<br>of recent payers.",t2n:"🏆 Leaderboard",t2d:"Full stats,<br>countries & peak hour.",consent:"I agree to instant digital delivery.",btn:"Show me the number",skip:"or close this page and never know",feedtitle:"▶ paying right now",ctitle:"💬 What others said (no spoilers)",nocomm:"Be the first to comment.",cftitle:"Leave your reaction",cwarn:"🔒 No spoilers — do not reveal the number.",csubmit:"Post reaction",nameph:"Your name",countryph:"🌍 Country",textph:"Share your reaction without revealing the number...",cerr:"🔒 Spoiler detected. No numbers allowed.",rsub:"people paid before you.",sharebtn:"Send to someone who won't pay",skip2:"Yeah, I'd rather not know.",skip3:"Ok fine. Show me.",suretitle:"Are you sure?",sure2:"One euro.",sure3:"You will think about this."},
+  it:{stamp:"classificato · accesso digitale una tantum",h1:"C'è un numero.<br><span class=\"gold\">Tu non lo sai.</span><br>Tutti gli altri sì.",hook:"Migliaia di persone lo hanno già visto.<br>Hanno pagato <em>esattamente €1</em> per scoprirlo.<br>Tu non l'hai ancora fatto. <em>Non ti dà fastidio?</em>",payreveal:"paga per scoprire",watching:"persone stanno guardando ora",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · 2 ore fa",t1t:'"Mi ero detto che non avrei pagato. Ho pagato. Zero rimpianti. Il numero è assurdo."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · 4 ore fa",t2t:'"L\'ho mandato a mia sorella. Mi ha chiamato subito. Ha pagato anche lei."',t3w:"Anonimo <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · 6 ore fa",t3t:'"È un euro. Spenderai di più solo a pensare se pagare o no."',t0n:"🔢 Il Numero",t0d:"Solo il numero.<br>Niente altro.",t1n:"👥 Il Feed",t1d:"Numero + nomi<br>di chi ha pagato.",t2n:"🏆 Classifica",t2d:"Statistiche complete,<br>paesi e ora di punta.",consent:"Acconsento alla consegna digitale immediata.",btn:"Mostrami il numero",skip:"oppure chiudi e non saperlo mai",feedtitle:"▶ stanno pagando ora",ctitle:"💬 Cosa dicono gli altri (zero spoiler)",nocomm:"Sii il primo a commentare.",cftitle:"Lascia la tua reazione",cwarn:"🔒 Nessuno spoiler — non rivelare il numero.",csubmit:"Pubblica reazione",nameph:"Il tuo nome",countryph:"🌍 Paese",textph:"Condividi la tua reazione senza rivelare il numero...",cerr:"🔒 Spoiler rilevato. Nessun numero consentito.",rsub:"persone hanno pagato prima di te.",sharebtn:"Mandalo a qualcuno che non pagherà",skip2:"Sì, preferisco non saperlo.",skip3:"Ok va bene. Mostrami.",suretitle:"Sei sicuro?",sure2:"Un euro.",sure3:"Ci penserai."},
+  de:{stamp:"klassifiziert · einmaliger digitaler Zugang",h1:"Es gibt eine Zahl.<br><span class=\"gold\">Du weißt sie nicht.</span><br>Alle anderen schon.",hook:"Tausende Menschen haben sie bereits gesehen.<br>Sie zahlten <em>genau €1</em> dafür.<br>Du noch nicht. <em>Stört dich das nicht?</em>",payreveal:"zahlen um zu sehen",watching:"Personen schauen jetzt zu",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · vor 2 Stunden",t1t:'"Ich hatte mir gesagt, ich zahle nicht. Dann tat ich es. Keine Reue. Die Zahl ist unglaublich."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · vor 4 Stunden",t2t:'"Ich schickte es meiner Schwester. Sie rief mich sofort an. Sie hat auch gezahlt."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · vor 6 Stunden",t3t:'"Es ist ein Euro. Du wirst mehr damit verbringen, darüber nachzudenken."',t0n:"🔢 Die Zahl",t0d:"Nur die Zahl.<br>Nichts anderes.",t1n:"👥 Der Feed",t1d:"Zahl + Namen<br>von Zahlern.",t2n:"🏆 Rangliste",t2d:"Vollst. Statistiken,<br>Länder & Spitzenstunde.",consent:"Ich stimme der sofortigen digitalen Lieferung zu.",btn:"Zeig mir die Zahl",skip:"oder schließ diese Seite und wisse es nie",feedtitle:"▶ zahlen gerade jetzt",ctitle:"💬 Was andere sagten (keine Spoiler)",nocomm:"Sei der Erste, der kommentiert.",cftitle:"Hinterlasse deine Reaktion",cwarn:"🔒 Keine Spoiler — verrate die Zahl nicht.",csubmit:"Reaktion posten",nameph:"Dein Name",countryph:"🌍 Land",textph:"Teile deine Reaktion, ohne die Zahl zu verraten...",cerr:"🔒 Spoiler erkannt. Keine Zahlen erlaubt.",rsub:"Personen haben vor dir gezahlt.",sharebtn:"Sende es jemandem, der nicht zahlt",skip2:"Ja, ich möchte es lieber nicht wissen.",skip3:"Ok, zeig mir es.",suretitle:"Bist du sicher?",sure2:"Ein Euro.",sure3:"Du wirst darüber nachdenken."},
+  fr:{stamp:"classifié · accès numérique unique",h1:"Il y a un nombre.<br><span class=\"gold\">Tu ne le sais pas.</span><br>Tout le monde d'autre si.",hook:"Des milliers de personnes l'ont déjà vu.<br>Ils ont payé <em>exactement €1</em> pour le savoir.<br>Pas toi encore. <em>Ça ne te dérange pas?</em>",payreveal:"payer pour révéler",watching:"personnes regardent maintenant",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · il y a 2h",t1t:'"Je m\'étais dit que non. J\'ai payé. Zéro regret. Le nombre est dingue."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · il y a 4h",t2t:'"Envoyé à ma sœur. Elle m\'a appelé immédiatement. Elle a payé aussi."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · il y a 6h",t3t:'"C\'est un euro. Tu passeras plus de temps à y réfléchir."',t0n:"🔢 Le Nombre",t0d:"Le nombre.<br>Rien d'autre.",t1n:"👥 Le Feed",t1d:"Nombre + noms<br>des derniers payeurs.",t2n:"🏆 Classement",t2d:"Stats complètes,<br>pays & heure de pointe.",consent:"J'accepte la livraison numérique immédiate.",btn:"Montrez-moi le nombre",skip:"ou fermer cette page et ne jamais savoir",feedtitle:"▶ paient en ce moment",ctitle:"💬 Ce que les autres ont dit (sans spoilers)",nocomm:"Sois le premier à commenter.",cftitle:"Laisse ta réaction",cwarn:"🔒 Pas de spoilers — ne révèle pas le nombre.",csubmit:"Poster la réaction",nameph:"Ton nom",countryph:"🌍 Pays",textph:"Partage ta réaction sans révéler le nombre...",cerr:"🔒 Spoiler détecté. Pas de chiffres.",rsub:"personnes ont payé avant toi.",sharebtn:"Envoyer à quelqu'un qui ne paiera pas",skip2:"Oui, je préfère ne pas savoir.",skip3:"Ok, montre-moi.",suretitle:"Tu es sûr?",sure2:"Un euro.",sure3:"Tu y penseras."},
+  es:{stamp:"clasificado · acceso digital único",h1:"Hay un número.<br><span class=\"gold\">Tú no lo sabes.</span><br>Todos los demás sí.",hook:"Miles de personas ya lo han visto.<br>Pagaron <em>exactamente €1</em> para descubrirlo.<br>Tú todavía no. <em>¿No te molesta eso?</em>",payreveal:"paga para revelar",watching:"personas mirando ahora",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · hace 2 horas",t1t:'"Me dije que no pagaría. Pagué. Cero arrepentimientos. El número es una locura."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · hace 4 horas",t2t:'"Se lo mandé a mi hermana. Me llamó enseguida. Ella también pagó."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · hace 6 horas",t3t:'"Es un euro. Gastarás más sólo pensando si pagar o no."',t0n:"🔢 El Número",t0d:"El número.<br>Nada más.",t1n:"👥 El Feed",t1d:"Número + nombres<br>de pagadores recientes.",t2n:"🏆 Clasificación",t2d:"Estadísticas completas,<br>países y hora punta.",consent:"Acepto la entrega digital inmediata.",btn:"Muéstrame el número",skip:"o cierra esta página y no saberlo nunca",feedtitle:"▶ pagando ahora mismo",ctitle:"💬 Lo que dijeron otros (sin spoilers)",nocomm:"Sé el primero en comentar.",cftitle:"Deja tu reacción",cwarn:"🔒 Sin spoilers — no reveles el número.",csubmit:"Publicar reacción",nameph:"Tu nombre",countryph:"🌍 País",textph:"Comparte tu reacción sin revelar el número...",cerr:"🔒 Spoiler detectado. No incluyas números.",rsub:"personas pagaron antes que tú.",sharebtn:"Envíalo a alguien que no pagará",skip2:"Sí, prefiero no saber.",skip3:"Ok, muéstrame.",suretitle:"¿Estás seguro?",sure2:"Un euro.",sure3:"Lo pensarás."}
 };
- 
+
 function rnd(a){return a[Math.floor(Math.random()*a.length)];}
- 
+
 function applyLang(){
   var t=T[lang];
   document.getElementById("el-stamp").textContent=t.stamp;
@@ -275,22 +290,22 @@ function applyLang(){
   document.getElementById("rb1").textContent=t.sharebtn;
   document.getElementById("rsub").textContent=t.rsub;
 }
- 
+
 function changeLang(l){lang=l;applyLang();}
- 
+
 // detect language
 try{
   var bl=(navigator.language||"en").toLowerCase().split("-")[0];
   if(T[bl]){lang=bl;}
 }catch(e){}
- 
+
 // init
 applyLang();
 try{document.getElementById("langdrop").value=lang;}catch(e){}
- 
+
 // detect stripe return
 function qp(k){try{var r=new RegExp("[?&]"+k+"=([^&]*)");var m=location.search.match(r);return m?decodeURIComponent(m[1]):null;}catch(e){return null;}}
- 
+
 if(qp("paid")==="true"){
   count++;
   try{localStorage.setItem("tn",count);}catch(e){}
@@ -309,12 +324,12 @@ if(qp("paid")==="true"){
     document.getElementById("wcount").textContent=Math.round(w);
   },3100);
 }
- 
+
 function initFeed(){
   for(var i=0;i<6;i++) addRow(Math.floor(Math.random()*55)+5);
   setInterval(function(){addRow(0);},3900);
 }
- 
+
 function addRow(ago){
   var list=document.getElementById("feed");
   var d=document.createElement("div");
@@ -324,19 +339,19 @@ function addRow(ago){
   list.insertBefore(d,list.firstChild);
   if(list.children.length>8)list.removeChild(list.lastChild);
 }
- 
+
 function pick(i){
   tier=i;
   for(var j=0;j<3;j++)document.getElementById("t"+j).className="tier"+(j===i?" on"+i:"");
   document.getElementById("paybtn").style.background=CL[i];
   document.getElementById("el-btn").textContent=T[lang].btn+" — €"+[1,3,5][i];
 }
- 
+
 function pay(){
   if(!document.getElementById("ok").checked){alert(T[lang].consent);return;}
   window.location.href=LINKS[tier];
 }
- 
+
 function skip(){
   var t=T[lang];
   document.getElementById("el-h1").innerHTML=t.suretitle+'<br><span class="gold">'+t.sure2+'</span><br>'+t.sure3;
@@ -344,7 +359,7 @@ function skip(){
   el.innerHTML='<span style="color:#555">'+t.skip2+'</span>';
   setTimeout(function(){el.innerHTML='<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">'+t.skip3+'</span>';},2200);
 }
- 
+
 function doReveal(){
   document.getElementById("reveal").className="on";
   var c=CL[tier];
@@ -353,7 +368,7 @@ function doReveal(){
   document.getElementById("rsub").textContent=count.toLocaleString()+" — "+T[lang].rsub;
   document.getElementById("rb1").style.background=c;
   document.getElementById("rb1").style.color="#080810";
- 
+
   setTimeout(function(){document.getElementById("rtag").className="rtag v";},300);
   setTimeout(function(){
     document.getElementById("rnum").className="rnum v";
@@ -370,7 +385,7 @@ function doReveal(){
     loadComments();
   },3800);
 }
- 
+
 function buildExtras(c){
   var html="";
   if(tier===0){
@@ -393,7 +408,7 @@ function buildExtras(c){
   }
   document.getElementById("rcontent").innerHTML=html;
 }
- 
+
 function animNum(to,el){
   var s=Date.now();
   (function loop(){
@@ -402,12 +417,12 @@ function animNum(to,el){
     if(p<1)requestAnimationFrame(loop);
   })();
 }
- 
+
 function loadComments(){
   var seeds=[
-    {name:"Alex K.",country:"🇺🇸",text:"Not what I expected at all. Sent it to my whole team."},
-    {name:"Giulia M.",country:"🇮🇹",text:"Pensavo di sapere la risposta. Non avevo idea."},
-    {name:"Felix B.",country:"🇩🇪",text:"Mein Freund glaubt mir nicht. Er wird selbst zahlen müssen."}
+    {name:"Alex K.",country:"<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle">",text:"Not what I expected at all. Sent it to my whole team."},
+    {name:"Giulia M.",country:"<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle">",text:"Pensavo di sapere la risposta. Non avevo idea."},
+    {name:"Felix B.",country:"<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle">",text:"Mein Freund glaubt mir nicht. Er wird selbst zahlen müssen."}
   ];
   var list=document.getElementById("clist");
   list.innerHTML="";
@@ -417,14 +432,14 @@ function loadComments(){
     list.appendChild(d);
   });
 }
- 
+
 function isSpoiler(txt){
   if(/\d/.test(txt))return true;
   var low=txt.toLowerCase();
   for(var i=0;i<SPOILERS.length;i++)if(low.indexOf(SPOILERS[i])!==-1)return true;
   return false;
 }
- 
+
 function submitC(){
   var name=document.getElementById("c-name").value.trim();
   var country=document.getElementById("c-country").value.trim();
@@ -441,13 +456,13 @@ function submitC(){
   document.getElementById("c-country").value="";
   document.getElementById("c-text").value="";
 }
- 
+
 function shr(){
   var m="There is a number. Thousands of people paid to see it. I know what it is. You don't.";
   if(navigator.share)navigator.share({title:"The Number",text:m,url:SU});
   else window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(m)+"&url="+encodeURIComponent(SU),"_blank");
 }
- 
+
 function bk(){
   document.getElementById("reveal").className="";
   document.getElementById("landing").style.display="block";
