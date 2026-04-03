@@ -110,6 +110,16 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
 
 <div id="landing">
 <div class="wrap">
+  <div style="text-align:right;margin-bottom:12px">
+    <span style="font-family:monospace;font-size:10px;color:#444;margin-right:8px;text-transform:uppercase;letter-spacing:.1em">Language</span>
+    <select onchange="changeLang(this.value)" id="langdrop" style="background:#111;color:#aaa;border:1px solid #333;border-radius:4px;padding:4px 10px;font-family:monospace;font-size:11px;cursor:pointer">
+      <option value="en">🇬🇧 EN</option>
+      <option value="it">🇮🇹 IT</option>
+      <option value="de">🇩🇪 DE</option>
+      <option value="fr">🇫🇷 FR</option>
+      <option value="es">🇪🇸 ES</option>
+    </select>
+  </div>
   <div class="stamp" id="el-stamp">classified · one-time digital access</div>
   <h1 id="el-h1">There is a number.<br><span class="gold">You don't know it.</span><br>Everyone else does.</h1>
   <p class="hook" id="el-hook">Thousands of people already saw it.<br>They paid <em>exactly €1</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em></p>
@@ -163,15 +173,7 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
 
   <div class="skip"><span onclick="skip()" id="el-skip">or close this page and never know</span></div>
 
-  <div class="langsel">
-    <select onchange="changeLang(this.value)" id="langdrop">
-      <option value="en">🇬🇧 English</option>
-      <option value="it">🇮🇹 Italiano</option>
-      <option value="de">🇩🇪 Deutsch</option>
-      <option value="fr">🇫🇷 Français</option>
-      <option value="es">🇪🇸 Español</option>
-    </select>
-  </div>
+
 
   <hr class="div"/>
   <div class="ftitle" id="el-feedtitle">▶ paying right now</div>
@@ -289,8 +291,6 @@ try{document.getElementById("langdrop").value=lang;}catch(e){}
 // detect stripe return
 function qp(k){try{var r=new RegExp("[?&]"+k+"=([^&]*)");var m=location.search.match(r);return m?decodeURIComponent(m[1]):null;}catch(e){return null;}}
 
-initFeed();
-
 if(qp("paid")==="true"){
   count++;
   try{localStorage.setItem("tn",count);}catch(e){}
@@ -298,6 +298,7 @@ if(qp("paid")==="true"){
   document.getElementById("landing").style.display="none";
   doReveal();
 } else {
+  initFeed();
   setInterval(function(){
     var nums=[count.toLocaleString(),(count+17).toLocaleString(),(count-5).toLocaleString()];
     document.getElementById("tnum").textContent=nums[Math.floor(Date.now()/2800)%3];
