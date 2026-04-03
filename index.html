@@ -4,39 +4,38 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>The Number</title>
-<meta name="description" content="There is a number. Thousands of people paid to see it. You don't know it yet."/>
 <meta property="og:title" content="There is a number. You don't know it."/>
 <meta property="og:description" content="Thousands of people paid 1 euro to find out. You still haven't."/>
 <meta property="og:url" content="https://simoleon93.github.io/TheNumber"/>
-<meta name="twitter:card" content="summary_large_image"/>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#080810;color:#f0eee8;font-family:Georgia,serif;min-height:100vh;overflow-x:hidden}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 @keyframes glow{0%,100%{text-shadow:0 0 40px rgba(245,200,66,.3)}50%{text-shadow:0 0 85px rgba(245,200,66,.85)}}
 @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
-@keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadein{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes flicker{0%,100%{opacity:1}93%{opacity:.7}95%{opacity:1}}
-@keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
 @keyframes ripple{0%{transform:scale(1);opacity:.4}100%{transform:scale(4.5);opacity:0}}
-body::after{content:'';position:fixed;left:0;top:0;width:100%;height:50px;background:linear-gradient(transparent,rgba(255,255,255,.012),transparent);animation:scanline 8s linear infinite;pointer-events:none;z-index:999}
-.wrap{max-width:560px;margin:0 auto;padding:48px 20px 60px;text-align:center}
-.stamp{font-family:monospace;font-size:10px;letter-spacing:.35em;color:#444;text-transform:uppercase;border:1px solid #1e1e2e;padding:5px 14px;border-radius:3px;display:inline-block;margin-bottom:36px}
-h1{font-size:clamp(24px,7vw,52px);line-height:1.15;margin-bottom:20px;animation:flicker 9s infinite}
+.wrap{max-width:560px;margin:0 auto;padding:32px 20px 60px;text-align:center}
+.langbar{text-align:right;margin-bottom:20px}
+.langbar label{font-family:monospace;font-size:10px;color:#444;letter-spacing:.1em;text-transform:uppercase;margin-right:8px}
+.langbar select{background:#111;color:#aaa;border:1px solid #333;border-radius:4px;padding:5px 10px;font-family:monospace;font-size:11px;cursor:pointer}
+.stamp{font-family:monospace;font-size:10px;letter-spacing:.35em;color:#444;text-transform:uppercase;border:1px solid #1e1e2e;padding:5px 14px;border-radius:3px;display:inline-block;margin-bottom:28px}
+h1{font-size:clamp(24px,7vw,52px);line-height:1.15;margin-bottom:18px;animation:flicker 9s infinite}
 .gold{color:#f5c842}
-.hook{font-family:monospace;font-size:13px;color:#666;line-height:1.85;margin-bottom:36px;max-width:400px;margin-left:auto;margin-right:auto}
+.hook{font-family:monospace;font-size:13px;color:#666;line-height:1.85;margin-bottom:32px;max-width:400px;margin-left:auto;margin-right:auto}
 .hook em{color:#aaa;font-style:normal}
-.teaser{position:relative;width:240px;height:130px;margin:0 auto 32px;display:flex;align-items:center;justify-content:center}
+.teaser{position:relative;width:240px;height:130px;margin:0 auto 28px;display:flex;align-items:center;justify-content:center}
 .tnum{font-size:96px;font-weight:900;color:#f5c842;filter:blur(14px);opacity:.45;user-select:none;animation:glow 3s ease-in-out infinite,drift 4s ease-in-out infinite}
 .tover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
 .tlock{font-size:26px;animation:drift 3s ease-in-out infinite}
 .thint{font-family:monospace;font-size:10px;letter-spacing:.25em;color:#555;text-transform:uppercase}
-.watchers{display:inline-flex;align-items:center;gap:9px;background:rgba(255,60,60,.07);border:1px solid rgba(255,60,60,.22);border-radius:100px;padding:7px 18px;font-family:monospace;font-size:12px;color:#ff6b6b;margin-bottom:28px}
+.watchers{display:inline-flex;align-items:center;gap:9px;background:rgba(255,60,60,.07);border:1px solid rgba(255,60,60,.22);border-radius:100px;padding:7px 18px;font-family:monospace;font-size:12px;color:#ff6b6b;margin-bottom:24px}
 .wdot{width:7px;height:7px;border-radius:50%;background:#ff4444;animation:pulse 1.2s infinite;flex-shrink:0}
-.testis{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
+.testis{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
 .testi{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:2px solid #f5c842;border-radius:8px;padding:12px 16px;text-align:left;font-size:12px;color:#888;line-height:1.65}
 .testi b{color:#bbb;display:block;margin-bottom:4px;font-size:11px}
-.tiers{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.tiers{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:20px}
 .tier{padding:14px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);cursor:pointer;font-family:monospace;font-size:11px;color:#666;transition:all .25s;text-align:center;min-width:120px}
 .tier.on0{border-color:#f5c842;color:#f5c842;background:rgba(245,200,66,.08);box-shadow:0 0 22px rgba(245,200,66,.2)}
 .tier.on1{border-color:#42d4f5;color:#42d4f5;background:rgba(66,212,245,.08);box-shadow:0 0 22px rgba(66,212,245,.2)}
@@ -44,22 +43,21 @@ h1{font-size:clamp(24px,7vw,52px);line-height:1.15;margin-bottom:20px;animation:
 .tp{font-family:Georgia,serif;font-size:26px;font-weight:900;display:block;margin-bottom:3px}
 .tn{font-size:9px;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:6px;opacity:.75}
 .td{font-size:10px;color:#555;line-height:1.4}
-.consent{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:18px}
+.consent{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:16px}
 .consent input{accent-color:#f5c842;cursor:pointer;width:14px;height:14px}
 .consent label{font-family:monospace;font-size:10px;color:#444;cursor:pointer}
 #paybtn{position:relative;overflow:hidden;display:block;width:100%;max-width:340px;margin:0 auto 10px;padding:18px 32px;background:#f5c842;color:#080810;font-family:Georgia,serif;font-size:18px;font-weight:900;border:none;border-radius:4px;cursor:pointer;transition:all .15s;box-shadow:0 0 32px rgba(245,200,66,.35)}
 #paybtn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent)}
 #paybtn:active{transform:scale(.97)}
 .rpl{position:absolute;width:100%;height:100%;top:0;left:0;border-radius:50%;background:rgba(245,200,66,.25);animation:ripple 2s ease-out infinite;pointer-events:none}
-.skip{font-family:monospace;font-size:11px;color:#333;margin-bottom:16px;margin-top:8px}
+.skip{font-family:monospace;font-size:11px;color:#333;margin-bottom:36px;margin-top:8px}
 .skip span{cursor:pointer;text-decoration:underline;color:#444}
-.langsel{margin-bottom:36px}
-.langsel select{background:#111;color:#666;border:1px solid #222;border-radius:4px;padding:5px 12px;font-family:monospace;font-size:11px;cursor:pointer}
-hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 30px;max-width:340px}
+hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 28px;max-width:340px}
 .ftitle{font-family:monospace;font-size:10px;letter-spacing:.3em;color:#333;text-transform:uppercase;margin-bottom:14px}
 .fi{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-family:monospace;font-size:12px;animation:fadein .4s ease}
-.ff{font-size:17px}.fn{flex:1;color:#777}
-.fb{font-size:9px;text-transform:uppercase;background:rgba(245,200,66,.1);color:#f5c842;padding:2px 7px;border-radius:100px}
+.fi img{flex-shrink:0}
+.fn{flex:1;color:#777}
+.fb{font-size:10px;color:#aaa;letter-spacing:.05em}
 .fa{font-size:10px;color:#333}
 #reveal{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center}
 #reveal.on{display:flex}
@@ -73,7 +71,7 @@ hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 30px
 .rcard.v{opacity:1;transform:translateY(0)}
 .rtitle2{font-size:9px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:14px}
 .rfeed-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
-.rflag{font-size:16px}.rname{flex:1;color:#aaa}
+.rname{flex:1;color:#aaa}
 .cbar{margin-bottom:8px}
 .cbar-row{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:4px}
 .cbar-track{height:3px;background:rgba(255,255,255,.07);border-radius:2px}
@@ -87,8 +85,7 @@ hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 30px
 .csect.v{opacity:1}
 .ctitle{font-family:monospace;font-size:10px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:20px;text-align:center}
 .citem{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-align:left;animation:fadein .4s ease}
-.cflag{font-size:15px;margin-right:6px}
-.cname{font-family:monospace;font-size:10px;color:#555;margin-bottom:6px}
+.cname{font-family:monospace;font-size:10px;color:#555;margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .ctext{font-size:12px;color:#999;line-height:1.6;font-style:italic}
 .cform{margin-top:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px}
 .cftitle{font-family:monospace;font-size:10px;letter-spacing:.2em;color:#555;text-transform:uppercase;margin-bottom:14px}
@@ -107,27 +104,28 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
 </style>
 </head>
 <body>
-
 <div id="landing">
 <div class="wrap">
-  <div style="text-align:right;margin-bottom:12px">
-    <span style="font-family:monospace;font-size:10px;color:#444;margin-right:8px;text-transform:uppercase;letter-spacing:.1em">Language</span>
-    <select onchange="changeLang(this.value)" id="langdrop" style="background:#111;color:#aaa;border:1px solid #333;border-radius:4px;padding:4px 10px;font-family:monospace;font-size:11px;cursor:pointer">
-      <option value="en"><img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle"> EN</option>
-      <option value="it"><img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> IT</option>
-      <option value="de"><img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> DE</option>
-      <option value="fr"><img src="https://flagcdn.com/16x12/fr.png" style="width:16px;vertical-align:middle"> FR</option>
-      <option value="es"><img src="https://flagcdn.com/16x12/es.png" style="width:16px;vertical-align:middle"> ES</option>
+
+  <div class="langbar">
+    <label>Language</label>
+    <select onchange="changeLang(this.value)" id="langdrop">
+      <option value="en">EN</option>
+      <option value="it">IT</option>
+      <option value="de">DE</option>
+      <option value="fr">FR</option>
+      <option value="es">ES</option>
     </select>
   </div>
+
   <div class="stamp" id="el-stamp">classified · one-time digital access</div>
   <h1 id="el-h1">There is a number.<br><span class="gold">You don't know it.</span><br>Everyone else does.</h1>
-  <p class="hook" id="el-hook">Thousands of people already saw it.<br>They paid <em>exactly €1</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em></p>
+  <p class="hook" id="el-hook">Thousands of people already saw it.<br>They paid <em>exactly 1 euro</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em></p>
 
   <div class="teaser">
     <div class="tnum" id="tnum">2,847</div>
     <div class="tover">
-      <div class="tlock">🔒</div>
+      <div class="tlock">&#128274;</div>
       <div class="thint" id="el-payreveal">pay to reveal</div>
     </div>
   </div>
@@ -138,26 +136,26 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
   </div>
 
   <div class="testis">
-    <div class="testi"><b id="el-t1w">Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · 2 hours ago</b><span id="el-t1t">"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</span></div>
-    <div class="testi"><b id="el-t2w">Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · 4 hours ago</b><span id="el-t2t">"Sent it to my sister. She called me immediately. She paid too."</span></div>
-    <div class="testi"><b id="el-t3w">Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · 6 hours ago</b><span id="el-t3t">"It's a euro. You will spend more just thinking about whether to pay."</span></div>
+    <div class="testi"><b id="el-t1w">Jordan M. · 2 hours ago</b><span id="el-t1t">"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</span></div>
+    <div class="testi"><b id="el-t2w">Chiara B. · 4 hours ago</b><span id="el-t2t">"Sent it to my sister. She called me immediately. She paid too."</span></div>
+    <div class="testi"><b id="el-t3w">Anon · 6 hours ago</b><span id="el-t3t">"It's a euro. You will spend more just thinking about whether to pay."</span></div>
   </div>
 
   <div class="tiers">
     <div class="tier on0" id="t0" onclick="pick(0)">
-      <span class="tp">€1</span>
-      <span class="tn" id="el-t0n">🔢 The Count</span>
+      <span class="tp">&#8364;1</span>
+      <span class="tn" id="el-t0n">The Count</span>
       <span class="td" id="el-t0d">The number.<br>Nothing else.</span>
     </div>
     <div class="tier" id="t1" onclick="pick(1)">
-      <span class="tp" style="color:#42d4f5">€3</span>
-      <span class="tn" id="el-t1n">👥 The Feed</span>
+      <span class="tp" style="color:#42d4f5">&#8364;3</span>
+      <span class="tn" id="el-t1n">The Feed</span>
       <span class="td" id="el-t1d">Number + names<br>of recent payers.</span>
     </div>
     <div class="tier" id="t2" onclick="pick(2)">
-      <span class="tp" style="color:#d442f5">€5</span>
-      <span class="tn" id="el-t2n">🏆 Leaderboard</span>
-      <span class="td" id="el-t2d">Full stats,<br>countries & peak hour.</span>
+      <span class="tp" style="color:#d442f5">&#8364;5</span>
+      <span class="tn" id="el-t2n">Leaderboard</span>
+      <span class="td" id="el-t2d">Full stats,<br>countries &amp; peak hour.</span>
     </div>
   </div>
 
@@ -168,21 +166,18 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
 
   <button id="paybtn" onclick="pay()">
     <div class="rpl"></div>
-    <span id="el-btn">Show me the number — €1</span>
+    <span id="el-btn">Show me the number &mdash; &#8364;1</span>
   </button>
-
   <div class="skip"><span onclick="skip()" id="el-skip">or close this page and never know</span></div>
 
-
-
   <hr class="div"/>
-  <div class="ftitle" id="el-feedtitle">▶ paying right now</div>
+  <div class="ftitle" id="el-feedtitle">&#9654; paying right now</div>
   <div id="feed"></div>
 </div>
 </div>
 
 <div id="reveal">
-  <div class="rtag" id="rtag">✦ access granted ✦</div>
+  <div class="rtag" id="rtag">&#10022; access granted &#10022;</div>
   <div class="rnum" id="rnum">0</div>
   <div class="rsub" id="rsub">people paid before you.</div>
   <div class="rcard" id="rcard">
@@ -191,281 +186,397 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
   </div>
   <div class="rbtns">
     <button class="rb rbp" id="rb1" onclick="shr()">Send to someone who won't pay</button>
-    <button class="rb rbs" id="rb2" onclick="bk()">← Back</button>
+    <button class="rb rbs" id="rb2" onclick="bk()">&#8592; Back</button>
   </div>
   <div class="csect" id="csect">
-    <div class="ctitle" id="el-ctitle">💬 What others said (no spoilers)</div>
+    <div class="ctitle" id="el-ctitle">What others said (no spoilers)</div>
     <div id="clist"><div class="nocomm" id="el-nocomm">Be the first to comment.</div></div>
     <div class="cform">
       <div class="cftitle" id="el-cftitle">Leave your reaction</div>
-      <div class="cwarn" id="el-cwarn">🔒 No spoilers — do not reveal the number or any hint of its size.</div>
+      <div class="cwarn" id="el-cwarn">No spoilers. Do not reveal the number or any hint of its size.</div>
       <div class="crow">
         <input type="text" id="c-name" placeholder="Your name" maxlength="30"/>
-        <input type="text" id="c-country" placeholder="🌍 Country" maxlength="20"/>
+        <input type="text" id="c-country" placeholder="Country" maxlength="20"/>
       </div>
       <textarea class="cinput" id="c-text" rows="3" placeholder="Share your reaction without revealing the number..." maxlength="200"></textarea>
-      <div class="cerr" id="cerr">🔒 Spoiler detected. No numbers or size hints allowed.</div>
+      <div class="cerr" id="cerr">Spoiler detected. No numbers or size hints allowed.</div>
       <button class="csubmit" onclick="submitC()" id="el-csubmit">Post reaction</button>
     </div>
   </div>
 </div>
 
-<footer>The Number · Digital content · No refunds after delivery.</footer>
+<footer>The Number &middot; Digital content &middot; No refunds after delivery.</footer>
 
 <script>
 var LINKS = [
-  "https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00",
-  "https://buy.stripe.com/test_7sY8wO9vRbRo56xbdfc7u01",
-  "https://buy.stripe.com/test_9B65kC37t5t02Ypdlnc7u02"
+  'https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00',
+  'https://buy.stripe.com/test_7sY8wO9vRbRo56xbdfc7u01',
+  'https://buy.stripe.com/test_9B65kC37t5t02Ypdlnc7u02'
 ];
-var SU = "https://simoleon93.github.io/TheNumber";
-var CL = ["#f5c842","#42d4f5","#d442f5"];
-var FLAGS = [
+var SU = 'https://simoleon93.github.io/TheNumber';
+var CL = ['#f5c842','#42d4f5','#d442f5'];
+
+var COUNTRIES = [
   {c:'it',n:'Italy'},{c:'us',n:'USA'},{c:'de',n:'Germany'},
   {c:'fr',n:'France'},{c:'gb',n:'UK'},{c:'jp',n:'Japan'},
   {c:'br',n:'Brazil'},{c:'es',n:'Spain'},{c:'ca',n:'Canada'},
   {c:'nl',n:'Netherlands'},{c:'au',n:'Australia'},{c:'kr',n:'Korea'},
   {c:'se',n:'Sweden'},{c:'pt',n:'Portugal'},{c:'ch',n:'Switzerland'}
 ];
-var NAMES = [
-  'M.R.','S.L.','T.K.','Y.T.','E.V.','J.O.',
-  'P.S.','L.M.','A.B.','C.W.','N.F.','O.H.',
-  'G.P.','S.D.','F.B.','L.Z.','R.I.','M.C.'
+
+var INITIALS = ['M.R.','S.L.','T.K.','Y.T.','E.V.','J.O.','P.S.','L.M.','A.B.','C.W.','N.F.','O.H.','G.P.','S.D.','F.B.','L.Z.'];
+
+var CDATA = [
+  {c:'us',n:'Italy',i:'A.K.',t:'Not what I expected at all. Sent it to my whole team.'},
+  {c:'it',n:'Italy',i:'G.M.',t:'Pensavo di sapere la risposta. Non avevo idea.'},
+  {c:'de',n:'Germany',i:'F.B.',t:'Mein Freund glaubt mir nicht. Er wird selbst zahlen.'}
 ];
-var COUNTRIES = [["<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> USA","34%",34],["<img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle"> UK","18%",18],["<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> Germany","11%",11],["<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> Italy","9%",9],["<img src="https://flagcdn.com/16x12/jp.png" style="width:16px;vertical-align:middle"> Japan","7%",7],["<img src="https://flagcdn.com/16x12/br.png" style="width:16px;vertical-align:middle"> Brazil","5%",5],["Other","16%",16]];
-var SPOILERS = ["thousand","hundred","million","billion","mille","cento","mila","milion","tausend","cent","hundert","scores","dozens","hundreds","thousands","millions","trilion"];
+
+var CTABLE = [
+  ['USA','34%',34],['UK','18%',18],['Germany','11%',11],
+  ['Italy','9%',9],['Japan','7%',7],['Brazil','5%',5],['Other','16%',16]
+];
+
+var SPOILERS = ['thousand','hundred','million','billion','mille','cento','mila','tausend','hundert','scores','dozens','hundreds','thousands','millions'];
 
 var tier = 0;
 var count = 2847;
-var lang = "en";
-try { var ss = localStorage.getItem("tn"); if(ss) count = parseInt(ss); } catch(e){}
+var lang = 'en';
+try { var ss = localStorage.getItem('tn'); if(ss) count = parseInt(ss); } catch(e) {}
 
 var T = {
-  en:{stamp:"classified · one-time digital access",h1:"There is a number.<br><span class=\"gold\">You don't know it.</span><br>Everyone else does.",hook:"Thousands of people already saw it.<br>They paid <em>exactly €1</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em>",payreveal:"pay to reveal",watching:"people watching right now",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · 2 hours ago",t1t:'"I told myself I wouldn\'t. I paid. Zero regrets. The number is insane."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · 4 hours ago",t2t:'"Sent it to my sister. She called me immediately. She paid too."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · 6 hours ago",t3t:'"It\'s a euro. You will spend more just thinking about whether to pay."',t0n:"🔢 The Count",t0d:"The number.<br>Nothing else.",t1n:"👥 The Feed",t1d:"Number + names<br>of recent payers.",t2n:"🏆 Leaderboard",t2d:"Full stats,<br>countries & peak hour.",consent:"I agree to instant digital delivery.",btn:"Show me the number",skip:"or close this page and never know",feedtitle:"▶ paying right now",ctitle:"💬 What others said (no spoilers)",nocomm:"Be the first to comment.",cftitle:"Leave your reaction",cwarn:"🔒 No spoilers — do not reveal the number.",csubmit:"Post reaction",nameph:"Your name",countryph:"🌍 Country",textph:"Share your reaction without revealing the number...",cerr:"🔒 Spoiler detected. No numbers allowed.",rsub:"people paid before you.",sharebtn:"Send to someone who won't pay",skip2:"Yeah, I'd rather not know.",skip3:"Ok fine. Show me.",suretitle:"Are you sure?",sure2:"One euro.",sure3:"You will think about this."},
-  it:{stamp:"classificato · accesso digitale una tantum",h1:"C'è un numero.<br><span class=\"gold\">Tu non lo sai.</span><br>Tutti gli altri sì.",hook:"Migliaia di persone lo hanno già visto.<br>Hanno pagato <em>esattamente €1</em> per scoprirlo.<br>Tu non l'hai ancora fatto. <em>Non ti dà fastidio?</em>",payreveal:"paga per scoprire",watching:"persone stanno guardando ora",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · 2 ore fa",t1t:'"Mi ero detto che non avrei pagato. Ho pagato. Zero rimpianti. Il numero è assurdo."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · 4 ore fa",t2t:'"L\'ho mandato a mia sorella. Mi ha chiamato subito. Ha pagato anche lei."',t3w:"Anonimo <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · 6 ore fa",t3t:'"È un euro. Spenderai di più solo a pensare se pagare o no."',t0n:"🔢 Il Numero",t0d:"Solo il numero.<br>Niente altro.",t1n:"👥 Il Feed",t1d:"Numero + nomi<br>di chi ha pagato.",t2n:"🏆 Classifica",t2d:"Statistiche complete,<br>paesi e ora di punta.",consent:"Acconsento alla consegna digitale immediata.",btn:"Mostrami il numero",skip:"oppure chiudi e non saperlo mai",feedtitle:"▶ stanno pagando ora",ctitle:"💬 Cosa dicono gli altri (zero spoiler)",nocomm:"Sii il primo a commentare.",cftitle:"Lascia la tua reazione",cwarn:"🔒 Nessuno spoiler — non rivelare il numero.",csubmit:"Pubblica reazione",nameph:"Il tuo nome",countryph:"🌍 Paese",textph:"Condividi la tua reazione senza rivelare il numero...",cerr:"🔒 Spoiler rilevato. Nessun numero consentito.",rsub:"persone hanno pagato prima di te.",sharebtn:"Mandalo a qualcuno che non pagherà",skip2:"Sì, preferisco non saperlo.",skip3:"Ok va bene. Mostrami.",suretitle:"Sei sicuro?",sure2:"Un euro.",sure3:"Ci penserai."},
-  de:{stamp:"klassifiziert · einmaliger digitaler Zugang",h1:"Es gibt eine Zahl.<br><span class=\"gold\">Du weißt sie nicht.</span><br>Alle anderen schon.",hook:"Tausende Menschen haben sie bereits gesehen.<br>Sie zahlten <em>genau €1</em> dafür.<br>Du noch nicht. <em>Stört dich das nicht?</em>",payreveal:"zahlen um zu sehen",watching:"Personen schauen jetzt zu",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · vor 2 Stunden",t1t:'"Ich hatte mir gesagt, ich zahle nicht. Dann tat ich es. Keine Reue. Die Zahl ist unglaublich."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · vor 4 Stunden",t2t:'"Ich schickte es meiner Schwester. Sie rief mich sofort an. Sie hat auch gezahlt."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · vor 6 Stunden",t3t:'"Es ist ein Euro. Du wirst mehr damit verbringen, darüber nachzudenken."',t0n:"🔢 Die Zahl",t0d:"Nur die Zahl.<br>Nichts anderes.",t1n:"👥 Der Feed",t1d:"Zahl + Namen<br>von Zahlern.",t2n:"🏆 Rangliste",t2d:"Vollst. Statistiken,<br>Länder & Spitzenstunde.",consent:"Ich stimme der sofortigen digitalen Lieferung zu.",btn:"Zeig mir die Zahl",skip:"oder schließ diese Seite und wisse es nie",feedtitle:"▶ zahlen gerade jetzt",ctitle:"💬 Was andere sagten (keine Spoiler)",nocomm:"Sei der Erste, der kommentiert.",cftitle:"Hinterlasse deine Reaktion",cwarn:"🔒 Keine Spoiler — verrate die Zahl nicht.",csubmit:"Reaktion posten",nameph:"Dein Name",countryph:"🌍 Land",textph:"Teile deine Reaktion, ohne die Zahl zu verraten...",cerr:"🔒 Spoiler erkannt. Keine Zahlen erlaubt.",rsub:"Personen haben vor dir gezahlt.",sharebtn:"Sende es jemandem, der nicht zahlt",skip2:"Ja, ich möchte es lieber nicht wissen.",skip3:"Ok, zeig mir es.",suretitle:"Bist du sicher?",sure2:"Ein Euro.",sure3:"Du wirst darüber nachdenken."},
-  fr:{stamp:"classifié · accès numérique unique",h1:"Il y a un nombre.<br><span class=\"gold\">Tu ne le sais pas.</span><br>Tout le monde d'autre si.",hook:"Des milliers de personnes l'ont déjà vu.<br>Ils ont payé <em>exactement €1</em> pour le savoir.<br>Pas toi encore. <em>Ça ne te dérange pas?</em>",payreveal:"payer pour révéler",watching:"personnes regardent maintenant",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · il y a 2h",t1t:'"Je m\'étais dit que non. J\'ai payé. Zéro regret. Le nombre est dingue."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · il y a 4h",t2t:'"Envoyé à ma sœur. Elle m\'a appelé immédiatement. Elle a payé aussi."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · il y a 6h",t3t:'"C\'est un euro. Tu passeras plus de temps à y réfléchir."',t0n:"🔢 Le Nombre",t0d:"Le nombre.<br>Rien d'autre.",t1n:"👥 Le Feed",t1d:"Nombre + noms<br>des derniers payeurs.",t2n:"🏆 Classement",t2d:"Stats complètes,<br>pays & heure de pointe.",consent:"J'accepte la livraison numérique immédiate.",btn:"Montrez-moi le nombre",skip:"ou fermer cette page et ne jamais savoir",feedtitle:"▶ paient en ce moment",ctitle:"💬 Ce que les autres ont dit (sans spoilers)",nocomm:"Sois le premier à commenter.",cftitle:"Laisse ta réaction",cwarn:"🔒 Pas de spoilers — ne révèle pas le nombre.",csubmit:"Poster la réaction",nameph:"Ton nom",countryph:"🌍 Pays",textph:"Partage ta réaction sans révéler le nombre...",cerr:"🔒 Spoiler détecté. Pas de chiffres.",rsub:"personnes ont payé avant toi.",sharebtn:"Envoyer à quelqu'un qui ne paiera pas",skip2:"Oui, je préfère ne pas savoir.",skip3:"Ok, montre-moi.",suretitle:"Tu es sûr?",sure2:"Un euro.",sure3:"Tu y penseras."},
-  es:{stamp:"clasificado · acceso digital único",h1:"Hay un número.<br><span class=\"gold\">Tú no lo sabes.</span><br>Todos los demás sí.",hook:"Miles de personas ya lo han visto.<br>Pagaron <em>exactamente €1</em> para descubrirlo.<br>Tú todavía no. <em>¿No te molesta eso?</em>",payreveal:"paga para revelar",watching:"personas mirando ahora",t1w:"Jordan M. <img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> · hace 2 horas",t1t:'"Me dije que no pagaría. Pagué. Cero arrepentimientos. El número es una locura."',t2w:"Chiara B. <img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> · hace 4 horas",t2t:'"Se lo mandé a mi hermana. Me llamó enseguida. Ella también pagó."',t3w:"Anon <img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> · hace 6 horas",t3t:'"Es un euro. Gastarás más sólo pensando si pagar o no."',t0n:"🔢 El Número",t0d:"El número.<br>Nada más.",t1n:"👥 El Feed",t1d:"Número + nombres<br>de pagadores recientes.",t2n:"🏆 Clasificación",t2d:"Estadísticas completas,<br>países y hora punta.",consent:"Acepto la entrega digital inmediata.",btn:"Muéstrame el número",skip:"o cierra esta página y no saberlo nunca",feedtitle:"▶ pagando ahora mismo",ctitle:"💬 Lo que dijeron otros (sin spoilers)",nocomm:"Sé el primero en comentar.",cftitle:"Deja tu reacción",cwarn:"🔒 Sin spoilers — no reveles el número.",csubmit:"Publicar reacción",nameph:"Tu nombre",countryph:"🌍 País",textph:"Comparte tu reacción sin revelar el número...",cerr:"🔒 Spoiler detectado. No incluyas números.",rsub:"personas pagaron antes que tú.",sharebtn:"Envíalo a alguien que no pagará",skip2:"Sí, prefiero no saber.",skip3:"Ok, muéstrame.",suretitle:"¿Estás seguro?",sure2:"Un euro.",sure3:"Lo pensarás."}
+  en: {
+    stamp:'classified · one-time digital access',
+    h1:'There is a number.<br><span class="gold">You don\'t know it.</span><br>Everyone else does.',
+    hook:'Thousands of people already saw it.<br>They paid <em>exactly 1 euro</em> to find out.<br>You still haven\'t. <em>Doesn\'t that bother you?</em>',
+    payreveal:'pay to reveal', watching:'people watching right now',
+    t1w:'Jordan M. · 2 hours ago', t1t:'"I told myself I wouldn\'t. I paid. Zero regrets. The number is insane."',
+    t2w:'Chiara B. · 4 hours ago', t2t:'"Sent it to my sister. She called me immediately. She paid too."',
+    t3w:'Anon · 6 hours ago', t3t:'"It\'s a euro. You will spend more just thinking about whether to pay."',
+    t0n:'The Count', t0d:'The number.<br>Nothing else.',
+    t1n:'The Feed', t1d:'Number + names<br>of recent payers.',
+    t2n:'Leaderboard', t2d:'Full stats,<br>countries &amp; peak hour.',
+    consent:'I agree to instant digital delivery.',
+    btn:'Show me the number', skip:'or close this page and never know',
+    feedtitle:'paying right now',
+    ctitle:'What others said (no spoilers)', nocomm:'Be the first to comment.',
+    cftitle:'Leave your reaction', cwarn:'No spoilers. Do not reveal the number.',
+    csubmit:'Post reaction', rsub:'people paid before you.',
+    sharebtn:'Send to someone who won\'t pay',
+    skip2:'Yeah, I\'d rather not know.', skip3:'Ok fine. Show me.',
+    suretitle:'Are you sure?', sure2:'One euro.', sure3:'You will think about this.'
+  },
+  it: {
+    stamp:'classificato · accesso digitale una tantum',
+    h1:'C\'è un numero.<br><span class="gold">Tu non lo sai.</span><br>Tutti gli altri sì.',
+    hook:'Migliaia di persone lo hanno già visto.<br>Hanno pagato <em>esattamente 1 euro</em> per scoprirlo.<br>Tu non l\'hai ancora fatto. <em>Non ti dà fastidio?</em>',
+    payreveal:'paga per scoprire', watching:'persone stanno guardando ora',
+    t1w:'Jordan M. · 2 ore fa', t1t:'"Mi ero detto che non avrei pagato. Ho pagato. Zero rimpianti. Il numero è assurdo."',
+    t2w:'Chiara B. · 4 ore fa', t2t:'"L\'ho mandato a mia sorella. Mi ha chiamato subito. Ha pagato anche lei."',
+    t3w:'Anonimo · 6 ore fa', t3t:'"È un euro. Spenderai di più solo a pensare se pagare o no."',
+    t0n:'Il Numero', t0d:'Solo il numero.<br>Niente altro.',
+    t1n:'Il Feed', t1d:'Numero + nomi<br>di chi ha pagato.',
+    t2n:'Classifica', t2d:'Statistiche complete,<br>paesi e ora di punta.',
+    consent:'Acconsento alla consegna digitale immediata.',
+    btn:'Mostrami il numero', skip:'oppure chiudi e non saperlo mai',
+    feedtitle:'stanno pagando ora',
+    ctitle:'Cosa dicono gli altri (zero spoiler)', nocomm:'Sii il primo a commentare.',
+    cftitle:'Lascia la tua reazione', cwarn:'Nessuno spoiler. Non rivelare il numero.',
+    csubmit:'Pubblica reazione', rsub:'persone hanno pagato prima di te.',
+    sharebtn:'Mandalo a qualcuno che non pagherà',
+    skip2:'Sì, preferisco non saperlo.', skip3:'Ok va bene. Mostrami.',
+    suretitle:'Sei sicuro?', sure2:'Un euro.', sure3:'Ci penserai.'
+  },
+  de: {
+    stamp:'klassifiziert · einmaliger digitaler Zugang',
+    h1:'Es gibt eine Zahl.<br><span class="gold">Du weißt sie nicht.</span><br>Alle anderen schon.',
+    hook:'Tausende Menschen haben sie bereits gesehen.<br>Sie zahlten <em>genau 1 Euro</em> dafür.<br>Du noch nicht. <em>Stört dich das nicht?</em>',
+    payreveal:'zahlen um zu sehen', watching:'Personen schauen jetzt zu',
+    t1w:'Jordan M. · vor 2 Stunden', t1t:'"Ich hatte mir gesagt, ich zahle nicht. Dann tat ich es. Keine Reue."',
+    t2w:'Chiara B. · vor 4 Stunden', t2t:'"Ich schickte es meiner Schwester. Sie rief mich sofort an. Sie hat auch gezahlt."',
+    t3w:'Anon · vor 6 Stunden', t3t:'"Es ist ein Euro. Du wirst mehr damit verbringen, darüber nachzudenken."',
+    t0n:'Die Zahl', t0d:'Nur die Zahl.<br>Nichts anderes.',
+    t1n:'Der Feed', t1d:'Zahl + Namen<br>von Zahlern.',
+    t2n:'Rangliste', t2d:'Vollst. Statistiken,<br>Länder &amp; Spitzenstunde.',
+    consent:'Ich stimme der sofortigen digitalen Lieferung zu.',
+    btn:'Zeig mir die Zahl', skip:'oder schließ diese Seite und wisse es nie',
+    feedtitle:'zahlen gerade jetzt',
+    ctitle:'Was andere sagten (keine Spoiler)', nocomm:'Sei der Erste, der kommentiert.',
+    cftitle:'Hinterlasse deine Reaktion', cwarn:'Keine Spoiler. Verrate die Zahl nicht.',
+    csubmit:'Reaktion posten', rsub:'Personen haben vor dir gezahlt.',
+    sharebtn:'Sende es jemandem, der nicht zahlt',
+    skip2:'Ja, ich möchte es lieber nicht wissen.', skip3:'Ok, zeig mir es.',
+    suretitle:'Bist du sicher?', sure2:'Ein Euro.', sure3:'Du wirst darüber nachdenken.'
+  },
+  fr: {
+    stamp:'classifié · accès numérique unique',
+    h1:'Il y a un nombre.<br><span class="gold">Tu ne le sais pas.</span><br>Tout le monde sait.',
+    hook:'Des milliers de personnes l\'ont déjà vu.<br>Ils ont payé <em>exactement 1 euro</em> pour le savoir.<br>Pas toi encore. <em>Ça ne te dérange pas?</em>',
+    payreveal:'payer pour révéler', watching:'personnes regardent maintenant',
+    t1w:'Jordan M. · il y a 2h', t1t:'"Je m\'étais dit que non. J\'ai payé. Zéro regret. Le nombre est dingue."',
+    t2w:'Chiara B. · il y a 4h', t2t:'"Envoyé à ma sœur. Elle m\'a appelé immédiatement. Elle a payé aussi."',
+    t3w:'Anon · il y a 6h', t3t:'"C\'est un euro. Tu passeras plus de temps à y réfléchir."',
+    t0n:'Le Nombre', t0d:'Le nombre.<br>Rien d\'autre.',
+    t1n:'Le Feed', t1d:'Nombre + noms<br>des derniers payeurs.',
+    t2n:'Classement', t2d:'Stats complètes,<br>pays &amp; heure de pointe.',
+    consent:'J\'accepte la livraison numérique immédiate.',
+    btn:'Montrez-moi le nombre', skip:'ou fermer cette page et ne jamais savoir',
+    feedtitle:'paient en ce moment',
+    ctitle:'Ce que les autres ont dit (sans spoilers)', nocomm:'Sois le premier à commenter.',
+    cftitle:'Laisse ta réaction', cwarn:'Pas de spoilers. Ne révèle pas le nombre.',
+    csubmit:'Poster la réaction', rsub:'personnes ont payé avant toi.',
+    sharebtn:'Envoyer à quelqu\'un qui ne paiera pas',
+    skip2:'Oui, je préfère ne pas savoir.', skip3:'Ok, montre-moi.',
+    suretitle:'Tu es sûr?', sure2:'Un euro.', sure3:'Tu y penseras.'
+  },
+  es: {
+    stamp:'clasificado · acceso digital único',
+    h1:'Hay un número.<br><span class="gold">Tú no lo sabes.</span><br>Todos los demás sí.',
+    hook:'Miles de personas ya lo han visto.<br>Pagaron <em>exactamente 1 euro</em> para descubrirlo.<br>Tú todavía no. <em>¿No te molesta eso?</em>',
+    payreveal:'paga para revelar', watching:'personas mirando ahora',
+    t1w:'Jordan M. · hace 2 horas', t1t:'"Me dije que no pagaría. Pagué. Cero arrepentimientos."',
+    t2w:'Chiara B. · hace 4 horas', t2t:'"Se lo mandé a mi hermana. Me llamó enseguida. Ella también pagó."',
+    t3w:'Anon · hace 6 horas', t3t:'"Es un euro. Gastarás más sólo pensando si pagar o no."',
+    t0n:'El Número', t0d:'El número.<br>Nada más.',
+    t1n:'El Feed', t1d:'Número + nombres<br>de pagadores recientes.',
+    t2n:'Clasificación', t2d:'Estadísticas completas,<br>países &amp; hora punta.',
+    consent:'Acepto la entrega digital inmediata.',
+    btn:'Muéstrame el número', skip:'o cierra esta página y no saberlo nunca',
+    feedtitle:'pagando ahora mismo',
+    ctitle:'Lo que dijeron otros (sin spoilers)', nocomm:'Sé el primero en comentar.',
+    cftitle:'Deja tu reacción', cwarn:'Sin spoilers. No reveles el número.',
+    csubmit:'Publicar reacción', rsub:'personas pagaron antes que tú.',
+    sharebtn:'Envíalo a alguien que no pagará',
+    skip2:'Sí, prefiero no saber.', skip3:'Ok, muéstrame.',
+    suretitle:'¿Estás seguro?', sure2:'Un euro.', sure3:'Lo pensarás.'
+  }
 };
 
-function rnd(a){return a[Math.floor(Math.random()*a.length)];}
-
-function applyLang(){
-  var t=T[lang];
-  document.getElementById("el-stamp").textContent=t.stamp;
-  document.getElementById("el-h1").innerHTML=t.h1;
-  document.getElementById("el-hook").innerHTML=t.hook;
-  document.getElementById("el-payreveal").textContent=t.payreveal;
-  document.getElementById("el-watching").textContent=t.watching;
-  document.getElementById("el-t1w").textContent=t.t1w;
-  document.getElementById("el-t1t").textContent=t.t1t;
-  document.getElementById("el-t2w").textContent=t.t2w;
-  document.getElementById("el-t2t").textContent=t.t2t;
-  document.getElementById("el-t3w").textContent=t.t3w;
-  document.getElementById("el-t3t").textContent=t.t3t;
-  document.getElementById("el-t0n").innerHTML=t.t0n;
-  document.getElementById("el-t0d").innerHTML=t.t0d;
-  document.getElementById("el-t1n").innerHTML=t.t1n;
-  document.getElementById("el-t1d").innerHTML=t.t1d;
-  document.getElementById("el-t2n").innerHTML=t.t2n;
-  document.getElementById("el-t2d").innerHTML=t.t2d;
-  document.getElementById("el-consent").textContent=t.consent;
-  document.getElementById("el-btn").textContent=t.btn+" — €"+[1,3,5][tier];
-  document.getElementById("el-skip").textContent=t.skip;
-  document.getElementById("el-feedtitle").textContent=t.feedtitle;
-  document.getElementById("el-ctitle").textContent=t.ctitle;
-  document.getElementById("el-nocomm").textContent=t.nocomm;
-  document.getElementById("el-cftitle").textContent=t.cftitle;
-  document.getElementById("el-cwarn").textContent=t.cwarn;
-  document.getElementById("el-csubmit").textContent=t.csubmit;
-  document.getElementById("c-name").placeholder=t.nameph;
-  document.getElementById("c-country").placeholder=t.countryph;
-  document.getElementById("c-text").placeholder=t.textph;
-  document.getElementById("cerr").textContent=t.cerr;
-  document.getElementById("rb1").textContent=t.sharebtn;
-  document.getElementById("rsub").textContent=t.rsub;
+function flag(code) {
+  return '<img src="https://flagcdn.com/16x12/' + code + '.png" width="16" style="vertical-align:middle;margin-right:4px">';
 }
 
-function changeLang(l){lang=l;applyLang();}
+function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+function applyLang() {
+  var t = T[lang];
+  document.getElementById('el-stamp').textContent = t.stamp;
+  document.getElementById('el-h1').innerHTML = t.h1;
+  document.getElementById('el-hook').innerHTML = t.hook;
+  document.getElementById('el-payreveal').textContent = t.payreveal;
+  document.getElementById('el-watching').textContent = t.watching;
+  document.getElementById('el-t1w').textContent = t.t1w;
+  document.getElementById('el-t1t').textContent = t.t1t;
+  document.getElementById('el-t2w').textContent = t.t2w;
+  document.getElementById('el-t2t').textContent = t.t2t;
+  document.getElementById('el-t3w').textContent = t.t3w;
+  document.getElementById('el-t3t').textContent = t.t3t;
+  document.getElementById('el-t0n').innerHTML = t.t0n;
+  document.getElementById('el-t0d').innerHTML = t.t0d;
+  document.getElementById('el-t1n').innerHTML = t.t1n;
+  document.getElementById('el-t1d').innerHTML = t.t1d;
+  document.getElementById('el-t2n').innerHTML = t.t2n;
+  document.getElementById('el-t2d').innerHTML = t.t2d;
+  document.getElementById('el-consent').textContent = t.consent;
+  document.getElementById('el-btn').innerHTML = t.btn + ' &mdash; &euro;' + [1,3,5][tier];
+  document.getElementById('el-skip').textContent = t.skip;
+  document.getElementById('el-feedtitle').textContent = t.feedtitle;
+  document.getElementById('el-ctitle').textContent = t.ctitle;
+  document.getElementById('el-nocomm').textContent = t.nocomm;
+  document.getElementById('el-cftitle').textContent = t.cftitle;
+  document.getElementById('el-cwarn').textContent = t.cwarn;
+  document.getElementById('el-csubmit').textContent = t.csubmit;
+  document.getElementById('rb1').textContent = t.sharebtn;
+}
+
+function changeLang(l) { lang = l; applyLang(); }
 
 // detect language
-try{
-  var bl=(navigator.language||"en").toLowerCase().split("-")[0];
-  if(T[bl]){lang=bl;}
-}catch(e){}
+try {
+  var bl = (navigator.language || 'en').toLowerCase().split('-')[0];
+  if (T[bl]) lang = bl;
+} catch(e) {}
 
-// init
 applyLang();
-try{document.getElementById("langdrop").value=lang;}catch(e){}
+try { document.getElementById('langdrop').value = lang; } catch(e) {}
 
-// detect stripe return
-function qp(k){try{var r=new RegExp("[?&]"+k+"=([^&]*)");var m=location.search.match(r);return m?decodeURIComponent(m[1]):null;}catch(e){return null;}}
+function qp(k) {
+  try {
+    var r = new RegExp('[?&]' + k + '=([^&]*)');
+    var m = location.search.match(r);
+    return m ? decodeURIComponent(m[1]) : null;
+  } catch(e) { return null; }
+}
 
-if(qp("paid")==="true"){
+if (qp('paid') === 'true') {
   count++;
-  try{localStorage.setItem("tn",count);}catch(e){}
-  tier=parseInt(qp("tier")||"0");
-  document.getElementById("landing").style.display="none";
+  try { localStorage.setItem('tn', count); } catch(e) {}
+  tier = parseInt(qp('tier') || '0');
+  document.getElementById('landing').style.display = 'none';
   doReveal();
 } else {
   initFeed();
-  setInterval(function(){
-    var nums=[count.toLocaleString(),(count+17).toLocaleString(),(count-5).toLocaleString()];
-    document.getElementById("tnum").textContent=nums[Math.floor(Date.now()/2800)%3];
-  },2800);
-  setInterval(function(){
-    var w=parseInt(document.getElementById("wcount").textContent)||20;
-    w+=Math.random()>.5?1:-1;w=Math.max(9,Math.min(46,w));
-    document.getElementById("wcount").textContent=Math.round(w);
-  },3100);
+  setInterval(function() {
+    var nums = [count.toLocaleString(), (count+17).toLocaleString(), (count-5).toLocaleString()];
+    document.getElementById('tnum').textContent = nums[Math.floor(Date.now()/2800)%3];
+  }, 2800);
+  setInterval(function() {
+    var w = parseInt(document.getElementById('wcount').textContent) || 20;
+    w += Math.random() > .5 ? 1 : -1;
+    w = Math.max(9, Math.min(46, w));
+    document.getElementById('wcount').textContent = Math.round(w);
+  }, 3100);
 }
 
-function initFeed(){
-  for(var i=0;i<6;i++) addRow(Math.floor(Math.random()*55)+5);
-  setInterval(function(){addRow(0);},3900);
+function initFeed() {
+  for (var i = 0; i < 6; i++) addRow(Math.floor(Math.random() * 55) + 5);
+  setInterval(function() { addRow(0); }, 3900);
 }
 
-function addRow(ago){
-  var list=document.getElementById("feed");
-  var d=document.createElement("div");
-  d.className="fi";
-  var a=ago===0?"just now":ago<60?ago+"s ago":Math.floor(ago/60)+"m ago";
-  var f=rnd(FLAGS);
-  d.innerHTML='<img src="https://flagcdn.com/16x12/'+f.c+'.png" style="width:16px;vertical-align:middle;margin-right:4px"><span class="fn">'+f.n+'</span><span class="fb">'+rnd(NAMES)+'</span><span class="fa">'+a+'</span>';
-  list.insertBefore(d,list.firstChild);
-  if(list.children.length>8)list.removeChild(list.lastChild);
+function addRow(ago) {
+  var list = document.getElementById('feed');
+  var d = document.createElement('div');
+  d.className = 'fi';
+  var a = ago === 0 ? 'just now' : ago < 60 ? ago + 's ago' : Math.floor(ago/60) + 'm ago';
+  var f = rnd(COUNTRIES);
+  var ini = rnd(INITIALS);
+  d.innerHTML = flag(f.c) + '<span class="fn">' + f.n + '</span><span class="fb">' + ini + '</span><span class="fa">' + a + '</span>';
+  list.insertBefore(d, list.firstChild);
+  if (list.children.length > 8) list.removeChild(list.lastChild);
 }
 
-function pick(i){
-  tier=i;
-  for(var j=0;j<3;j++)document.getElementById("t"+j).className="tier"+(j===i?" on"+i:"");
-  document.getElementById("paybtn").style.background=CL[i];
-  document.getElementById("el-btn").textContent=T[lang].btn+" — €"+[1,3,5][i];
+function pick(i) {
+  tier = i;
+  for (var j = 0; j < 3; j++) document.getElementById('t'+j).className = 'tier' + (j===i ? ' on'+i : '');
+  document.getElementById('paybtn').style.background = CL[i];
+  document.getElementById('el-btn').innerHTML = T[lang].btn + ' &mdash; &euro;' + [1,3,5][i];
 }
 
-function pay(){
-  if(!document.getElementById("ok").checked){alert(T[lang].consent);return;}
-  window.location.href=LINKS[tier];
+function pay() {
+  if (!document.getElementById('ok').checked) { alert(T[lang].consent); return; }
+  window.location.href = LINKS[tier];
 }
 
-function skip(){
-  var t=T[lang];
-  document.getElementById("el-h1").innerHTML=t.suretitle+'<br><span class="gold">'+t.sure2+'</span><br>'+t.sure3;
-  var el=document.querySelector(".skip");
-  el.innerHTML='<span style="color:#555">'+t.skip2+'</span>';
-  setTimeout(function(){el.innerHTML='<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">'+t.skip3+'</span>';},2200);
+function skip() {
+  var t = T[lang];
+  document.getElementById('el-h1').innerHTML = t.suretitle + '<br><span class="gold">' + t.sure2 + '</span><br>' + t.sure3;
+  var el = document.querySelector('.skip');
+  el.innerHTML = '<span style="color:#555">' + t.skip2 + '</span>';
+  setTimeout(function() {
+    el.innerHTML = '<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">' + t.skip3 + '</span>';
+  }, 2200);
 }
 
-function doReveal(){
-  document.getElementById("reveal").className="on";
-  var c=CL[tier];
-  document.getElementById("rnum").style.color=c;
-  document.getElementById("rnum").style.textShadow="0 0 70px "+c+"88";
-  document.getElementById("rsub").textContent=count.toLocaleString()+" — "+T[lang].rsub;
-  document.getElementById("rb1").style.background=c;
-  document.getElementById("rb1").style.color="#080810";
+function doReveal() {
+  document.getElementById('reveal').className = 'on';
+  var c = CL[tier];
+  document.getElementById('rnum').style.color = c;
+  document.getElementById('rnum').style.textShadow = '0 0 70px ' + c + '88';
+  document.getElementById('rsub').textContent = count.toLocaleString() + ' — ' + T[lang].rsub;
+  document.getElementById('rb1').style.background = c;
+  document.getElementById('rb1').style.color = '#080810';
 
-  setTimeout(function(){document.getElementById("rtag").className="rtag v";},300);
-  setTimeout(function(){
-    document.getElementById("rnum").className="rnum v";
-    document.getElementById("rsub").className="rsub v";
-    animNum(count,document.getElementById("rnum"));
-  },600);
-  setTimeout(function(){buildExtras(c);document.getElementById("rcard").className="rcard v";},2800);
-  setTimeout(function(){
-    document.getElementById("rb1").className="rb rbp v";
-    document.getElementById("rb2").className="rb rbs v";
-  },3300);
-  setTimeout(function(){
-    document.getElementById("csect").className="csect v";
+  setTimeout(function() { document.getElementById('rtag').className = 'rtag v'; }, 300);
+  setTimeout(function() {
+    document.getElementById('rnum').className = 'rnum v';
+    document.getElementById('rsub').className = 'rsub v';
+    animNum(count, document.getElementById('rnum'));
+  }, 600);
+  setTimeout(function() { buildExtras(c); document.getElementById('rcard').className = 'rcard v'; }, 2800);
+  setTimeout(function() {
+    document.getElementById('rb1').className = 'rb rbp v';
+    document.getElementById('rb2').className = 'rb rbs v';
+  }, 3300);
+  setTimeout(function() {
+    document.getElementById('csect').className = 'csect v';
     loadComments();
-  },3800);
+  }, 3800);
 }
 
-function buildExtras(c){
-  var html="";
-  if(tier===0){
-    document.getElementById("rcardtitle").textContent="What does this mean?";
-    html='Each of them faced the same choice.<br>Curiosity won. <span style="color:'+c+'">It always does.</span><br><br>Now send this to a friend who won\'t pay.<br><span style="color:'+c+'">Watch them struggle.</span>';
+function buildExtras(c) {
+  var html = '';
+  if (tier === 0) {
+    document.getElementById('rcardtitle').textContent = 'What does this mean?';
+    html = 'Each of them faced the same choice.<br>Curiosity won. <span style="color:' + c + '">It always does.</span><br><br>Now send this to a friend.<br><span style="color:' + c + '">Watch them struggle.</span>';
   }
-  if(tier>=1){
-    document.getElementById("rcardtitle").textContent="Recent payers";
-    html="";
-    for(var i=0;i<6;i++){
-      html+='<div class="rfeed-item"><span class="rflag">'+rnd(FLAGS)+'</span><span class="rname">'+rnd(NAMES)+'</span><span style="font-family:monospace;font-size:10px;color:#444">'+[2,5,8,12,18,24,31][Math.floor(Math.random()*7)]+'m ago</span></div>';
+  if (tier >= 1) {
+    document.getElementById('rcardtitle').textContent = 'Recent payers';
+    html = '';
+    for (var i = 0; i < 6; i++) {
+      var f = rnd(COUNTRIES);
+      var ini = rnd(INITIALS);
+      var m = [2,5,8,12,18,24][Math.floor(Math.random()*6)];
+      html += '<div class="rfeed-item">' + flag(f.c) + '<span class="rname">' + f.n + ' &middot; ' + ini + '</span><span style="font-family:monospace;font-size:10px;color:#444">' + m + 'm ago</span></div>';
     }
   }
-  if(tier>=2){
-    html+='<br><div style="font-size:9px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:14px">Country breakdown</div>';
-    COUNTRIES.forEach(function(row){
-      html+='<div class="cbar"><div class="cbar-row"><span>'+row[0]+'</span><span style="color:'+c+'">'+row[1]+'</span></div><div class="cbar-track"><div class="cbar-fill" style="width:'+row[2]+'%;background:'+c+'"></div></div></div>';
+  if (tier >= 2) {
+    html += '<br><div style="font-size:9px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:14px">Country breakdown</div>';
+    CTABLE.forEach(function(row) {
+      html += '<div class="cbar"><div class="cbar-row"><span>' + row[0] + '</span><span style="color:' + c + '">' + row[1] + '</span></div><div class="cbar-track"><div class="cbar-fill" style="width:' + row[2] + '%;background:' + c + '"></div></div></div>';
     });
-    html+='<br><div style="font-size:11px;color:#555">🕐 Peak hour: <span style="color:'+c+'">9–10 PM UTC</span></div>';
+    html += '<br><div style="font-size:11px;color:#555">Peak hour: <span style="color:' + c + '">9-10 PM UTC</span></div>';
   }
-  document.getElementById("rcontent").innerHTML=html;
+  document.getElementById('rcontent').innerHTML = html;
 }
 
-function animNum(to,el){
-  var s=Date.now();
-  (function loop(){
-    var p=Math.min((Date.now()-s)/2000,1),e=1-Math.pow(1-p,4);
-    el.textContent=Math.floor(e*to).toLocaleString();
-    if(p<1)requestAnimationFrame(loop);
+function animNum(to, el) {
+  var s = Date.now();
+  (function loop() {
+    var p = Math.min((Date.now()-s)/2000, 1), e = 1-Math.pow(1-p,4);
+    el.textContent = Math.floor(e*to).toLocaleString();
+    if (p < 1) requestAnimationFrame(loop);
   })();
 }
 
-function loadComments(){
-  var seeds=[
-    {name:"Alex K.",country:"<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle">",text:"Not what I expected at all. Sent it to my whole team."},
-    {name:"Giulia M.",country:"<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle">",text:"Pensavo di sapere la risposta. Non avevo idea."},
-    {name:"Felix B.",country:"<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle">",text:"Mein Freund glaubt mir nicht. Er wird selbst zahlen müssen."}
-  ];
-  var list=document.getElementById("clist");
-  list.innerHTML="";
-  seeds.forEach(function(c){
-    var d=document.createElement("div");d.className="citem";
-    d.innerHTML='<div class="cname"><span class="cflag">'+c.country+'</span> '+c.name+'</div><div class="ctext">&ldquo;'+c.text+'&rdquo;</div>';
+function loadComments() {
+  var list = document.getElementById('clist');
+  list.innerHTML = '';
+  CDATA.forEach(function(c) {
+    var d = document.createElement('div');
+    d.className = 'citem';
+    d.innerHTML = '<div class="cname">' + flag(c.c) + c.i + '</div><div class="ctext">&ldquo;' + c.t + '&rdquo;</div>';
     list.appendChild(d);
   });
 }
 
-function isSpoiler(txt){
-  if(/\d/.test(txt))return true;
-  var low=txt.toLowerCase();
-  for(var i=0;i<SPOILERS.length;i++)if(low.indexOf(SPOILERS[i])!==-1)return true;
+function isSpoiler(txt) {
+  if (/\d/.test(txt)) return true;
+  var low = txt.toLowerCase();
+  for (var i = 0; i < SPOILERS.length; i++) if (low.indexOf(SPOILERS[i]) !== -1) return true;
   return false;
 }
 
-function submitC(){
-  var name=document.getElementById("c-name").value.trim();
-  var country=document.getElementById("c-country").value.trim();
-  var text=document.getElementById("c-text").value.trim();
-  var err=document.getElementById("cerr");
-  err.style.display="none";
-  if(!name||!text){alert("Name and comment required.");return;}
-  if(isSpoiler(text)){err.style.display="block";return;}
-  var list=document.getElementById("clist");
-  var d=document.createElement("div");d.className="citem";
-  d.innerHTML='<div class="cname"><span class="cflag">'+(country||"🌍")+'</span> '+name+'</div><div class="ctext">&ldquo;'+text+'&rdquo;</div>';
-  list.insertBefore(d,list.firstChild);
-  document.getElementById("c-name").value="";
-  document.getElementById("c-country").value="";
-  document.getElementById("c-text").value="";
+function submitC() {
+  var name = document.getElementById('c-name').value.trim();
+  var country = document.getElementById('c-country').value.trim();
+  var text = document.getElementById('c-text').value.trim();
+  var err = document.getElementById('cerr');
+  err.style.display = 'none';
+  if (!name || !text) { alert('Name and comment required.'); return; }
+  if (isSpoiler(text)) { err.style.display = 'block'; return; }
+  var list = document.getElementById('clist');
+  var d = document.createElement('div');
+  d.className = 'citem';
+  d.innerHTML = '<div class="cname">' + (country || '') + ' ' + name + '</div><div class="ctext">&ldquo;' + text + '&rdquo;</div>';
+  list.insertBefore(d, list.firstChild);
+  document.getElementById('c-name').value = '';
+  document.getElementById('c-country').value = '';
+  document.getElementById('c-text').value = '';
 }
 
-function shr(){
-  var m="There is a number. Thousands of people paid to see it. I know what it is. You don't.";
-  if(navigator.share)navigator.share({title:"The Number",text:m,url:SU});
-  else window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(m)+"&url="+encodeURIComponent(SU),"_blank");
+function shr() {
+  var m = "There is a number. Thousands of people paid to see it. I know what it is. You don't.";
+  if (navigator.share) navigator.share({title:'The Number', text:m, url:SU});
+  else window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(m) + '&url=' + encodeURIComponent(SU), '_blank');
 }
 
-function bk(){
-  document.getElementById("reveal").className="";
-  document.getElementById("landing").style.display="block";
-  try{history.replaceState(null,"",SU);}catch(e){}
-  ["rtag","rnum","rsub","rcard","rb1","rb2","csect"].forEach(function(id){
-    var el=document.getElementById(id);
-    if(el)el.className=el.className.replace(/\bv\b/g,"").trim();
+function bk() {
+  document.getElementById('reveal').className = '';
+  document.getElementById('landing').style.display = 'block';
+  try { history.replaceState(null, '', SU); } catch(e) {}
+  ['rtag','rnum','rsub','rcard','rb1','rb2','csect'].forEach(function(id) {
+    var el = document.getElementById(id);
+    if (el) el.className = el.className.replace(/\bv\b/g,'').trim();
   });
 }
 </script>
