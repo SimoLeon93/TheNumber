@@ -221,22 +221,17 @@ var LINKS = [
 var SU = "https://simoleon93.github.io/TheNumber";
 var CL = ["#f5c842","#42d4f5","#d442f5"];
 var FLAGS = [
-  '<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/fr.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/jp.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/br.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/es.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/ca.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/nl.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/au.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/kr.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/se.png" style="width:16px;vertical-align:middle">',
-  '<img src="https://flagcdn.com/16x12/pt.png" style="width:16px;vertical-align:middle">'
+  {c:'it',n:'Italy'},{c:'us',n:'USA'},{c:'de',n:'Germany'},
+  {c:'fr',n:'France'},{c:'gb',n:'UK'},{c:'jp',n:'Japan'},
+  {c:'br',n:'Brazil'},{c:'es',n:'Spain'},{c:'ca',n:'Canada'},
+  {c:'nl',n:'Netherlands'},{c:'au',n:'Australia'},{c:'kr',n:'Korea'},
+  {c:'se',n:'Sweden'},{c:'pt',n:'Portugal'},{c:'ch',n:'Switzerland'}
 ];
-var NAMES = ["Marco R.","Sophie L.","Tyler K.","Yuki T.","Elena V.","James O.","Priya S.","Lucas M.","Ana B.","Chen W.","Nadia F.","Omar H.","Giulia P.","Sam D.","Felix B.","Leila Z.","Ryo I.","Mia C."];
+var NAMES = [
+  'M.R.','S.L.','T.K.','Y.T.','E.V.','J.O.',
+  'P.S.','L.M.','A.B.','C.W.','N.F.','O.H.',
+  'G.P.','S.D.','F.B.','L.Z.','R.I.','M.C.'
+];
 var COUNTRIES = [["<img src="https://flagcdn.com/16x12/us.png" style="width:16px;vertical-align:middle"> USA","34%",34],["<img src="https://flagcdn.com/16x12/gb.png" style="width:16px;vertical-align:middle"> UK","18%",18],["<img src="https://flagcdn.com/16x12/de.png" style="width:16px;vertical-align:middle"> Germany","11%",11],["<img src="https://flagcdn.com/16x12/it.png" style="width:16px;vertical-align:middle"> Italy","9%",9],["<img src="https://flagcdn.com/16x12/jp.png" style="width:16px;vertical-align:middle"> Japan","7%",7],["<img src="https://flagcdn.com/16x12/br.png" style="width:16px;vertical-align:middle"> Brazil","5%",5],["Other","16%",16]];
 var SPOILERS = ["thousand","hundred","million","billion","mille","cento","mila","milion","tausend","cent","hundert","scores","dozens","hundreds","thousands","millions","trilion"];
 
@@ -335,7 +330,8 @@ function addRow(ago){
   var d=document.createElement("div");
   d.className="fi";
   var a=ago===0?"just now":ago<60?ago+"s ago":Math.floor(ago/60)+"m ago";
-  d.innerHTML='<span class="ff">'+rnd(FLAGS)+'</span><span class="fn">'+rnd(NAMES)+'</span><span class="fb">paid</span><span class="fa">'+a+'</span>';
+  var f=rnd(FLAGS);
+  d.innerHTML='<img src="https://flagcdn.com/16x12/'+f.c+'.png" style="width:16px;vertical-align:middle;margin-right:4px"><span class="fn">'+f.n+'</span><span class="fb">'+rnd(NAMES)+'</span><span class="fa">'+a+'</span>';
   list.insertBefore(d,list.firstChild);
   if(list.children.length>8)list.removeChild(list.lastChild);
 }
