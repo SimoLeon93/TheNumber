@@ -1,3 +1,5 @@
+Copy
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -106,7 +108,7 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
 <body>
 <div id="landing">
 <div class="wrap">
-
+ 
   <div class="langbar">
     <label>Language</label>
     <select onchange="changeLang(this.value)" id="langdrop">
@@ -117,11 +119,11 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
       <option value="es">ES</option>
     </select>
   </div>
-
+ 
   <div class="stamp" id="el-stamp">classified · one-time digital access</div>
   <h1 id="el-h1">There is a number.<br><span class="gold">You don't know it.</span><br>Everyone else does.</h1>
   <p class="hook" id="el-hook">Thousands of people already saw it.<br>They paid <em>exactly 1 euro</em> to find out.<br>You still haven't. <em>Doesn't that bother you?</em></p>
-
+ 
   <div class="teaser">
     <div class="tnum" id="tnum">2,847</div>
     <div class="tover">
@@ -129,18 +131,18 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
       <div class="thint" id="el-payreveal">pay to reveal</div>
     </div>
   </div>
-
+ 
   <div class="watchers">
     <span class="wdot"></span>
     <span id="wcount">23</span>&nbsp;<span id="el-watching">people watching right now</span>
   </div>
-
+ 
   <div class="testis">
     <div class="testi"><b id="el-t1w">Jordan M. · 2 hours ago</b><span id="el-t1t">"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</span></div>
     <div class="testi"><b id="el-t2w">Chiara B. · 4 hours ago</b><span id="el-t2t">"Sent it to my sister. She called me immediately. She paid too."</span></div>
     <div class="testi"><b id="el-t3w">Anon · 6 hours ago</b><span id="el-t3t">"It's a euro. You will spend more just thinking about whether to pay."</span></div>
   </div>
-
+ 
   <div class="tiers">
     <div class="tier on0" id="t0" onclick="pick(0)">
       <span class="tp">&#8364;1</span>
@@ -158,24 +160,24 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
       <span class="td" id="el-t2d">Full stats,<br>countries &amp; peak hour.</span>
     </div>
   </div>
-
+ 
   <div class="consent">
     <input type="checkbox" id="ok"/>
     <label for="ok" id="el-consent">I agree to instant digital delivery.</label>
   </div>
-
+ 
   <button id="paybtn" onclick="pay()">
     <div class="rpl"></div>
     <span id="el-btn">Show me the number &mdash; &#8364;1</span>
   </button>
   <div class="skip"><span onclick="skip()" id="el-skip">or close this page and never know</span></div>
-
+ 
   <hr class="div"/>
   <div class="ftitle" id="el-feedtitle">&#9654; paying right now</div>
   <div id="feed"></div>
 </div>
 </div>
-
+ 
 <div id="reveal">
   <div class="rtag" id="rtag">&#10022; access granted &#10022;</div>
   <div class="rnum" id="rnum">0</div>
@@ -204,9 +206,9 @@ footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;
     </div>
   </div>
 </div>
-
+ 
 <footer>The Number &middot; Digital content &middot; No refunds after delivery.</footer>
-
+ 
 <script>
 var LINKS = [
   'https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00',
@@ -215,7 +217,7 @@ var LINKS = [
 ];
 var SU = 'https://simoleon93.github.io/TheNumber';
 var CL = ['#f5c842','#42d4f5','#d442f5'];
-
+ 
 var COUNTRIES = [
   {c:'it',n:'Italy'},{c:'us',n:'USA'},{c:'de',n:'Germany'},
   {c:'fr',n:'France'},{c:'gb',n:'UK'},{c:'jp',n:'Japan'},
@@ -223,27 +225,27 @@ var COUNTRIES = [
   {c:'nl',n:'Netherlands'},{c:'au',n:'Australia'},{c:'kr',n:'Korea'},
   {c:'se',n:'Sweden'},{c:'pt',n:'Portugal'},{c:'ch',n:'Switzerland'}
 ];
-
+ 
 var INITIALS = ['M.R.','S.L.','T.K.','Y.T.','E.V.','J.O.','P.S.','L.M.','A.B.','C.W.','N.F.','O.H.','G.P.','S.D.','F.B.','L.Z.'];
-
+ 
 var CDATA = [
   {c:'us',n:'Italy',i:'A.K.',t:'Not what I expected at all. Sent it to my whole team.'},
   {c:'it',n:'Italy',i:'G.M.',t:'Pensavo di sapere la risposta. Non avevo idea.'},
   {c:'de',n:'Germany',i:'F.B.',t:'Mein Freund glaubt mir nicht. Er wird selbst zahlen.'}
 ];
-
+ 
 var CTABLE = [
   ['USA','34%',34],['UK','18%',18],['Germany','11%',11],
   ['Italy','9%',9],['Japan','7%',7],['Brazil','5%',5],['Other','16%',16]
 ];
-
+ 
 var SPOILERS = ['thousand','hundred','million','billion','mille','cento','mila','tausend','hundert','scores','dozens','hundreds','thousands','millions'];
-
+ 
 var tier = 0;
 var count = 2847;
 var lang = 'en';
 try { var ss = localStorage.getItem('tn'); if(ss) count = parseInt(ss); } catch(e) {}
-
+ 
 var T = {
   en: {
     stamp:'classified · one-time digital access',
@@ -351,13 +353,13 @@ var T = {
     suretitle:'¿Estás seguro?', sure2:'Un euro.', sure3:'Lo pensarás.'
   }
 };
-
+ 
 function flag(code) {
   return '<img src="https://flagcdn.com/16x12/' + code + '.png" width="16" style="vertical-align:middle;margin-right:4px">';
 }
-
+ 
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
-
+ 
 function applyLang() {
   var t = T[lang];
   document.getElementById('el-stamp').textContent = t.stamp;
@@ -388,18 +390,18 @@ function applyLang() {
   document.getElementById('el-csubmit').textContent = t.csubmit;
   document.getElementById('rb1').textContent = t.sharebtn;
 }
-
+ 
 function changeLang(l) { lang = l; applyLang(); }
-
+ 
 // detect language
 try {
   var bl = (navigator.language || 'en').toLowerCase().split('-')[0];
   if (T[bl]) lang = bl;
 } catch(e) {}
-
+ 
 applyLang();
 try { document.getElementById('langdrop').value = lang; } catch(e) {}
-
+ 
 function qp(k) {
   try {
     var r = new RegExp('[?&]' + k + '=([^&]*)');
@@ -407,7 +409,7 @@ function qp(k) {
     return m ? decodeURIComponent(m[1]) : null;
   } catch(e) { return null; }
 }
-
+ 
 if (qp('paid') === 'true') {
   count++;
   try { localStorage.setItem('tn', count); } catch(e) {}
@@ -427,12 +429,12 @@ if (qp('paid') === 'true') {
     document.getElementById('wcount').textContent = Math.round(w);
   }, 3100);
 }
-
+ 
 function initFeed() {
   for (var i = 0; i < 6; i++) addRow(Math.floor(Math.random() * 55) + 5);
   setInterval(function() { addRow(0); }, 3900);
 }
-
+ 
 function addRow(ago) {
   var list = document.getElementById('feed');
   var d = document.createElement('div');
@@ -444,19 +446,19 @@ function addRow(ago) {
   list.insertBefore(d, list.firstChild);
   if (list.children.length > 8) list.removeChild(list.lastChild);
 }
-
+ 
 function pick(i) {
   tier = i;
   for (var j = 0; j < 3; j++) document.getElementById('t'+j).className = 'tier' + (j===i ? ' on'+i : '');
   document.getElementById('paybtn').style.background = CL[i];
   document.getElementById('el-btn').innerHTML = T[lang].btn + ' &mdash; &euro;' + [1,3,5][i];
 }
-
+ 
 function pay() {
   if (!document.getElementById('ok').checked) { alert(T[lang].consent); return; }
   window.location.href = LINKS[tier];
 }
-
+ 
 function skip() {
   var t = T[lang];
   document.getElementById('el-h1').innerHTML = t.suretitle + '<br><span class="gold">' + t.sure2 + '</span><br>' + t.sure3;
@@ -466,7 +468,7 @@ function skip() {
     el.innerHTML = '<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">' + t.skip3 + '</span>';
   }, 2200);
 }
-
+ 
 function doReveal() {
   document.getElementById('reveal').className = 'on';
   var c = CL[tier];
@@ -475,7 +477,7 @@ function doReveal() {
   document.getElementById('rsub').textContent = count.toLocaleString() + ' — ' + T[lang].rsub;
   document.getElementById('rb1').style.background = c;
   document.getElementById('rb1').style.color = '#080810';
-
+ 
   setTimeout(function() { document.getElementById('rtag').className = 'rtag v'; }, 300);
   setTimeout(function() {
     document.getElementById('rnum').className = 'rnum v';
@@ -492,7 +494,7 @@ function doReveal() {
     loadComments();
   }, 3800);
 }
-
+ 
 function buildExtras(c) {
   var html = '';
   if (tier === 0) {
@@ -518,7 +520,7 @@ function buildExtras(c) {
   }
   document.getElementById('rcontent').innerHTML = html;
 }
-
+ 
 function animNum(to, el) {
   var s = Date.now();
   (function loop() {
@@ -527,7 +529,7 @@ function animNum(to, el) {
     if (p < 1) requestAnimationFrame(loop);
   })();
 }
-
+ 
 function loadComments() {
   var list = document.getElementById('clist');
   list.innerHTML = '';
@@ -538,14 +540,14 @@ function loadComments() {
     list.appendChild(d);
   });
 }
-
+ 
 function isSpoiler(txt) {
   if (/\d/.test(txt)) return true;
   var low = txt.toLowerCase();
   for (var i = 0; i < SPOILERS.length; i++) if (low.indexOf(SPOILERS[i]) !== -1) return true;
   return false;
 }
-
+ 
 function submitC() {
   var name = document.getElementById('c-name').value.trim();
   var country = document.getElementById('c-country').value.trim();
@@ -563,13 +565,13 @@ function submitC() {
   document.getElementById('c-country').value = '';
   document.getElementById('c-text').value = '';
 }
-
+ 
 function shr() {
   var m = "There is a number. Thousands of people paid to see it. I know what it is. You don't.";
   if (navigator.share) navigator.share({title:'The Number', text:m, url:SU});
   else window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(m) + '&url=' + encodeURIComponent(SU), '_blank');
 }
-
+ 
 function bk() {
   document.getElementById('reveal').className = '';
   document.getElementById('landing').style.display = 'block';
