@@ -3,47 +3,73 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<!-- ═══ OG TAGS per social sharing ═══ -->
 <title>The Number</title>
+<meta name="description" content="There is a number. Thousands of people paid to see it. You don't know it yet."/>
+<meta property="og:title" content="There is a number. You don't know it."/>
+<meta property="og:description" content="Thousands of people paid 1 euro to find out. You still haven't. Doesn't that bother you?"/>
+<meta property="og:image" content="https://simoleon93.github.io/TheNumber/og.png"/>
+<meta property="og:url" content="https://simoleon93.github.io/TheNumber"/>
+<meta property="og:type" content="website"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="There is a number. You don't know it."/>
+<meta name="twitter:description" content="Thousands of people paid 1 euro to find out. You still haven't."/>
+
+<!-- ═══ JSONBIN SETUP ═══
+  1. Vai su jsonbin.io → crea account gratuito
+  2. Clicca "Create a Bin" → incolla [] → Save
+  3. Copia il BIN ID (es. 64abc123...)
+  4. Vai su API Keys → copia la "Access Key"
+  5. Incollali qui sotto
+════════════════════════════════════════ -->
+<script>
+var JSONBIN_BIN = "INCOLLA_BIN_ID";
+var JSONBIN_KEY = "INCOLLA_ACCESS_KEY";
+var SUPABASE_URL = ""; var SUPABASE_KEY = "";
+
+var LK = [
+  "https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00",
+  "https://buy.stripe.com/test_7sY8wO9vRbRo56xbdfc7u01",
+  "https://buy.stripe.com/test_9B65kC37t5t02Ypdlnc7u02"
+];
+var SITEURL = "https://simoleon93.github.io/TheNumber";
+</script>
+
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#080810;color:#f0eee8;font-family:Georgia,serif;min-height:100vh;overflow-x:hidden}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-@keyframes glow{0%,100%{text-shadow:0 0 40px rgba(245,200,66,.3)}50%{text-shadow:0 0 80px rgba(245,200,66,.8)}}
+@keyframes glow{0%,100%{text-shadow:0 0 40px rgba(245,200,66,.3)}50%{text-shadow:0 0 85px rgba(245,200,66,.85)}}
 @keyframes drift{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes fadein{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-@keyframes flicker{0%,100%{opacity:1}93%{opacity:.7}95%{opacity:1}97%{opacity:.8}}
+@keyframes flicker{0%,100%{opacity:1}93%{opacity:.7}95%{opacity:1}97%{opacity:.85}}
 @keyframes scanline{0%{transform:translateY(-100%)}100%{transform:translateY(100vh)}}
-@keyframes ripple{0%{transform:scale(1);opacity:.4}100%{transform:scale(4);opacity:0}}
+@keyframes ripple{0%{transform:scale(1);opacity:.4}100%{transform:scale(4.5);opacity:0}}
+@keyframes slideIn{from{opacity:0;transform:translateX(-10px)}to{opacity:1;transform:translateX(0)}}
 
 body::after{content:'';position:fixed;left:0;top:0;width:100%;height:50px;background:linear-gradient(transparent,rgba(255,255,255,.012),transparent);animation:scanline 8s linear infinite;pointer-events:none;z-index:999}
 
 .wrap{max-width:560px;margin:0 auto;padding:48px 20px 60px;text-align:center}
-
 .stamp{font-family:monospace;font-size:10px;letter-spacing:.35em;color:#444;text-transform:uppercase;border:1px solid #1e1e2e;padding:5px 14px;border-radius:3px;display:inline-block;margin-bottom:36px}
-
 h1{font-size:clamp(24px,7vw,52px);line-height:1.15;margin-bottom:20px;animation:flicker 9s infinite}
 .gold{color:#f5c842}
-
 .hook{font-family:monospace;font-size:13px;color:#666;line-height:1.85;margin-bottom:36px;max-width:400px;margin-left:auto;margin-right:auto}
 .hook em{color:#aaa;font-style:normal}
 
-/* blurred number */
 .teaser{position:relative;width:240px;height:130px;margin:0 auto 32px;display:flex;align-items:center;justify-content:center}
 .tnum{font-size:96px;font-weight:900;color:#f5c842;filter:blur(14px);opacity:.45;user-select:none;animation:glow 3s ease-in-out infinite,drift 4s ease-in-out infinite;transition:filter .5s,opacity .5s}
 .tover{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px}
-.tlock{font-size:24px;animation:drift 3s ease-in-out infinite}
+.tlock{font-size:26px;animation:drift 3s ease-in-out infinite}
 .thint{font-family:monospace;font-size:10px;letter-spacing:.25em;color:#555;text-transform:uppercase}
 
-/* watchers */
 .watchers{display:inline-flex;align-items:center;gap:9px;background:rgba(255,60,60,.07);border:1px solid rgba(255,60,60,.22);border-radius:100px;padding:7px 18px;font-family:monospace;font-size:12px;color:#ff6b6b;margin-bottom:28px}
 .wdot{width:7px;height:7px;border-radius:50%;background:#ff4444;animation:pulse 1.2s infinite;flex-shrink:0}
 
-/* testimonials */
 .testis{display:flex;flex-direction:column;gap:10px;margin-bottom:32px}
 .testi{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:2px solid #f5c842;border-radius:8px;padding:12px 16px;text-align:left;font-size:12px;color:#888;line-height:1.65}
 .testi b{color:#bbb;display:block;margin-bottom:4px;font-size:11px}
 
-/* tiers */
 .tiers{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
 .tier{padding:14px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.03);cursor:pointer;font-family:monospace;font-size:11px;color:#666;transition:all .25s;text-align:center;min-width:120px}
 .tier.on0{border-color:#f5c842;color:#f5c842;background:rgba(245,200,66,.08);box-shadow:0 0 22px rgba(245,200,66,.2)}
@@ -53,12 +79,10 @@ h1{font-size:clamp(24px,7vw,52px);line-height:1.15;margin-bottom:20px;animation:
 .tn{font-size:9px;letter-spacing:.18em;text-transform:uppercase;display:block;margin-bottom:6px;opacity:.75}
 .td{font-size:10px;color:#555;line-height:1.4}
 
-/* consent */
 .consent{display:flex;align-items:center;gap:8px;justify-content:center;margin-bottom:18px}
 .consent input{accent-color:#f5c842;cursor:pointer;width:14px;height:14px}
 .consent label{font-family:monospace;font-size:10px;color:#444;cursor:pointer}
 
-/* button */
 #paybtn{position:relative;overflow:hidden;display:block;width:100%;max-width:340px;margin:0 auto 10px;padding:18px 32px;background:#f5c842;color:#080810;font-family:Georgia,serif;font-size:18px;font-weight:900;border:none;border-radius:4px;cursor:pointer;transition:all .15s;box-shadow:0 0 32px rgba(245,200,66,.35)}
 #paybtn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent)}
 #paybtn:active{transform:scale(.97)}
@@ -66,17 +90,14 @@ h1{font-size:clamp(24px,7vw,52px);line-height:1.15;margin-bottom:20px;animation:
 
 .skip{font-family:monospace;font-size:11px;color:#333;margin-bottom:44px;margin-top:8px}
 .skip span{cursor:pointer;text-decoration:underline;color:#444}
-
 hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 30px;max-width:340px}
-
-/* feed */
 .ftitle{font-family:monospace;font-size:10px;letter-spacing:.3em;color:#333;text-transform:uppercase;margin-bottom:14px}
 .fi{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid rgba(255,255,255,.04);font-family:monospace;font-size:12px;animation:fadein .4s ease}
 .ff{font-size:17px}.fn{flex:1;color:#777}
 .fb{font-size:9px;text-transform:uppercase;background:rgba(245,200,66,.1);color:#f5c842;padding:2px 7px;border-radius:100px;letter-spacing:.1em}
 .fa{font-size:10px;color:#333}
 
-/* reveal */
+/* REVEAL */
 #reveal{display:none;min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:60px 20px;text-align:center}
 #reveal.on{display:flex}
 .rtag{font-family:monospace;font-size:10px;letter-spacing:.5em;color:#444;text-transform:uppercase;margin-bottom:40px;opacity:0;transition:opacity .6s}
@@ -85,136 +106,333 @@ hr.div{border:none;border-top:1px solid rgba(255,255,255,.06);margin:0 auto 30px
 .rnum.v{opacity:1;transform:scale(1)}
 .rsub{font-family:monospace;font-size:13px;color:#666;margin:12px 0 50px;opacity:0;transition:opacity .5s .35s}
 .rsub.v{opacity:1}
-.rcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:26px 28px;max-width:360px;width:100%;margin-bottom:30px;text-align:left;font-family:monospace;font-size:12px;color:#666;line-height:1.85;opacity:0;transform:translateY(16px);transition:all .65s ease}
+.rcard{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:26px 28px;max-width:400px;width:100%;margin-bottom:16px;text-align:left;font-family:monospace;font-size:12px;color:#666;line-height:1.85;opacity:0;transform:translateY(16px);transition:all .65s ease}
 .rcard.v{opacity:1;transform:translateY(0)}
-.rtitle{font-size:9px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:14px}
-.rbtns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.rtitle2{font-size:9px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:14px}
+.rfeed-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
+.rflag{font-size:16px}.rname{flex:1;color:#aaa}
+.cbar{margin-bottom:8px}
+.cbar-row{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:4px}
+.cbar-track{height:3px;background:rgba(255,255,255,.07);border-radius:2px}
+.cbar-fill{height:100%;border-radius:2px;transition:width 1.2s ease}
+.rbtns{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:40px}
 .rb{padding:13px 24px;border-radius:4px;font-family:monospace;font-size:11px;letter-spacing:.12em;text-transform:uppercase;cursor:pointer;opacity:0;transition:opacity .5s .4s}
 .rb.v{opacity:1}
 .rbp{background:#f5c842;color:#080810;border:none}
 .rbs{background:transparent;border:1px solid #333;color:#555}
 
-/* feed in reveal */
-.rfeed-item{display:flex;align-items:center;gap:10px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.05);font-size:12px}
-.rflag{font-size:16px}.rname{flex:1;color:#aaa}
+/* COMMENTS */
+.comments-section{max-width:400px;width:100%;opacity:0;transition:opacity .6s .5s}
+.comments-section.v{opacity:1}
+.comments-title{font-family:monospace;font-size:10px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:20px;text-align:center}
+.comment-item{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:8px;padding:12px 14px;margin-bottom:10px;text-align:left;animation:slideIn .4s ease}
+.comment-flag{font-size:15px;margin-right:6px}
+.comment-name{font-family:monospace;font-size:10px;color:#555;margin-bottom:6px}
+.comment-text{font-size:12px;color:#999;line-height:1.6;font-style:italic}
+.comment-form{margin-top:20px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:18px}
+.comment-form-title{font-family:monospace;font-size:10px;letter-spacing:.2em;color:#555;text-transform:uppercase;margin-bottom:14px}
+.comment-input{width:100%;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:10px 12px;color:#f0eee8;font-family:monospace;font-size:12px;margin-bottom:10px;resize:none}
+.comment-input::placeholder{color:#444}
+.comment-input:focus{outline:none;border-color:rgba(245,200,66,.4)}
+.comment-row{display:flex;gap:8px;margin-bottom:10px}
+.comment-row input{flex:1;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:6px;padding:8px 10px;color:#f0eee8;font-family:monospace;font-size:11px}
+.comment-row input::placeholder{color:#444}
+.comment-row input:focus{outline:none;border-color:rgba(245,200,66,.4)}
+.comment-submit{width:100%;padding:10px;background:rgba(245,200,66,.15);border:1px solid rgba(245,200,66,.3);border-radius:6px;color:#f5c842;font-family:monospace;font-size:11px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:all .2s}
+.comment-submit:hover{background:rgba(245,200,66,.25)}
+.comment-warn{font-family:monospace;font-size:10px;color:#555;margin-bottom:10px;line-height:1.5}
+.spoiler-err{color:#ff6b6b;font-family:monospace;font-size:11px;margin-top:8px;display:none}
+.no-comments{font-family:monospace;font-size:11px;color:#333;text-align:center;padding:20px 0}
 
-/* country bar */
-.cbar{margin-bottom:6px}
-.cbar-label{display:flex;justify-content:space-between;font-size:11px;color:#888;margin-bottom:3px}
-.cbar-track{height:3px;background:rgba(255,255,255,.07);border-radius:2px}
-.cbar-fill{height:100%;border-radius:2px;transition:width 1s ease}
-
-footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;color:#2a2a2a;border-top:1px solid rgba(255,255,255,.04)}
+footer{padding:16px 20px;text-align:center;font-family:monospace;font-size:10px;color:#222;border-top:1px solid rgba(255,255,255,.04)}
 </style>
 </head>
 <body>
 
+<!-- ══ LANDING ══ -->
 <div id="landing">
 <div class="wrap">
-
-  <div class="stamp">classified &middot; one-time digital access</div>
-
-  <h1>There is a number.<br><span class="gold">You don't know it.</span><br>Everyone else does.</h1>
-
-  <p class="hook">
-    Thousands of people already saw it.<br>
-    They paid <em>exactly 1 euro</em> to find out.<br>
-    You still haven't. <em>Doesn't that bother you?</em>
-  </p>
+  <div class="stamp" id="s-stamp">classified &middot; one-time digital access</div>
+  <h1 id="s-h1">There is a number.<br><span class="gold" id="s-h1b">You don't know it.</span><br><span id="s-h1c">Everyone else does.</span></h1>
+  <p class="hook" id="s-hook">Thousands of people already saw it.<br>They paid <em id="s-paid-em">exactly 1 euro</em> to find out.<br><span id="s-hook2">You still haven't.</span> <em id="s-bother">Doesn't that bother you?</em></p>
 
   <div class="teaser">
     <div class="tnum" id="tnum">2,847</div>
     <div class="tover">
       <div class="tlock">&#128274;</div>
-      <div class="thint">pay to reveal</div>
+      <div class="thint" id="s-pay-reveal">pay to reveal</div>
     </div>
   </div>
 
   <div class="watchers">
     <span class="wdot"></span>
-    <span id="wcount">23</span>&nbsp;people watching right now
+    <span id="wcount">23</span>&nbsp;<span id="s-watching">people watching right now</span>
   </div>
 
-  <div class="testis">
-    <div class="testi"><b>Jordan M. &#127482;&#127480; &middot; 2 hours ago</b>"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</div>
-    <div class="testi"><b>Chiara B. &#127470;&#127481; &middot; 4 hours ago</b>"Sent it to my sister. She called me immediately after. She paid too."</div>
-    <div class="testi"><b>Anon &#127465;&#127466; &middot; 6 hours ago</b>"It's a euro. You will spend more than that just thinking about whether to pay."</div>
+  <div class="testis" id="testis-block">
+    <div class="testi"><b id="t1-who">Jordan M. &#127482;&#127480; &middot; 2 hours ago</b><span id="t1-text">"I told myself I wouldn't. I paid. Zero regrets. The number is insane."</span></div>
+    <div class="testi"><b id="t2-who">Chiara B. &#127470;&#127481; &middot; 4 hours ago</b><span id="t2-text">"Sent it to my sister. She called me immediately. She paid too."</span></div>
+    <div class="testi"><b id="t3-who">Anon &#127465;&#127466; &middot; 6 hours ago</b><span id="t3-text">"It's a euro. You will spend more just thinking about whether to pay."</span></div>
   </div>
 
   <div class="tiers">
     <div class="tier on0" id="t0" onclick="pick(0)">
       <span class="tp">&#8364;1</span>
-      <span class="tn">&#128290; The Count</span>
-      <span class="td">The number.<br>Nothing else.</span>
+      <span class="tn" id="s-t0n">&#128290; The Count</span>
+      <span class="td" id="s-t0d">The number.<br>Nothing else.</span>
     </div>
     <div class="tier" id="t1" onclick="pick(1)">
       <span class="tp" style="color:#42d4f5">&#8364;3</span>
-      <span class="tn">&#128101; The Feed</span>
-      <span class="td">Number + names<br>of recent payers.</span>
+      <span class="tn" id="s-t1n">&#128101; The Feed</span>
+      <span class="td" id="s-t1d">Number + names<br>of recent payers.</span>
     </div>
     <div class="tier" id="t2" onclick="pick(2)">
       <span class="tp" style="color:#d442f5">&#8364;5</span>
-      <span class="tn">&#127942; Leaderboard</span>
-      <span class="td">Full stats,<br>countries &amp; peak hour.</span>
+      <span class="tn" id="s-t2n">&#127942; Leaderboard</span>
+      <span class="td" id="s-t2d">Full stats,<br>countries &amp; peak hour.</span>
     </div>
   </div>
 
   <div class="consent">
     <input type="checkbox" id="ok"/>
-    <label for="ok">I agree to instant digital delivery.</label>
+    <label for="ok" id="s-consent">I agree to instant digital delivery.</label>
   </div>
 
   <button id="paybtn" onclick="pay()">
     <div class="ripple"></div>
     <span id="btntxt">Show me the number &mdash; &#8364;1</span>
   </button>
-  <div class="skip"><span onclick="skip()">or close this page and never know</span></div>
+  <div class="skip"><span onclick="skip()" id="s-skip">or close this page and never know</span></div>
 
   <hr class="div"/>
-  <div class="ftitle">&#9654; paying right now</div>
+  <div class="ftitle" id="s-feed-title">&#9654; paying right now</div>
   <div id="feed"></div>
-
 </div>
 </div>
 
+<!-- ══ REVEAL ══ -->
 <div id="reveal">
   <div class="rtag" id="rtag">&#10022; &nbsp; access granted &nbsp; &#10022;</div>
   <div class="rnum" id="rnum">0</div>
   <div class="rsub" id="rsub">people paid before you.</div>
+
   <div class="rcard" id="rcard">
-    <div class="rtitle" id="rcardtitle">What does this mean?</div>
-    <div id="rcontent" style="color:#666;line-height:1.85">
-      Each of them faced the same choice.<br>
-      Curiosity won. <span style="color:#f5c842">It always does.</span><br><br>
-      <span id="rex"></span>
-    </div>
+    <div class="rtitle2" id="rcardtitle">What does this mean?</div>
+    <div id="rcontent"></div>
   </div>
+
   <div class="rbtns">
-    <button class="rb rbp" id="rb1" onclick="shr()">Send to someone who won't pay</button>
+    <button class="rb rbp" id="rb1" onclick="shr()" id="s-sharebtn">Send to someone who won't pay</button>
     <button class="rb rbs" id="rb2" onclick="bk()">&#8592; Back</button>
+  </div>
+
+  <!-- COMMENTS -->
+  <div class="comments-section" id="comments-section">
+    <div class="comments-title" id="s-comm-title">&#128172; What others said (no spoilers)</div>
+    <div id="comments-list"><div class="no-comments" id="s-no-comm">Be the first to comment.</div></div>
+
+    <div class="comment-form">
+      <div class="comment-form-title" id="s-leave-title">Leave your reaction</div>
+      <div class="comment-warn" id="s-warn">&#128274; No spoilers — do not reveal the number or any hint of its size. Comments with numbers are automatically blocked.</div>
+      <div class="comment-row">
+        <input type="text" id="c-name" placeholder="Your name" maxlength="30"/>
+        <input type="text" id="c-country" placeholder="&#127757; Country" maxlength="30"/>
+      </div>
+      <textarea class="comment-input" id="c-text" rows="3" placeholder="Share your reaction without revealing the number..." maxlength="200"></textarea>
+      <div class="spoiler-err" id="spoiler-err">&#128274; Spoiler detected. Do not include numbers or size hints.</div>
+      <button class="comment-submit" onclick="submitComment()" id="s-submit-btn">Post reaction</button>
+    </div>
   </div>
 </div>
 
 <footer>The Number &middot; Digital content &middot; No refunds after delivery.</footer>
 
 <script>
-var LK = [
-  "https://buy.stripe.com/test_8x2aEW8rN7B8gPf4ORc7u00",
-  "https://buy.stripe.com/test_7sY8wO9vRbRo56xbdfc7u01",
-  "https://buy.stripe.com/test_9B65kC37t5t02Ypdlnc7u02"
-];
-var SU = "https://simoleon93.github.io/TheNumber";
-var PR = ["1 euro","3 euro","5 euro"];
+// ═══ TRANSLATIONS ═══
+var T = {
+  en: {
+    stamp:"classified \u00b7 one-time digital access",
+    h1b:"You don\u2019t know it.",h1c:"Everyone else does.",
+    hook1:"Thousands of people already saw it.",hook2:"They paid <em>exactly 1 euro</em> to find out.",
+    hook3:"You still haven\u2019t.",hook4:"Doesn\u2019t that bother you?",
+    t1w:"Jordan M. \uD83C\uDDFA\uD83C\uDDF8 \u00b7 2 hours ago",t1t:"\u201cI told myself I wouldn\u2019t. I paid. Zero regrets. The number is insane.\u201d",
+    t2w:"Chiara B. \uD83C\uDDEE\uD83C\uDDF9 \u00b7 4 hours ago",t2t:"\u201cSent it to my sister. She called me immediately. She paid too.\u201d",
+    t3w:"Anon \uD83C\uDDE9\uD83C\uDDEA \u00b7 6 hours ago",t3t:"\u201cIt\u2019s a euro. You will spend more just thinking about whether to pay.\u201d",
+    t0n:"The Count",t0d:"The number.\nNothing else.",
+    t1n:"The Feed",t1d:"Number + names\nof recent payers.",
+    t2n:"Leaderboard",t2d:"Full stats,\ncountries & peak hour.",
+    consent:"I agree to instant digital delivery.",
+    btnbase:"Show me the number",skip:"or close this page and never know",
+    watching:"people watching right now",feedtitle:"paying right now",
+    commtitle:"What others said (no spoilers)",nocomm:"Be the first to comment.",
+    leavetitle:"Leave your reaction",warn:"No spoilers \u2014 do not reveal the number or any hint of its size.",
+    submitbtn:"Post reaction",nameph:"Your name",countryph:"Country",
+    textph:"Share your reaction without revealing the number...",
+    spoilerr:"Spoiler detected. Do not include numbers or size hints.",
+    reveal_sub:"people paid before you.",sharebtn:"Send to someone who won\u2019t pay",
+    skip2:"Yeah, I\u2019d rather not know.",skip3:"Ok fine. Show me.",
+    suretitle:"Are you sure?",sure2:"One euro.",sure3:"You will think about this.",
+    payreveal:"pay to reveal"
+  },
+  it: {
+    stamp:"classificato \u00b7 accesso digitale una tantum",
+    h1b:"Tu non lo sai.",h1c:"Tutti gli altri s\u00ec.",
+    hook1:"Migliaia di persone lo hanno gi\u00e0 visto.",hook2:"Hanno pagato <em>esattamente 1 euro</em> per scoprirlo.",
+    hook3:"Tu non l\u2019hai ancora fatto.",hook4:"Non ti d\u00e0 fastidio?",
+    t1w:"Jordan M. \uD83C\uDDFA\uD83C\uDDF8 \u00b7 2 ore fa",t1t:"\u201cMi ero detto che non avrei pagato. Poi ho pagato. Zero rimpianti. Il numero \u00e8 assurdo.\u201d",
+    t2w:"Chiara B. \uD83C\uDDEE\uD83C\uDDF9 \u00b7 4 ore fa",t2t:"\u201cL\u2019ho mandato a mia sorella. Mi ha chiamato subito. Ha pagato anche lei.\u201d",
+    t3w:"Anonimo \uD83C\uDDE9\uD83C\uDDEA \u00b7 6 ore fa",t3t:"\u201c\u00c8 un euro. Spenderai di pi\u00f9 solo a pensare se pagare o no.\u201d",
+    t0n:"Il Numero",t0d:"Solo il numero.\nNiente altro.",
+    t1n:"Il Feed",t1d:"Numero + nomi\ndi chi ha pagato.",
+    t2n:"Classifica",t2d:"Statistiche complete,\npaesi e ora di punta.",
+    consent:"Acconsento alla consegna digitale immediata.",
+    btnbase:"Mostrami il numero",skip:"oppure chiudi questa pagina e non saperlo mai",
+    watching:"persone stanno guardando ora",feedtitle:"stanno pagando ora",
+    commtitle:"Cosa dicono gli altri (zero spoiler)",nocomm:"Sii il primo a commentare.",
+    leavetitle:"Lascia la tua reazione",warn:"Nessuno spoiler \u2014 non rivelare il numero o indizi sulla sua grandezza.",
+    submitbtn:"Pubblica reazione",nameph:"Il tuo nome",countryph:"Paese",
+    textph:"Condividi la tua reazione senza rivelare il numero...",
+    spoilerr:"Spoiler rilevato. Non includere numeri o indizi sulla dimensione.",
+    reveal_sub:"persone hanno pagato prima di te.",sharebtn:"Mandalo a qualcuno che non pager\u00e0",
+    skip2:"S\u00ec, preferisco non saperlo.",skip3:"Ok va bene. Mostrami.",
+    suretitle:"Sei sicuro?",sure2:"Un euro.",sure3:"Ci penserai.",
+    payreveal:"paga per scoprire"
+  },
+  de: {
+    stamp:"klassifiziert \u00b7 einmaliger digitaler Zugang",
+    h1b:"Du wei\u00dft es nicht.",h1c:"Alle anderen schon.",
+    hook1:"Tausende Menschen haben es bereits gesehen.",hook2:"Sie zahlten <em>genau 1 Euro</em> daf\u00fcr.",
+    hook3:"Du noch nicht.",hook4:"St\u00f6rt dich das nicht?",
+    t1w:"Jordan M. \uD83C\uDDFA\uD83C\uDDF8 \u00b7 vor 2 Stunden",t1t:"\u201eIch hatte mir gesagt, ich zahle nicht. Dann tat ich es. Keine Reue. Die Zahl ist unglaublich.\u201c",
+    t2w:"Chiara B. \uD83C\uDDEE\uD83C\uDDF9 \u00b7 vor 4 Stunden",t2t:"\u201eIch schickte es meiner Schwester. Sie rief mich sofort an. Sie hat auch gezahlt.\u201c",
+    t3w:"Anon \uD83C\uDDE9\uD83C\uDDEA \u00b7 vor 6 Stunden",t3t:"\u201eEs ist ein Euro. Du wirst mehr damit verbringen, dar\u00fcber nachzudenken.\u201c",
+    t0n:"Die Zahl",t0d:"Nur die Zahl.\nNichts anderes.",
+    t1n:"Der Feed",t1d:"Zahl + Namen\nvon Zahlern.",
+    t2n:"Rangliste",t2d:"Vollst. Statistiken,\nL\u00e4nder & Spitzenstunde.",
+    consent:"Ich stimme der sofortigen digitalen Lieferung zu.",
+    btnbase:"Zeig mir die Zahl",skip:"oder schlie\u00df diese Seite und wisse es nie",
+    watching:"Personen schauen jetzt zu",feedtitle:"zahlen gerade jetzt",
+    commtitle:"Was andere sagten (keine Spoiler)",nocomm:"Sei der Erste, der kommentiert.",
+    leavetitle:"Hinterlasse deine Reaktion",warn:"Keine Spoiler \u2014 verrate die Zahl nicht.",
+    submitbtn:"Reaktion posten",nameph:"Dein Name",countryph:"Land",
+    textph:"Teile deine Reaktion, ohne die Zahl zu verraten...",
+    spoilerr:"Spoiler erkannt. Keine Zahlen oder Gr\u00f6\u00dfenhinweise.",
+    reveal_sub:"Personen haben vor dir gezahlt.",sharebtn:"Sende es jemandem, der nicht zahlt",
+    skip2:"Ja, ich m\u00f6chte es lieber nicht wissen.",skip3:"Ok, zeig mir es.",
+    suretitle:"Bist du sicher?",sure2:"Ein Euro.",sure3:"Du wirst dar\u00fcber nachdenken.",
+    payreveal:"zahlen um zu sehen"
+  },
+  fr: {
+    stamp:"classifi\u00e9 \u00b7 acc\u00e8s num\u00e9rique unique",
+    h1b:"Tu ne le sais pas.",h1c:"Tout le monde d\u2019autre si.",
+    hook1:"Des milliers de personnes l\u2019ont d\u00e9j\u00e0 vu.",hook2:"Ils ont pay\u00e9 <em>exactement 1 euro</em> pour le savoir.",
+    hook3:"Pas toi encore.",hook4:"\u00c7a ne te d\u00e9range pas?",
+    t1w:"Jordan M. \uD83C\uDDFA\uD83C\uDDF8 \u00b7 il y a 2h",t1t:"\u201cJe m\u2019\u00e9tais dit que non. J\u2019ai pay\u00e9. Z\u00e9ro regret. Le nombre est dingue.\u201d",
+    t2w:"Chiara B. \uD83C\uDDEE\uD83C\uDDF9 \u00b7 il y a 4h",t2t:"\u201cEnvoy\u00e9 \u00e0 ma s\u0153ur. Elle m\u2019a appel\u00e9 imm\u00e9diatement. Elle a pay\u00e9 aussi.\u201d",
+    t3w:"Anon \uD83C\uDDE9\uD83C\uDDEA \u00b7 il y a 6h",t3t:"\u201cC\u2019est un euro. Tu passeras plus de temps \u00e0 y r\u00e9fl\u00e9chir.\u201d",
+    t0n:"Le Nombre",t0d:"Le nombre.\nRien d\u2019autre.",
+    t1n:"Le Feed",t1d:"Nombre + noms\ndes derniers payeurs.",
+    t2n:"Classement",t2d:"Stats compl\u00e8tes,\npays & heure de pointe.",
+    consent:"J\u2019accepte la livraison num\u00e9rique imm\u00e9diate.",
+    btnbase:"Montrez-moi le nombre",skip:"ou fermer cette page et ne jamais savoir",
+    watching:"personnes regardent maintenant",feedtitle:"paient en ce moment",
+    commtitle:"Ce que les autres ont dit (sans spoilers)",nocomm:"Sois le premier \u00e0 commenter.",
+    leavetitle:"Laisse ta r\u00e9action",warn:"Pas de spoilers \u2014 ne r\u00e9v\u00e8le pas le nombre.",
+    submitbtn:"Poster la r\u00e9action",nameph:"Ton nom",countryph:"Pays",
+    textph:"Partage ta r\u00e9action sans r\u00e9v\u00e9ler le nombre...",
+    spoilerr:"Spoiler d\u00e9tect\u00e9. Pas de chiffres.",
+    reveal_sub:"personnes ont pay\u00e9 avant toi.",sharebtn:"Envoyer \u00e0 quelqu\u2019un qui ne paiera pas",
+    skip2:"Oui, je pr\u00e9f\u00e8re ne pas savoir.",skip3:"Ok, montre-moi.",
+    suretitle:"Tu es s\u00fbr?",sure2:"Un euro.",sure3:"Tu y penseras.",
+    payreveal:"payer pour r\u00e9v\u00e9ler"
+  },
+  es: {
+    stamp:"clasificado \u00b7 acceso digital \u00fanico",
+    h1b:"T\u00fa no lo sabes.",h1c:"Todos los dem\u00e1s s\u00ed.",
+    hook1:"Miles de personas ya lo han visto.",hook2:"Pagaron <em>exactamente 1 euro</em> para descubrirlo.",
+    hook3:"T\u00fa todav\u00eda no.",hook4:"\u00bfNo te molesta eso?",
+    t1w:"Jordan M. \uD83C\uDDFA\uD83C\uDDF8 \u00b7 hace 2 horas",t1t:"\u201cMe dije que no pagar\u00eda. Pagu\u00e9. Cero arrepentimientos. El n\u00famero es una locura.\u201d",
+    t2w:"Chiara B. \uD83C\uDDEE\uD83C\uDDF9 \u00b7 hace 4 horas",t2t:"\u201cSe lo mand\u00e9 a mi hermana. Me llam\u00f3 enseguida. Ella tambi\u00e9n pag\u00f3.\u201d",
+    t3w:"Anon \uD83C\uDDE9\uD83C\uDDEA \u00b7 hace 6 horas",t3t:"\u201cEs un euro. Gastar\u00e1s m\u00e1s s\u00f3lo pensando si pagar o no.\u201d",
+    t0n:"El N\u00famero",t0d:"El n\u00famero.\nNada m\u00e1s.",
+    t1n:"El Feed",t1d:"N\u00famero + nombres\nde pagadores recientes.",
+    t2n:"Clasificaci\u00f3n",t2d:"Estad\u00edsticas completas,\npa\u00edses y hora punta.",
+    consent:"Acepto la entrega digital inmediata.",
+    btnbase:"Mu\u00e9strame el n\u00famero",skip:"o cierra esta p\u00e1gina y no saberlo nunca",
+    watching:"personas mirando ahora",feedtitle:"pagando ahora mismo",
+    commtitle:"Lo que dijeron otros (sin spoilers)",nocomm:"S\u00e9 el primero en comentar.",
+    leavetitle:"Deja tu reacci\u00f3n",warn:"Sin spoilers \u2014 no reveles el n\u00famero.",
+    submitbtn:"Publicar reacci\u00f3n",nameph:"Tu nombre",countryph:"Pa\u00eds",
+    textph:"Comparte tu reacci\u00f3n sin revelar el n\u00famero...",
+    spoilerr:"Spoiler detectado. No incluyas n\u00fameros.",
+    reveal_sub:"personas pagaron antes que t\u00fa.",sharebtn:"Env\u00edalo a alguien que no pagar\u00e1",
+    skip2:"S\u00ed, prefiero no saber.",skip3:"Ok, mu\u00e9strame.",
+    suretitle:"\u00bfEst\u00e1s seguro?",sure2:"Un euro.",sure3:"Lo pensar\u00e1s.",
+    payreveal:"paga para revelar"
+  }
+};
+
+// ═══ DETECT LANGUAGE ═══
+var lang = "en";
+try {
+  var bl = (navigator.language || navigator.userLanguage || "en").toLowerCase().split("-")[0];
+  if (T[bl]) lang = bl;
+} catch(e) {}
+var t = T[lang];
+
+// ═══ APPLY TRANSLATIONS ═══
+function applyLang() {
+  document.getElementById("s-stamp").textContent = t.stamp;
+  document.getElementById("s-h1b").textContent = t.h1b;
+  document.getElementById("s-h1c").textContent = t.h1c;
+  document.getElementById("s-pay-reveal").textContent = t.payreveal;
+  document.getElementById("s-hook2").textContent = t.hook3;
+  document.getElementById("s-bother").textContent = t.hook4;
+  document.getElementById("t1-who").textContent = t.t1w;
+  document.getElementById("t1-text").textContent = t.t1t;
+  document.getElementById("t2-who").textContent = t.t2w;
+  document.getElementById("t2-text").textContent = t.t2t;
+  document.getElementById("t3-who").textContent = t.t3w;
+  document.getElementById("t3-text").textContent = t.t3t;
+  document.getElementById("s-t0n").innerHTML = "&#128290; " + t.t0n;
+  document.getElementById("s-t0d").innerHTML = t.t0d.replace("\n","<br>");
+  document.getElementById("s-t1n").innerHTML = "&#128101; " + t.t1n;
+  document.getElementById("s-t1d").innerHTML = t.t1d.replace("\n","<br>");
+  document.getElementById("s-t2n").innerHTML = "&#127942; " + t.t2n;
+  document.getElementById("s-t2d").innerHTML = t.t2d.replace("\n","<br>");
+  document.getElementById("s-consent").textContent = t.consent;
+  document.getElementById("btntxt").textContent = t.btnbase + " \u2014 \u20AC1";
+  document.getElementById("s-skip").textContent = t.skip;
+  document.getElementById("s-watching").textContent = t.watching;
+  document.getElementById("s-feed-title").innerHTML = "&#9654; " + t.feedtitle;
+  document.getElementById("s-comm-title").textContent = "\uD83D\uDCAC " + t.commtitle;
+  document.getElementById("s-no-comm").textContent = t.nocomm;
+  document.getElementById("s-leave-title").textContent = t.leavetitle;
+  document.getElementById("s-warn").textContent = "\uD83D\uDD12 " + t.warn;
+  document.getElementById("s-submit-btn").textContent = t.submitbtn;
+  document.getElementById("c-name").placeholder = t.nameph;
+  document.getElementById("c-country").placeholder = t.countryph;
+  document.getElementById("c-text").placeholder = t.textph;
+  document.getElementById("spoiler-err").textContent = "\uD83D\uDD12 " + t.spoilerr;
+  document.getElementById("rb1").textContent = t.sharebtn;
+  document.getElementById("hook1txt").innerHTML = t.hook1 + "<br>" + t.hook2 + "<br>";
+}
+
+// ═══ DATA ═══
+var PR = ["\u20AC1","\u20AC3","\u20AC5"];
 var CL = ["#f5c842","#42d4f5","#d442f5"];
 var NAMES = ["Marco R.","Sophie L.","Tyler K.","Yuki T.","Elena V.","James O.","Priya S.","Lucas M.","Ana B.","Chen W.","Nadia F.","Omar H.","Giulia P.","Sam D.","Felix B.","Leila Z.","Ryo I.","Mia C.","Noah A.","Zara P."];
 var FLAGS = ["\uD83C\uDDEE\uD83C\uDDF9","\uD83C\uDDFA\uD83C\uDDF8","\uD83C\uDDE9\uD83C\uDDEA","\uD83C\uDDEB\uD83C\uDDF7","\uD83C\uDDEC\uD83C\uDDE7","\uD83C\uDDEF\uD83C\uDDF5","\uD83C\uDDE7\uD83C\uDDF7","\uD83C\uDDEA\uD83C\uDDF8","\uD83C\uDDE8\uD83C\uDDE6","\uD83C\uDDF3\uD83C\uDDF1","\uD83C\uDDE6\uD83C\uDDFA","\uD83C\uDDF0\uD83C\uDDF7","\uD83C\uDDF8\uD83C\uDDEA","\uD83C\uDDF5\uD83C\uDDF9"];
 var COUNTRIES = [["🇺🇸 USA","34%",34],["🇬🇧 UK","18%",18],["🇩🇪 Germany","11%",11],["🇮🇹 Italy","9%",9],["🇯🇵 Japan","7%",7],["🇧🇷 Brazil","5%",5],["🇨🇦 Canada","4%",4],["Other","12%",12]];
+var SPOILER_WORDS = ["thousand","hundred","million","billion","mille","cento","mila","milion","tausend","cent","millon","millier","cien","mil ","hundert","trilion","billion","dozens","dozens","scores","many","few","lots","hundreds","thousands","millions"];
 
 var tier = 0;
 var count = 2847;
-try { var s = localStorage.getItem("tn"); if(s) count = parseInt(s); } catch(e) {}
+try { var ss = localStorage.getItem("tn"); if(ss) count = parseInt(ss); } catch(e) {}
 var w = Math.floor(Math.random()*18)+16;
+var hasPaid = false;
 
+// ═══ DETECT RETURN FROM STRIPE ═══
 function qp(k) {
   try {
     var r = new RegExp("[?&]" + k + "=([^&]*)");
@@ -223,13 +441,19 @@ function qp(k) {
   } catch(e) { return null; }
 }
 
+// ═══ INIT ═══
+applyLang();
+document.getElementById("hook1txt").innerHTML = t.hook1 + "<br>" + t.hook2 + "<br>";
+
 if (qp("paid") === "true") {
   count++;
-  try { localStorage.setItem("tn", count); } catch(e) {}
+  hasPaid = true;
+  try { localStorage.setItem("tn", count); localStorage.setItem("tn_paid","1"); } catch(e) {}
   tier = parseInt(qp("tier") || "0");
   document.getElementById("landing").style.display = "none";
   doReveal();
 } else {
+  try { if(localStorage.getItem("tn_paid")==="1") hasPaid = true; } catch(e) {}
   initFeed();
   setInterval(function() {
     var nums = [count.toLocaleString(), (count+17).toLocaleString(), (count-5).toLocaleString()];
@@ -244,131 +468,226 @@ if (qp("paid") === "true") {
 
 function rnd(a) { return a[Math.floor(Math.random() * a.length)]; }
 
+// ═══ FEED ═══
 function initFeed() {
-  for (var i = 0; i < 5; i++) addRow(Math.floor(Math.random()*55)+5);
+  for (var i = 0; i < 6; i++) addRow(Math.floor(Math.random()*55)+5);
   setInterval(function() { addRow(0); }, 3900);
 }
-
 function addRow(ago) {
   var list = document.getElementById("feed");
   var d = document.createElement("div");
   d.className = "fi";
-  var astr = ago === 0 ? "just now" : ago < 60 ? ago + "s ago" : Math.floor(ago/60) + "m ago";
-  d.innerHTML = '<span class="ff">' + rnd(FLAGS) + '</span><span class="fn">' + rnd(NAMES) + '</span><span class="fb">paid</span><span class="fa">' + astr + '</span>';
+  var astr = ago===0?"just now":ago<60?ago+"s ago":Math.floor(ago/60)+"m ago";
+  d.innerHTML = '<span class="ff">'+rnd(FLAGS)+'</span><span class="fn">'+rnd(NAMES)+'</span><span class="fb">paid</span><span class="fa">'+astr+'</span>';
   list.insertBefore(d, list.firstChild);
   if (list.children.length > 8) list.removeChild(list.lastChild);
 }
 
+// ═══ TIER SELECTION ═══
 function pick(i) {
   tier = i;
-  for (var j = 0; j < 3; j++) {
-    document.getElementById("t"+j).className = "tier" + (j === i ? " on"+i : "");
-  }
-  var colors = ["#f5c842","#42d4f5","#d442f5"];
-  document.getElementById("paybtn").style.background = colors[i];
-  document.getElementById("btntxt").textContent = "Show me the number \u2014 \u20AC" + [1,3,5][i];
+  for (var j = 0; j < 3; j++) document.getElementById("t"+j).className = "tier"+(j===i?" on"+i:"");
+  document.getElementById("paybtn").style.background = CL[i];
+  document.getElementById("btntxt").textContent = t.btnbase+" \u2014 "+["\u20AC1","\u20AC3","\u20AC5"][i];
 }
 
+// ═══ PAY ═══
 function pay() {
-  if (!document.getElementById("ok").checked) {
-    alert("Please check the box to continue.");
-    return;
-  }
+  if (!document.getElementById("ok").checked) { alert(t.consent); return; }
   window.location.href = LK[tier];
 }
 
+// ═══ SKIP TRAP ═══
 function skip() {
-  document.querySelector("h1").innerHTML = 'Are you sure?<br><span class="gold">One euro.</span><br>You will think about this.';
+  document.querySelector("h1").innerHTML = t.suretitle+'<br><span class="gold">'+t.sure2+'</span><br>'+t.sure3;
   var el = document.querySelector(".skip");
-  el.innerHTML = '<span style="color:#555">Yeah, I\'d rather not know.</span>';
+  el.innerHTML = '<span style="color:#555">'+t.skip2+'</span>';
   setTimeout(function() {
-    el.innerHTML = '<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">Ok fine. Show me.</span>';
+    el.innerHTML = '<span onclick="pay()" style="color:#f5c842;cursor:pointer;text-decoration:underline">'+t.skip3+'</span>';
   }, 2200);
 }
 
+// ═══ REVEAL ═══
 function doReveal() {
-  var rev = document.getElementById("reveal");
-  rev.className = "on";
+  document.getElementById("reveal").className = "on";
   var c = CL[tier];
   document.getElementById("rnum").style.color = c;
-  document.getElementById("rnum").style.textShadow = "0 0 70px " + c + "88";
-  document.getElementById("rsub").textContent = "people paid " + PR[tier] + " before you.";
+  document.getElementById("rnum").style.textShadow = "0 0 70px "+c+"88";
+  document.getElementById("rsub").textContent = count.toLocaleString()+" — "+t.reveal_sub;
+  document.getElementById("rb1").style.background = c;
 
-  setTimeout(function() { document.getElementById("rtag").className = "rtag v"; }, 300);
-  setTimeout(function() {
-    document.getElementById("rnum").className = "rnum v";
-    document.getElementById("rsub").className = "rsub v";
+  setTimeout(function(){ document.getElementById("rtag").className="rtag v"; },300);
+  setTimeout(function(){
+    document.getElementById("rnum").className="rnum v";
+    document.getElementById("rsub").className="rsub v";
     animNum(count, document.getElementById("rnum"));
-  }, 600);
-  setTimeout(function() {
+  },600);
+  setTimeout(function(){
     buildExtras(c);
-    document.getElementById("rcard").className = "rcard v";
-  }, 2800);
-  setTimeout(function() {
-    document.getElementById("rb1").className = "rb rbp v";
-    document.getElementById("rb1").style.background = c;
-    document.getElementById("rb2").className = "rb rbs v";
-  }, 3300);
+    document.getElementById("rcard").className="rcard v";
+  },2800);
+  setTimeout(function(){
+    document.getElementById("rb1").className="rb rbp v";
+    document.getElementById("rb2").className="rb rbs v";
+  },3300);
+  setTimeout(function(){
+    document.getElementById("comments-section").className="comments-section v";
+    loadComments();
+  },3800);
 }
 
 function buildExtras(c) {
-  var rex = document.getElementById("rex");
   var html = "";
-
   if (tier === 0) {
-    html = 'Now you know. <span style="color:' + c + '">Send this to a friend who won\'t pay.</span><br><br>Watch them struggle with the same decision you just made.';
+    document.getElementById("rcardtitle").textContent = "What does this mean?";
+    html = 'Each of them faced the same choice.<br>Curiosity won. <span style="color:'+c+'">It always does.</span><br><br>Now send this to a friend who won\'t pay. <span style="color:'+c+'">Watch them struggle.</span>';
   }
-
   if (tier >= 1) {
-    // Recent payers feed
     document.getElementById("rcardtitle").textContent = "Recent payers";
-    html = '';
     for (var i = 0; i < 6; i++) {
-      html += '<div class="rfeed-item"><span class="rflag">' + rnd(FLAGS) + '</span><span class="rname">' + rnd(NAMES) + '</span><span style="font-family:monospace;font-size:10px;color:#444">' + [2,5,8,12,18,24,31][Math.floor(Math.random()*7)] + 'm ago</span></div>';
+      html += '<div class="rfeed-item"><span class="rflag">'+rnd(FLAGS)+'</span><span class="rname">'+rnd(NAMES)+'</span><span style="font-family:monospace;font-size:10px;color:#444">'+[2,5,8,12,18,24,31][Math.floor(Math.random()*7)]+'m ago</span></div>';
     }
   }
-
   if (tier >= 2) {
-    // Country breakdown
     html += '<br><div style="font-size:9px;letter-spacing:.35em;color:#444;text-transform:uppercase;margin-bottom:14px">Country breakdown</div>';
     COUNTRIES.forEach(function(row) {
-      html += '<div class="cbar"><div class="cbar-label"><span>' + row[0] + '</span><span style="color:' + c + '">' + row[1] + '</span></div><div class="cbar-track"><div class="cbar-fill" style="width:' + row[2] + '%;background:' + c + '"></div></div></div>';
+      html += '<div class="cbar"><div class="cbar-row"><span>'+row[0]+'</span><span style="color:'+c+'">'+row[1]+'</span></div><div class="cbar-track"><div class="cbar-fill" style="width:'+row[2]+'%;background:'+c+'"></div></div></div>';
     });
-    html += '<br><div style="font-size:11px;color:#555">&#128336; Peak hour: <span style="color:' + c + '">9&ndash;10 PM UTC</span></div>';
+    html += '<br><div style="font-size:11px;color:#555">&#128336; Peak hour: <span style="color:'+c+'">9\u201310 PM UTC</span></div>';
   }
-
-  rex.innerHTML = html;
+  document.getElementById("rcontent").innerHTML = html;
 }
 
 function animNum(to, el) {
   var s = Date.now();
-  var dur = 2000;
   (function loop() {
-    var p = Math.min((Date.now()-s)/dur, 1);
-    var e = 1 - Math.pow(1-p, 4);
-    el.textContent = Math.floor(e * to).toLocaleString();
-    if (p < 1) requestAnimationFrame(loop);
+    var p = Math.min((Date.now()-s)/2000,1);
+    var e = 1-Math.pow(1-p,4);
+    el.textContent = Math.floor(e*to).toLocaleString();
+    if(p<1) requestAnimationFrame(loop);
   })();
 }
 
-function shr() {
-  var m = "There is a number. Thousands of people paid to see it. I know what it is. You don't.";
-  if (navigator.share) {
-    navigator.share({ title: "The Number", text: m, url: SU });
-  } else {
-    window.open("https://twitter.com/intent/tweet?text=" + encodeURIComponent(m) + "&url=" + encodeURIComponent(SU), "_blank");
+// ═══ COMMENTS ═══
+function isSpoiler(text) {
+  if (/\d/.test(text)) return true;
+  var low = text.toLowerCase();
+  for (var i = 0; i < SPOILER_WORDS.length; i++) {
+    if (low.indexOf(SPOILER_WORDS[i]) !== -1) return true;
   }
+  return false;
 }
 
-function bk() {
-  document.getElementById("reveal").className = "";
-  document.getElementById("landing").style.display = "block";
-  try { history.replaceState(null, "", SU); } catch(e) {}
-  var ids = ["rtag","rnum","rsub","rcard","rb1","rb2"];
-  ids.forEach(function(id) {
-    document.getElementById(id).className = document.getElementById(id).className.replace(/\bv\b/g,"").trim();
+function loadComments() {
+  if (JSONBIN_BIN === "INCOLLA_BIN_ID") { showFallbackComments(); return; }
+  fetch("https://api.jsonbin.io/v3/b/" + JSONBIN_BIN + "/latest", {
+    headers: { "X-Access-Key": JSONBIN_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var comments = data.record || [];
+    var list = document.getElementById("comments-list");
+    if (!comments.length) { return; }
+    list.innerHTML = "";
+    comments.slice().reverse().forEach(function(c) {
+      var d = document.createElement("div");
+      d.className = "comment-item";
+      d.innerHTML = '<div class="comment-name"><span class="comment-flag">'+c.country+'</span> '+c.name+'</div><div class="comment-text">&ldquo;'+c.text+'&rdquo;</div>';
+      list.appendChild(d);
+    });
+  })
+  .catch(function(){ showFallbackComments(); });
+}
+
+function showFallbackComments() {
+  // Mostra commenti di seed finché non ci sono commenti reali
+  var seeds = [
+    {name:"Alex K.", country:"\uD83C\uDDFA\uD83C\uDDF8", text:"Not what I expected at all. Sent it to my whole team."},
+    {name:"Giulia M.", country:"\uD83C\uDDEE\uD83C\uDDF9", text:"Pensavo di sapere la risposta. Non avevo idea."},
+    {name:"Felix B.", country:"\uD83C\uDDE9\uD83C\uDDEA", text:"Mein Freund glaubt mir nicht. Er wird es selbst zahlen m\u00fcssen."}
+  ];
+  var list = document.getElementById("comments-list");
+  list.innerHTML = "";
+  seeds.forEach(function(c) {
+    var d = document.createElement("div");
+    d.className = "comment-item";
+    d.innerHTML = '<div class="comment-name"><span class="comment-flag">'+c.country+'</span> '+c.name+'</div><div class="comment-text">&ldquo;'+c.text+'&rdquo;</div>';
+    list.appendChild(d);
   });
 }
+
+function submitComment() {
+  var name = document.getElementById("c-name").value.trim();
+  var country = document.getElementById("c-country").value.trim();
+  var text = document.getElementById("c-text").value.trim();
+  var err = document.getElementById("spoiler-err");
+  err.style.display = "none";
+
+  if (!name || !text) { alert("Name and comment are required."); return; }
+  if (isSpoiler(text)) { err.style.display = "block"; return; }
+
+  if (JSONBIN_BIN === "INCOLLA_BIN_ID") {
+    var list = document.getElementById("comments-list");
+    var d = document.createElement("div");
+    d.className = "comment-item";
+    d.innerHTML = '<div class="comment-name"><span class="comment-flag">'+(country||"🌍")+'</span> '+name+'</div><div class="comment-text">&ldquo;'+text+'&rdquo;</div>';
+    list.insertBefore(d, list.firstChild);
+    document.getElementById("c-name").value="";
+    document.getElementById("c-country").value="";
+    document.getElementById("c-text").value="";
+    return;
+  }
+  // Read current comments, append new one, write back
+  fetch("https://api.jsonbin.io/v3/b/" + JSONBIN_BIN + "/latest", {
+    headers: { "X-Access-Key": JSONBIN_KEY }
+  })
+  .then(function(r){ return r.json(); })
+  .then(function(data){
+    var comments = data.record || [];
+    comments.push({ name: name, country: country||"🌍", text: text, ts: Date.now() });
+    return fetch("https://api.jsonbin.io/v3/b/" + JSONBIN_BIN, {
+      method: "PUT",
+      headers: { "X-Access-Key": JSONBIN_KEY, "Content-Type": "application/json" },
+      body: JSON.stringify(comments)
+    });
+  })
+  .then(function(){
+    document.getElementById("c-name").value="";
+    document.getElementById("c-country").value="";
+    document.getElementById("c-text").value="";
+    loadComments();
+  })
+  .catch(function(){ alert("Error posting comment. Try again."); });
+}
+
+// ═══ SHARE ═══
+function shr() {
+  var m = "There is a number. Thousands of people paid to see it. I know what it is. You don't.";
+  if (navigator.share) { navigator.share({title:"The Number",text:m,url:SITEURL}); }
+  else { window.open("https://twitter.com/intent/tweet?text="+encodeURIComponent(m)+"&url="+encodeURIComponent(SITEURL),"_blank"); }
+}
+
+// ═══ BACK ═══
+function bk() {
+  document.getElementById("reveal").className="";
+  document.getElementById("landing").style.display="block";
+  try { history.replaceState(null,"",SITEURL); } catch(e) {}
+  var ids=["rtag","rnum","rsub","rcard","rb1","rb2","comments-section"];
+  ids.forEach(function(id){
+    var el=document.getElementById(id);
+    if(el) el.className=el.className.replace(/\bv\b/g,"").trim();
+  });
+}
+</script>
+
+<!-- Fix: hook1txt span needed -->
+<script>
+// Add hook1txt span if missing
+var hookEl = document.getElementById("s-hook");
+if (hookEl && !document.getElementById("hook1txt")) {
+  hookEl.innerHTML = '<span id="hook1txt"></span><span id="s-hook2">'+t.hook3+'</span> <em id="s-bother">'+t.hook4+'</em>';
+}
+document.getElementById("hook1txt").innerHTML = t.hook1+"<br>"+t.hook2+"<br>";
 </script>
 </body>
 </html>
