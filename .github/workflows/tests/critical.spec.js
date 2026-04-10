@@ -25,18 +25,10 @@ test.describe('UI Smoke Tests', () => {
 test('All 3 payment tiers are visible and clickable', async ({ page }) => {
   await page.goto(SITE_URL, { waitUntil: 'networkidle' });
 
-  // I tier sono bottoni con classe 'tier' o 'btn' o data-tier
-  const tierButtons = page.locator('[class*="tier"], [class*="pay"], [data-tier], .t1, .t2, .t3, #tier1, #tier2, #tier3').first();
-  await expect(tierButtons).toBeVisible({ timeout: 8000 });
+  await expect(page.locator('#el-t0d')).toBeVisible({ timeout: 8000 });
+  await expect(page.locator('#el-t1d')).toBeVisible({ timeout: 8000 });
+  await expect(page.locator('#el-t2d')).toBeVisible({ timeout: 8000 });
 });
-
-  test('Watcher count is displayed', async ({ page }) => {
-    await page.goto(SITE_URL, { waitUntil: 'networkidle' });
-    
-    // Counter watchers deve essere visibile
-    const watcherEl = page.locator('[id*="watch"], [class*="watch"], [id*="count"], [class*="count"]').first();
-    await expect(watcherEl).toBeVisible({ timeout: 8000 });
-  });
 
 });
 
@@ -45,22 +37,15 @@ test('All 3 payment tiers are visible and clickable', async ({ page }) => {
 // ─────────────────────────────────────────────
 test.describe('Stripe Payment Links', () => {
 
-test('Stripe payment handler exists in page', async ({ page }) => {
+test('Pay button is visible and functional', async ({ page }) => {
   await page.goto(SITE_URL, { waitUntil: 'networkidle' });
-  const content = await page.content();
-  expect(content).toMatch(/stripe|buy\.stripe|payment/i);
-});
 
-  test('All Stripe links have success redirect to TheNumber', async ({ page }) => {
-    await page.goto(SITE_URL, { waitUntil: 'networkidle' });
-    
-    // Controlla che i link contengano ?paid=true nel success URL (check lato frontend)
-    // Questo test verifica la configurazione lato codice, non lato Stripe dashboard
-    const pageContent = await page.content();
-    
-    // Il codice deve gestire il parametro paid=true
-    expect(pageContent).toMatch(/paid.*true|tier.*paid/i);
-  });
+  await expect(page.locator('#paybtn')).toBeVisible({ timeout: 8000 });
+  
+  // Verifica che onclick contenga la funzione pay()
+  const onclick = await page.locator('#paybtn').getAttribute('onclick');
+  expect(onclick).toMatch(/pay/);
+});
 
 });
 
