@@ -104,32 +104,7 @@ body::before {
 }
 .langbar select:hover { border-color: var(--gray-2); }
 
-/* ── Counter badge ── */
-.counter-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 32px;
-  animation: fadeUp .6s ease both;
-}
-.live-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--red);
-  animation: pulse 1.4s infinite;
-  flex-shrink: 0;
-}
-.counter-text {
-  font-size: 11px;
-  letter-spacing: .2em;
-  color: var(--gray-1);
-  text-transform: uppercase;
-}
-.counter-text strong {
-  color: var(--white);
-  font-weight: 500;
-}
+
 
 /* ── Hero copy ── */
 .hero {
@@ -966,7 +941,6 @@ function rnd(a){return a[Math.floor(Math.random()*a.length)];}
 
 function applyLang() {
   var t = T[lang];
-  document.getElementById('el-badge-txt').textContent = t.badge;
   document.getElementById('el-h1').innerHTML = t.h1a+'<br>'+t.h1b+'<br><em>'+t.h1em.replace('\n','<br>')+'</em>';
   document.getElementById('el-hook').innerHTML = t.hook;
   document.getElementById('el-payreveal').textContent = t.payreveal;
@@ -1005,8 +979,7 @@ db.ref('count').on('value',function(snap){
     count=val;
     var el=document.getElementById('tnum');
     if(el) el.textContent=count.toLocaleString();
-    var mc=document.getElementById('main-count');
-    if(mc) mc.textContent=count.toLocaleString();
+
   }
 });
 
