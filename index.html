@@ -1105,6 +1105,50 @@ function submitC(){
   document.getElementById('c-text').value='';
 }
 
+function getShareText(){
+  return count.toLocaleString()+' people gave in. I know the number. You don\'t. #TheNumber '+SU;
+}
+function shrWA(){
+  var txt=getShareText();
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+}
+function shrX(){
+  var txt=count.toLocaleString()+' people gave in. I know the number. You don\'t. #TheNumber';
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(SU),'_blank');
+}
+function shrCopy(){
+  var url=SU;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(function(){
+      _setCopied('copy-btn','copy-label','Copied!','Copy link');
+    }).catch(function(){ _fallbackCopy(url,'copy-label','Copied!','Copy link'); });
+  } else { _fallbackCopy(url,'copy-label','Copied!','Copy link'); }
+}
+function shrCopyReveal(){
+  var url=SU;
+  if(navigator.clipboard){
+    navigator.clipboard.writeText(url).then(function(){
+      _setCopied('copy-btn-r','copy-label-r','Copied!','Copy');
+    }).catch(function(){ _fallbackCopy(url,'copy-label-r','Copied!','Copy'); });
+  } else { _fallbackCopy(url,'copy-label-r','Copied!','Copy'); }
+}
+function _setCopied(btnId,labelId,doneText,resetText){
+  var lbl=document.getElementById(labelId);
+  var btn=document.getElementById(btnId);
+  if(lbl) lbl.textContent=doneText;
+  if(btn) btn.classList.add('copied');
+  setTimeout(function(){
+    if(lbl) lbl.textContent=resetText;
+    if(btn) btn.classList.remove('copied');
+  },2000);
+}
+function _fallbackCopy(text,labelId,doneText,resetText){
+  var ta=document.createElement('textarea');
+  ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
+  document.body.appendChild(ta); ta.focus(); ta.select();
+  try{ document.execCommand('copy'); _setCopied(null,labelId,doneText,resetText); }catch(e){}
+  document.body.removeChild(ta);
+}
 function shr(){
   var m=T[lang].badge.replace('people know what it is.','people know a number. You don\'t.');
   var txt="There's a number. "+count.toLocaleString()+" people paid €1 to see it. I know what it is. You don't.";
