@@ -3,13 +3,12 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>The Number</title>
-<meta property="og:title" content="A number exists. You don't know it."/>
-<meta property="og:description" content="2,847 people know what it is. You don't. €1."/>
+<title>THE NUMBER</title>
+<meta property="og:title" content="THE NUMBER"/>
+<meta property="og:description" content="Find out how many people paid €1 to find out how many people did the same."/>
 <meta property="og:url" content="https://thenumber.lol"/>
-<meta property="og:image" content="https://thenumber.lol/og.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 <script>
@@ -20,490 +19,589 @@ firebase.initializeApp({
 var db = firebase.database();
 </script>
 <style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
 :root {
-  --bg: #06060a;
-  --gold: #f5c842;
-  --gold-dim: rgba(245,200,66,.12);
-  --gold-glow: rgba(245,200,66,.35);
-  --white: #f0ece4;
-  --gray-1: #c8c4bc;
-  --gray-2: #888480;
-  --gray-3: #3a3836;
-  --red: #ff4444;
+  --black: #000;
+  --white: #f2ede4;
+  --red: #e8132a;
+  --yellow: #f5e642;
+  --gray: #888;
+  --border: #222;
 }
 
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
+html { background: var(--black); }
 
 body {
-  background: var(--bg);
+  background: var(--black);
   color: var(--white);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Space Mono', monospace;
   min-height: 100vh;
   overflow-x: hidden;
-  cursor: default;
 }
 
-/* ── Noise texture overlay ── */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* ── Animations ── */
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.2} }
-@keyframes glow {
-  0%,100%{text-shadow:0 0 60px rgba(245,200,66,.25),0 0 120px rgba(245,200,66,.1)}
-  50%{text-shadow:0 0 100px rgba(245,200,66,.7),0 0 200px rgba(245,200,66,.3)}
-}
-@keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
-@keyframes fadeUp { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-@keyframes flicker { 0%,100%{opacity:1} 92%{opacity:.75} 94%{opacity:1} 96%{opacity:.8} }
-@keyframes ripple { 0%{transform:scale(1);opacity:.5} 100%{transform:scale(5);opacity:0} }
-@keyframes scanline {
-  0%{transform:translateY(-100%)}
-  100%{transform:translateY(100vh)}
-}
-@keyframes revealScale {
-  0%{opacity:0;transform:scale(.4) translateY(30px);filter:blur(20px)}
-  60%{filter:blur(0px)}
-  100%{opacity:1;transform:scale(1) translateY(0)}
-}
-@keyframes countUp { from{opacity:0;transform:scale(1.3)} to{opacity:1;transform:scale(1)} }
-
-/* ── Layout ── */
-.page { position: relative; z-index: 1; }
-
-.wrap {
-  max-width: 520px;
+/* ── LANDING ── */
+#landing {
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  max-width: 640px;
   margin: 0 auto;
-  padding: 40px 24px 80px;
+  padding: 0 20px;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
 }
 
-/* ── Language bar ── */
-.langbar {
+/* TOP BAR */
+.topbar {
   display: flex;
-  justify-content: flex-end;
-  margin-bottom: 48px;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 2px solid var(--white);
 }
-.langbar select {
-  background: transparent;
-  color: var(--gray-2);
-  border: 1px solid var(--gray-3);
-  border-radius: 3px;
-  padding: 4px 8px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
+.topbar-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
   letter-spacing: .15em;
+  color: var(--white);
+}
+.topbar-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.live-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--red);
+  text-transform: uppercase;
+}
+.live-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--red);
+  animation: blink 1.2s infinite;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:.2} }
+
+select#langdrop {
+  background: var(--black);
+  color: var(--gray);
+  border: 1px solid var(--border);
+  padding: 4px 8px;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
   cursor: pointer;
   outline: none;
 }
-.langbar select:hover { border-color: var(--gray-2); }
 
-
-
-/* ── Hero copy ── */
-.hero {
-  margin-bottom: 48px;
-  animation: fadeUp .7s ease .1s both;
-}
-.hero h1 {
-  font-family: 'Cormorant Garamond', Georgia, serif;
-  font-size: clamp(38px, 10vw, 68px);
-  font-weight: 900;
-  line-height: 1.05;
-  letter-spacing: -.01em;
-  margin-bottom: 20px;
-  animation: flicker 11s infinite;
-}
-.hero h1 em {
-  color: var(--gold);
-  font-style: normal;
-  animation: glow 3s ease-in-out infinite;
-  display: inline;
-}
-.hero p {
-  font-size: 13px;
-  color: var(--gray-1);
-  line-height: 1.85;
-  max-width: 380px;
-  letter-spacing: .03em;
-}
-.hero p strong { color: var(--white); font-weight: 500; }
-
-/* ── Number teaser ── */
-.teaser {
-  position: relative;
-  height: 140px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 40px;
-  animation: fadeUp .8s ease .2s both;
-}
-.t-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 120px;
-  font-weight: 900;
-  color: var(--gold);
-  filter: blur(16px);
-  opacity: .5;
-  user-select: none;
-  animation: glow 3s ease-in-out infinite, float 5s ease-in-out infinite;
-  letter-spacing: -.02em;
-}
-.t-overlay {
-  position: absolute;
-  inset: 0;
+/* MAIN CONTENT */
+.main {
+  padding: 32px 0 40px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
 }
-.t-lock {
-  font-size: 22px;
-  animation: float 3.5s ease-in-out infinite;
-  opacity: .9;
+
+/* HEADLINE */
+.headline {
+  margin-bottom: 40px;
 }
-.t-hint {
+
+.hl-tag {
   font-size: 9px;
   letter-spacing: .4em;
-  color: var(--gray-1);
+  color: var(--red);
   text-transform: uppercase;
-}
-
-/* ── Watching ── */
-.watching {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 10px;
-  letter-spacing: .2em;
-  color: var(--gray-1);
-  text-transform: uppercase;
-  margin-bottom: 44px;
-  animation: fadeUp .8s ease .3s both;
-}
-.w-dot {
-  width: 5px; height: 5px;
-  border-radius: 50%;
-  background: var(--red);
-  animation: pulse 1.8s infinite .4s;
-  flex-shrink: 0;
-}
-
-/* ── Divider ── */
-.divider {
-  width: 40px;
-  height: 1px;
-  background: var(--gray-3);
-  margin: 0 auto 40px;
-}
-
-/* ── Testimonials ── */
-.testis {
-  display: flex;
-  flex-direction: column;
-  gap: 1px;
-  margin-bottom: 48px;
-  animation: fadeUp .9s ease .35s both;
-}
-.testi {
-  padding: 18px 20px;
-  background: rgba(255,255,255,.025);
-  border-left: 2px solid var(--gold);
-}
-.testi:first-child { border-radius: 6px 6px 0 0; }
-.testi:last-child { border-radius: 0 0 6px 6px; }
-.testi-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 17px;
-  color: var(--gray-1);
-  line-height: 1.5;
-  font-style: italic;
-  margin-bottom: 8px;
-}
-.testi-name {
-  font-size: 10px;
-  letter-spacing: .2em;
-  color: var(--gray-1);
-  text-transform: uppercase;
-}
-
-/* ── CTA block ── */
-.cta-block {
-  animation: fadeUp 1s ease .4s both;
-}
-
-.pay-btn {
-  position: relative;
-  overflow: hidden;
+  margin-bottom: 12px;
   display: block;
-  width: 100%;
-  padding: 22px 32px;
-  background: var(--gold);
-  color: #06060a;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: transform .12s, box-shadow .12s;
-  box-shadow: 0 0 50px rgba(245,200,66,.25), 0 4px 24px rgba(0,0,0,.4);
+}
+
+h1 {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 20vw, 140px);
+  line-height: .92;
+  letter-spacing: .02em;
+  color: var(--white);
   margin-bottom: 16px;
 }
-.pay-btn::before {
+
+h1 .invert {
+  background: var(--white);
+  color: var(--black);
+  padding: 0 8px;
+  display: inline-block;
+}
+
+.hl-sub {
+  font-size: 12px;
+  color: var(--gray);
+  line-height: 1.8;
+  max-width: 420px;
+  border-left: 3px solid var(--red);
+  padding-left: 14px;
+  margin-top: 20px;
+}
+
+.hl-sub strong { color: var(--white); font-weight: 700; }
+
+/* LOCK SECTION */
+.lock-sect {
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--yellow);
+  padding: 28px 24px;
+  margin-bottom: 32px;
+  position: relative;
+  overflow: hidden;
+}
+.lock-sect::before {
+  content: 'CLASSIFIED';
+  position: absolute;
+  top: 10px; right: -28px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 11px;
+  letter-spacing: .3em;
+  color: var(--border);
+  transform: rotate(90deg);
+  transform-origin: right center;
+}
+
+.lock-number {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(80px, 22vw, 160px);
+  line-height: 1;
+  color: var(--yellow);
+  filter: blur(18px);
+  opacity: .6;
+  user-select: none;
+  letter-spacing: .02em;
+  animation: glitch 6s infinite;
+  text-align: center;
+}
+
+@keyframes glitch {
+  0%,95%,100% { transform: translate(0); filter: blur(18px); }
+  96% { transform: translate(-4px, 1px); filter: blur(16px) hue-rotate(20deg); }
+  97% { transform: translate(4px, -1px); filter: blur(20px); }
+  98% { transform: translate(-2px, 0); filter: blur(18px); }
+}
+
+.lock-label {
+  text-align: center;
+  font-size: 10px;
+  letter-spacing: .35em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.lock-label::before, .lock-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+/* WATCHING BAR */
+.watching-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 28px;
+  font-size: 10px;
+  letter-spacing: .15em;
+  color: var(--gray);
+  text-transform: uppercase;
+}
+.watching-bar span strong { color: var(--white); }
+
+/* TESTIMONIALS */
+.testis {
+  margin-bottom: 32px;
+}
+.testi {
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 12px;
+  align-items: start;
+}
+.testi-idx {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  color: var(--border);
+  line-height: 1;
+}
+.testi-text {
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.65;
+  font-style: italic;
+}
+.testi-name {
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-top: 6px;
+}
+
+/* CTA */
+.cta-wrap { margin-bottom: 16px; }
+
+.pay-btn {
+  display: block;
+  width: 100%;
+  padding: 20px 32px;
+  background: var(--yellow);
+  color: var(--black);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 28px;
+  letter-spacing: .12em;
+  border: none;
+  cursor: pointer;
+  transition: transform .08s;
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+.pay-btn::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,.2) 0%, transparent 60%);
+  background: rgba(255,255,255,.15);
+  opacity: 0;
+  transition: opacity .15s;
 }
-.pay-btn:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 0 70px rgba(245,200,66,.45), 0 8px 32px rgba(0,0,0,.5);
-}
-.pay-btn:active { transform: scale(.98); }
-.pay-btn .rpl {
-  position: absolute;
-  width: 100%; height: 100%;
-  top: 0; left: 0;
-  border-radius: 50%;
-  background: rgba(245,200,66,.3);
-  animation: ripple 2.2s ease-out infinite;
-  pointer-events: none;
+.pay-btn:hover::after { opacity: 1; }
+.pay-btn:active { transform: scale(.99); }
+
+.pay-btn-sub {
+  display: block;
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .2em;
+  color: rgba(0,0,0,.55);
+  margin-top: 4px;
+  text-transform: uppercase;
+  font-weight: 400;
 }
 
 .skip-link {
+  display: block;
   text-align: center;
   font-size: 10px;
-  letter-spacing: .18em;
-  color: var(--gray-2);
+  letter-spacing: .2em;
+  color: var(--border);
   text-transform: uppercase;
   cursor: pointer;
+  padding: 12px 0;
   transition: color .2s;
-  padding: 8px 0;
-  display: block;
+  text-decoration: none;
 }
-.skip-link:hover { color: var(--gray-2); }
+.skip-link:hover { color: var(--gray); }
 
-/* ── REVEAL PAGE ── */
+/* SHARE */
+.share-sect {
+  padding: 20px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+.share-label {
+  font-size: 9px;
+  letter-spacing: .3em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.share-btns {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.s-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 14px;
+  border: 1px solid var(--border);
+  background: transparent;
+  color: var(--gray);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color .2s, color .2s;
+}
+.s-btn:hover { border-color: var(--white); color: var(--white); }
+.s-btn.copied { border-color: var(--yellow); color: var(--yellow); }
+
+/* BOTTOM BAR */
+.bottombar {
+  padding: 16px 0;
+  border-top: 2px solid var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--border);
+  text-transform: uppercase;
+}
+
+/* ════════════════════════
+   REVEAL PAGE
+════════════════════════ */
 #reveal {
   display: none;
   min-height: 100vh;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 0 20px;
+  border-left: 1px solid var(--border);
+  border-right: 1px solid var(--border);
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 80px 24px 60px;
-  text-align: center;
-  position: relative;
-  z-index: 1;
 }
 #reveal.on { display: flex; }
 
-/* Scanline effect on reveal */
-#reveal::before {
-  content: '';
-  position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 3px;
-  background: linear-gradient(transparent, rgba(245,200,66,.4), transparent);
-  animation: scanline 2.5s ease-in-out 1 forwards;
-  pointer-events: none;
-  z-index: 10;
+.r-topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 2px solid var(--white);
 }
-
+.r-topbar-logo {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 22px;
+  letter-spacing: .15em;
+}
 .r-tag {
   font-size: 9px;
-  letter-spacing: .6em;
-  color: var(--gray-1);
+  letter-spacing: .3em;
+  color: var(--red);
   text-transform: uppercase;
-  margin-bottom: 56px;
   opacity: 0;
-  transition: opacity .8s;
+  transition: opacity .6s;
 }
 .r-tag.v { opacity: 1; }
 
-.r-num-wrap {
-  position: relative;
-  margin-bottom: 20px;
+.r-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48px 0 40px;
 }
-.r-num {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: clamp(100px, 26vw, 180px);
-  font-weight: 900;
-  line-height: 1;
-  color: var(--gold);
+
+.r-label {
+  font-size: 9px;
+  letter-spacing: .4em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 16px;
   opacity: 0;
-  transform: scale(.4) translateY(30px);
-  filter: blur(20px);
+  transition: opacity .5s .3s;
+}
+.r-label.v { opacity: 1; }
+
+.r-num {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(100px, 28vw, 200px);
+  line-height: .9;
+  color: var(--yellow);
+  letter-spacing: .02em;
+  opacity: 0;
+  transform: scale(.5);
   transition: none;
-  letter-spacing: -.02em;
+  text-align: center;
+  width: 100%;
 }
 .r-num.v {
-  animation: revealScale 1.2s cubic-bezier(.34,1.2,.64,1) forwards;
-  animation-delay: .1s;
+  animation: popIn 1s cubic-bezier(.34,1.4,.64,1) .2s forwards;
+}
+@keyframes popIn {
+  0%   { opacity:0; transform:scale(.5); filter:blur(24px); }
+  60%  { filter:blur(0); }
+  100% { opacity:1; transform:scale(1); }
 }
 
 .r-sub {
-  font-size: 12px;
-  letter-spacing: .15em;
-  color: var(--gray-1);
+  font-size: 11px;
+  letter-spacing: .2em;
+  color: var(--gray);
   text-transform: uppercase;
-  margin-bottom: 60px;
+  margin-top: 16px;
+  margin-bottom: 48px;
   opacity: 0;
-  transition: opacity .6s .5s;
+  transition: opacity .5s .6s;
+  text-align: center;
 }
 .r-sub.v { opacity: 1; }
 
 .r-card {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
-  border-top: 1px solid rgba(245,200,66,.2);
-  border-radius: 12px;
-  padding: 28px 32px;
-  max-width: 420px;
   width: 100%;
-  margin-bottom: 20px;
-  text-align: left;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--yellow);
+  padding: 24px;
+  margin-bottom: 24px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: opacity .6s ease, transform .6s ease;
+  transform: translateY(16px);
+  transition: opacity .5s .8s, transform .5s .8s;
 }
 .r-card.v { opacity: 1; transform: translateY(0); }
 
 .r-card-title {
-  font-size: 9px;
-  letter-spacing: .4em;
-  color: var(--gray-1);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: .3em;
+  color: var(--gray);
   text-transform: uppercase;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 .r-card-body {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 18px;
-  color: var(--gray-1);
-  line-height: 1.7;
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.8;
 }
-.r-card-body .accent { color: var(--gold); }
+.r-card-body .accent { color: var(--yellow); }
 
-.r-btns {
+/* Reveal share + back */
+.r-actions {
   display: flex;
-  gap: 12px;
+  gap: 8px;
   flex-wrap: wrap;
-  justify-content: center;
-  margin-bottom: 60px;
+  width: 100%;
+  margin-bottom: 40px;
   opacity: 0;
-  transition: opacity .5s .6s;
+  transition: opacity .5s 1s;
 }
-.r-btns.v { opacity: 1; }
+.r-actions.v { opacity: 1; }
 
 .r-btn-share {
-  padding: 14px 28px;
-  background: var(--gold);
-  color: #06060a;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  font-weight: 500;
-  letter-spacing: .2em;
-  text-transform: uppercase;
+  flex: 1;
+  padding: 14px;
+  background: var(--yellow);
+  color: var(--black);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 16px;
+  letter-spacing: .1em;
   border: none;
-  border-radius: 4px;
   cursor: pointer;
-  transition: transform .1s, box-shadow .2s;
-  box-shadow: 0 0 30px rgba(245,200,66,.2);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: opacity .2s;
 }
-.r-btn-share:hover { transform: translateY(-1px); box-shadow: 0 0 50px rgba(245,200,66,.4); }
+.r-btn-share:hover { opacity: .9; }
+
+.r-btn-x {
+  padding: 14px 18px;
+  background: transparent;
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  letter-spacing: .1em;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: border-color .2s;
+}
+.r-btn-x:hover { border-color: var(--white); }
 
 .r-btn-back {
-  padding: 14px 28px;
+  padding: 14px 18px;
   background: transparent;
-  color: var(--gray-1);
-  font-family: 'IBM Plex Mono', monospace;
+  color: var(--gray);
+  font-family: 'Space Mono', monospace;
   font-size: 10px;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  border: 1px solid var(--gray-3);
-  border-radius: 4px;
+  letter-spacing: .1em;
+  border: 1px solid var(--border);
   cursor: pointer;
-  transition: border-color .2s, color .2s;
+  transition: color .2s, border-color .2s;
 }
-.r-btn-back:hover { border-color: var(--gray-2); color: var(--gray-1); }
+.r-btn-back:hover { color: var(--white); border-color: var(--white); }
 
-/* ── Comments ── */
+/* Comments */
 .c-sect {
-  max-width: 420px;
   width: 100%;
   opacity: 0;
-  transition: opacity .6s .7s;
+  transition: opacity .5s 1.2s;
+  margin-bottom: 40px;
 }
 .c-sect.v { opacity: 1; }
 
 .c-title {
-  font-size: 9px;
-  letter-spacing: .4em;
-  color: var(--gray-1);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: .3em;
+  color: var(--gray);
   text-transform: uppercase;
-  margin-bottom: 20px;
-  text-align: center;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
 }
 
 .c-item {
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.07);
-  border-radius: 8px;
-  padding: 16px 18px;
-  margin-bottom: 8px;
-  animation: fadeUp .4s ease;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--border);
+  animation: fadeUp .3s ease;
 }
+@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+
 .c-item-name {
-  font-size: 10px;
-  letter-spacing: .15em;
-  color: var(--gray-1);
-  margin-bottom: 8px;
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--gray);
   text-transform: uppercase;
+  margin-bottom: 6px;
 }
 .c-item-text {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 16px;
-  color: var(--gray-1);
-  line-height: 1.55;
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.6;
   font-style: italic;
 }
 
 .c-no-comm {
   font-size: 11px;
-  color: var(--gray-2);
-  text-align: center;
-  padding: 24px 0;
+  color: var(--gray);
+  padding: 20px 0;
   letter-spacing: .1em;
 }
 
 .c-form {
   margin-top: 24px;
-  background: rgba(255,255,255,.03);
-  border: 1px solid rgba(255,255,255,.08);
-  border-radius: 10px;
-  padding: 22px 22px;
+  border: 1px solid var(--border);
+  border-top: 3px solid var(--red);
+  padding: 20px;
 }
 .c-form-title {
-  font-size: 9px;
-  letter-spacing: .4em;
-  color: var(--gray-1);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: .3em;
+  color: var(--white);
   text-transform: uppercase;
   margin-bottom: 6px;
 }
 .c-form-warn {
   font-size: 10px;
-  color: var(--gray-2);
+  color: var(--gray);
   letter-spacing: .05em;
   margin-bottom: 16px;
   line-height: 1.5;
@@ -515,254 +613,196 @@ body::before {
 }
 .c-input {
   width: 100%;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.1);
-  border-radius: 5px;
-  padding: 11px 13px;
+  background: #0a0a0a;
+  border: 1px solid var(--border);
+  padding: 10px 12px;
   color: var(--white);
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: 'Space Mono', monospace;
   font-size: 11px;
-  letter-spacing: .05em;
-  transition: border-color .2s;
   outline: none;
+  transition: border-color .2s;
   resize: none;
 }
 .c-row input { flex: 1; }
-.c-input::placeholder { color: var(--gray-3); }
-.c-input:focus { border-color: rgba(245,200,66,.4); background: rgba(255,255,255,.07); }
+.c-input::placeholder { color: #333; }
+.c-input:focus { border-color: var(--gray); }
 
 .c-submit {
   width: 100%;
   padding: 12px;
-  background: rgba(245,200,66,.1);
-  border: 1px solid rgba(245,200,66,.25);
-  border-radius: 5px;
-  color: var(--gold);
-  font-family: 'IBM Plex Mono', monospace;
+  background: transparent;
+  border: 1px solid var(--gray);
+  color: var(--white);
+  font-family: 'Space Mono', monospace;
   font-size: 10px;
-  letter-spacing: .25em;
+  letter-spacing: .2em;
   text-transform: uppercase;
   cursor: pointer;
+  margin-top: 6px;
   transition: background .2s, border-color .2s;
-  margin-top: 4px;
 }
-.c-submit:hover { background: rgba(245,200,66,.18); border-color: rgba(245,200,66,.5); }
+.c-submit:hover { background: var(--white); color: var(--black); }
 
 .c-err {
-  color: #ff6b6b;
-  font-size: 11px;
+  color: var(--red);
+  font-size: 10px;
   margin-top: 8px;
   display: none;
   letter-spacing: .05em;
-}
-
-/* ── Feed items (reveal page tier 1+) ── */
-.rfeed-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 0;
-  border-bottom: 1px solid rgba(255,255,255,.05);
-  font-size: 12px;
-  color: var(--gray-1);
-}
-.rfeed-item img { flex-shrink: 0; }
-.rfeed-name { flex: 1; }
-.rfeed-time { font-size: 10px; color: var(--gray-3); letter-spacing: .08em; }
-
-/* ── Bar chart ── */
-.cbar { margin-bottom: 10px; }
-.cbar-row { display: flex; justify-content: space-between; font-size: 11px; color: var(--gray-1); margin-bottom: 5px; }
-.cbar-track { height: 2px; background: rgba(255,255,255,.06); border-radius: 2px; }
-.cbar-fill { height: 100%; border-radius: 2px; transition: width 1.4s ease; }
-
-
-/* ── Share buttons ── */
-.share-sect {
-  margin-top: 32px;
-  text-align: center;
-  animation: fadeUp 1s ease .5s both;
-}
-.share-label {
-  font-size: 9px;
-  letter-spacing: .35em;
-  color: var(--gray-2);
-  text-transform: uppercase;
-  margin-bottom: 14px;
-}
-.share-btns {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.s-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 10px 16px;
-  border-radius: 4px;
-  font-family: 'IBM Plex Mono', monospace;
-  font-size: 10px;
-  letter-spacing: .15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  border: 1px solid var(--gray-2);
-  background: transparent;
-  color: var(--gray-1);
-  transition: all .2s;
-  text-decoration: none;
-}
-.s-btn:hover { border-color: var(--gray-2); color: var(--white); }
-.s-btn svg { flex-shrink: 0; }
-.s-btn.copied { border-color: var(--gold); color: var(--gold); }
-
-/* ── Footer ── */
-footer {
-  padding: 20px 24px;
-  text-align: center;
-  font-size: 9px;
-  letter-spacing: .2em;
-  color: var(--gray-2);
-  text-transform: uppercase;
-  border-top: 1px solid rgba(255,255,255,.04);
-  position: relative;
-  z-index: 1;
 }
 </style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════
-     LANDING PAGE
-══════════════════════════════════ -->
-<div id="landing" class="page">
-<div class="wrap">
+<!-- ════════════════════════
+     LANDING
+════════════════════════ -->
+<div id="landing">
 
-  <div class="langbar">
-    <select onchange="changeLang(this.value)" id="langdrop">
-      <option value="en">EN</option>
-      <option value="it">IT</option>
-      <option value="de">DE</option>
-      <option value="fr">FR</option>
-      <option value="es">ES</option>
-    </select>
-  </div>
-
-
-  <div class="hero">
-    <h1 id="el-h1">Every second<br>someone gives in.<br><em id="el-h1-em">Will you<br>hold out?</em></h1>
-    <p id="el-hook">A counter grows every time someone<br>can't resist the curiosity.<br>You don't know how high it is. <strong>Yet.</strong></p>
-  </div>
-
-  <div class="teaser">
-    <div class="t-num" id="tnum">2847</div>
-    <div class="t-overlay">
-      <div class="t-lock">🔒</div>
-      <div class="t-hint" id="el-payreveal">pay to reveal</div>
+  <div class="topbar">
+    <span class="topbar-logo">THE NUMBER</span>
+    <div class="topbar-right">
+      <div class="live-pill">
+        <span class="live-dot"></span>
+        <span id="el-live">LIVE</span>
+      </div>
+      <select id="langdrop" onchange="changeLang(this.value)">
+        <option value="en">EN</option>
+        <option value="it">IT</option>
+        <option value="de">DE</option>
+        <option value="fr">FR</option>
+        <option value="es">ES</option>
+      </select>
     </div>
   </div>
 
-  <div class="watching">
-    <span class="w-dot"></span>
-    <span id="wcount">23</span>&nbsp;<span id="el-watching">watching right now</span>
-  </div>
+  <div class="main">
 
-  <div class="divider"></div>
-
-  <div class="testis">
-    <div class="testi">
-      <div class="testi-text" id="el-t1t">"Not what I expected."</div>
-      <div class="testi-name" id="el-t1w">M.R.</div>
+    <div class="headline">
+      <span class="hl-tag" id="el-tag">ONE QUESTION. ONE EURO.</span>
+      <h1 id="el-h1">HOW<br>MANY<br><span class="invert" id="el-h1-inv">GAVE IN?</span></h1>
+      <p class="hl-sub" id="el-hook">Find out how many people paid <strong>€1</strong> to find out how many people paid <strong>€1</strong> to find out how many people paid <strong>€1</strong>…</p>
     </div>
-    <div class="testi">
-      <div class="testi-text" id="el-t2t">"My friend didn't believe me. He paid too."</div>
-      <div class="testi-name" id="el-t2w">A.K.</div>
-    </div>
-  </div>
 
-  <div class="cta-block">
-    <button class="pay-btn" id="paybtn" onclick="pay()">
-      <div class="rpl"></div>
-      <span id="el-btn">Show me the number — €1</span>
-    </button>
+    <div class="lock-sect">
+      <div class="lock-number" id="tnum">????</div>
+      <div class="lock-label" id="el-locked">LOCKED UNTIL YOU PAY</div>
+    </div>
+
+    <div class="watching-bar">
+      <span id="el-watching-label">WATCHING RIGHT NOW</span>
+      <span><strong id="wcount">23</strong></span>
+    </div>
+
+    <div class="testis">
+      <div class="testi">
+        <span class="testi-idx">1</span>
+        <div>
+          <div class="testi-text" id="el-t1t">"Not what I expected."</div>
+          <div class="testi-name" id="el-t1w">M.R.</div>
+        </div>
+      </div>
+      <div class="testi">
+        <span class="testi-idx">2</span>
+        <div>
+          <div class="testi-text" id="el-t2t">"My friend didn't believe me. He paid too."</div>
+          <div class="testi-name" id="el-t2w">A.K.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-wrap">
+      <button class="pay-btn" id="paybtn" onclick="pay()">
+        <span id="el-btn">PAY €1 — SEE THE NUMBER</span>
+        <span class="pay-btn-sub" id="el-btn-sub">one-time · instant access · no refunds</span>
+      </button>
+    </div>
+
     <span class="skip-link" id="el-skip" onclick="skip()">or leave and never know</span>
-  </div>
 
-</div>
-  <div class="share-sect">
-    <div class="share-label" id="el-share-label">Share the mystery</div>
-    <div class="share-btns">
-      <button class="s-btn" onclick="shrWA()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        WhatsApp
-      </button>
-      <button class="s-btn" onclick="shrX()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        X / Twitter
-      </button>
-      <button class="s-btn" id="copy-btn" onclick="shrCopy()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-        <span id="copy-label">Copy link</span>
-      </button>
+    <div class="share-sect">
+      <div class="share-label" id="el-share-label">SPREAD THE CURIOSITY</div>
+      <div class="share-btns">
+        <button class="s-btn" onclick="shrWA()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          WhatsApp
+        </button>
+        <button class="s-btn" onclick="shrX()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          X
+        </button>
+        <button class="s-btn" id="copy-btn" onclick="shrCopy()">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+          <span id="copy-label">Copy link</span>
+        </button>
+      </div>
     </div>
+
+  </div>
+
+  <div class="bottombar">
+    <span>thenumber.lol</span>
+    <span id="el-footer">Digital content · No refunds</span>
   </div>
 
 </div>
 
-<!-- ══════════════════════════════════
-     REVEAL PAGE
-══════════════════════════════════ -->
+<!-- ════════════════════════
+     REVEAL
+════════════════════════ -->
 <div id="reveal">
 
-  <div class="r-tag" id="rtag" id="el-rtag">✦ access granted ✦</div>
+  <div class="r-topbar">
+    <span class="r-topbar-logo">THE NUMBER</span>
+    <span class="r-tag" id="rtag">✦ ACCESS GRANTED ✦</span>
+  </div>
 
-  <div class="r-num-wrap">
+  <div class="r-main">
+
+    <div class="r-label" id="rlabel">THE ANSWER IS</div>
     <div class="r-num" id="rnum">0</div>
-  </div>
+    <div class="r-sub" id="rsub">people paid before you.</div>
 
-  <div class="r-sub" id="rsub">people paid before you.</div>
-
-  <div class="r-card" id="rcard">
-    <div class="r-card-title" id="rcardtitle">What does this mean?</div>
-    <div class="r-card-body" id="rcontent"></div>
-  </div>
-
-  <div class="r-btns" id="rbtns">
-    <button class="r-btn-share" id="rb1" onclick="shrWA()">
-      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle;margin-right:6px"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-      WhatsApp
-    </button>
-    <button class="r-btn-back" style="display:inline-flex;align-items:center;gap:6px" onclick="shrX()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-      X
-    </button>
-    <button class="r-btn-back" id="copy-btn-r" style="display:inline-flex;align-items:center;gap:6px" onclick="shrCopyReveal()">
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
-      <span id="copy-label-r">Copy</span>
-    </button>
-    <button class="r-btn-back" id="rb2" onclick="bk()">← Back</button>
-  </div>
-
-  <div class="c-sect" id="csect">
-    <div class="c-title" id="el-ctitle">What others said</div>
-    <div id="clist"><div class="c-no-comm" id="el-nocomm">Be the first to comment.</div></div>
-    <div class="c-form">
-      <div class="c-form-title" id="el-cftitle">Leave your reaction</div>
-      <div class="c-form-warn" id="el-cwarn">No spoilers. Do not reveal the number.</div>
-      <div class="c-row">
-        <input class="c-input" type="text" id="c-name" placeholder="Name" maxlength="30"/>
-        <input class="c-input" type="text" id="c-country" placeholder="Country" maxlength="20"/>
-      </div>
-      <textarea class="c-input" id="c-text" rows="3" placeholder="Your reaction..." maxlength="200"></textarea>
-      <div class="c-err" id="cerr">No spoilers allowed.</div>
-      <button class="c-submit" onclick="submitC()" id="el-csubmit">Post reaction</button>
+    <div class="r-card" id="rcard">
+      <div class="r-card-title" id="rcardtitle">What does this mean?</div>
+      <div class="r-card-body" id="rcontent"></div>
     </div>
+
+    <div class="r-actions" id="rbtns">
+      <button class="r-btn-share" onclick="shrWA()">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        <span id="rb1">Send to someone who won't pay</span>
+      </button>
+      <button class="r-btn-x" onclick="shrX()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.748l7.73-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+        X
+      </button>
+      <button class="r-btn-x" id="copy-btn-r" onclick="shrCopyReveal()">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
+        <span id="copy-label-r">Copy</span>
+      </button>
+      <button class="r-btn-back" id="rb2" onclick="bk()">← Back</button>
+    </div>
+
+    <div class="c-sect" id="csect">
+      <div class="c-title" id="el-ctitle">REACTIONS</div>
+      <div id="clist"><div class="c-no-comm" id="el-nocomm">Be the first to react.</div></div>
+      <div class="c-form">
+        <div class="c-form-title" id="el-cftitle">LEAVE YOUR REACTION</div>
+        <div class="c-form-warn" id="el-cwarn">No spoilers. Do not reveal the number.</div>
+        <div class="c-row">
+          <input class="c-input" type="text" id="c-name" placeholder="Name" maxlength="30"/>
+          <input class="c-input" type="text" id="c-country" placeholder="Country" maxlength="20"/>
+        </div>
+        <textarea class="c-input" id="c-text" rows="3" placeholder="Your reaction..." maxlength="200"></textarea>
+        <div class="c-err" id="cerr">No spoilers allowed.</div>
+        <button class="c-submit" onclick="submitC()" id="el-csubmit">POST REACTION</button>
+      </div>
+    </div>
+
   </div>
 
 </div>
-
-<footer>The Number &middot; Digital content &middot; No refunds after delivery</footer>
 
 <script>
 var LINKS = [
@@ -771,226 +811,211 @@ var LINKS = [
   'https://buy.stripe.com/28E28rb8wb3X5QM1yL1Nu02'
 ];
 var SU = 'https://thenumber.lol';
-var CL = ['#f5c842','#42d4f5','#d442f5'];
-var COUNTRIES = [
-  {c:'it',n:'Italy'},{c:'us',n:'USA'},{c:'de',n:'Germany'},
-  {c:'fr',n:'France'},{c:'gb',n:'UK'},{c:'jp',n:'Japan'},
-  {c:'br',n:'Brazil'},{c:'es',n:'Spain'},{c:'ca',n:'Canada'},
-  {c:'nl',n:'Netherlands'},{c:'au',n:'Australia'},{c:'kr',n:'Korea'},
-  {c:'se',n:'Sweden'},{c:'pt',n:'Portugal'},{c:'ch',n:'Switzerland'}
-];
-var INITIALS = ['M.R.','S.L.','T.K.','Y.T.','E.V.','J.O.','P.S.','L.M.','A.B.','C.W.','N.F.','O.H.','G.P.','S.D.','F.B.','L.Z.'];
-var CTABLE = [['USA','34%',34],['UK','18%',18],['Germany','11%',11],['Italy','9%',9],['Japan','7%',7],['Brazil','5%',5],['Other','16%',16]];
 var SPOILERS = ['thousand','hundred','million','billion','mille','cento','mila','tausend','hundert','scores','dozens','hundreds','thousands','millions'];
-
-var tier = 0;
 var count = 2847;
 var lang = 'en';
 
 var T = {
   en: {
-    badge: 'people gave in.',
-    h1a: 'Every second', h1b: 'someone gives in.', h1em: 'Will you\nhold out?',
-    hook: 'A counter grows every time someone<br>can\'t resist the curiosity.<br>You don\'t know how high it is. <strong>Yet.</strong>',
-    payreveal: 'pay to reveal',
-    watching: 'watching right now',
-    t1t: '"Not what I expected."', t1w: 'M.R.',
-    t2t: '"My friend didn\'t believe me. He paid too."', t2w: 'A.K.',
-    btn: 'Show me the number — €1',
-    skip: 'or leave and never know',
-    shareLabel: 'Share the mystery',
-    ctitle: 'What others said',
-    nocomm: 'Be the first to comment.',
-    cftitle: 'Leave your reaction',
-    cwarn: 'No spoilers. Do not reveal the number.',
-    csubmit: 'Post reaction',
-    rsub: 'people paid before you.',
-    sharebtn: 'Send to someone who won\'t pay',
-    back: '← Back',
-    rmean: 'What does this mean?',
-    rtext: 'You just became part of the number.<br><span class="accent">Next time someone pays, it goes up by 1.</span><br><br>They won\'t know you\'re in there.<br><span class="accent">Send it. Watch them wonder.</span>',
-    rpayers: 'Recent payers',
-    skip2: 'Yeah, I\'d rather not know.',
-    skip3: 'Ok fine. Show me.',
-    suretitle: 'Sure?',
-    sure2: 'One euro.',
-    sure3: 'You\'ll think about this.'
+    tag:'ONE QUESTION. ONE EURO.',
+    h1:'HOW<br>MANY<br><span class="invert">GAVE IN?</span>',
+    hook:'Find out how many people paid <strong>€1</strong> to find out how many people paid <strong>€1</strong> to find out how many people paid <strong>€1</strong>…',
+    locked:'LOCKED UNTIL YOU PAY',
+    watching:'WATCHING RIGHT NOW',
+    t1t:'"Not what I expected."', t1w:'M.R.',
+    t2t:'"My friend didn\'t believe me. He paid too."', t2w:'A.K.',
+    btn:'PAY €1 — SEE THE NUMBER',
+    btnsub:'one-time · instant access · no refunds',
+    skip:'or leave and never know',
+    shareLabel:'SPREAD THE CURIOSITY',
+    footer:'Digital content · No refunds',
+    ctitle:'REACTIONS',
+    nocomm:'Be the first to react.',
+    cftitle:'LEAVE YOUR REACTION',
+    cwarn:'No spoilers. Do not reveal the number.',
+    csubmit:'POST REACTION',
+    rsub:'people paid before you.',
+    rb1:'Send to someone who won\'t pay',
+    rb2:'← Back',
+    rlabel:'THE ANSWER IS',
+    rmean:'What does this mean?',
+    rtext:'You just became part of the number.<br><span class="accent">Next time someone pays, it goes up by 1.</span><br><br>They won\'t know you\'re in there.<br><span class="accent">Send it. Watch them wonder.</span>',
+    skip2:'Yeah, I\'d rather not know.',
+    skip3:'Ok fine. Show me.',
+    suretitle:'SURE?',
+    sure2:'ONE EURO.',
+    sure3:'You\'ll think about this.'
   },
   it: {
-    badge: 'persone hanno ceduto.',
-    h1a: 'Ogni secondo', h1b: 'qualcuno cede.', h1em: 'Reggerai\ntu?',
-    hook: 'Un contatore sale ogni volta che qualcuno<br>non riesce a resistere alla curiosità.<br>Non sai quanto è alto. <strong>Ancora.</strong>',
-    payreveal: 'paga per scoprire',
-    watching: 'stanno guardando ora',
-    t1t: '"Non me lo aspettavo."', t1w: 'M.R.',
-    t2t: '"Il mio amico non ci credeva. Ha pagato anche lui."', t2w: 'A.K.',
-    btn: 'Mostrami il numero — €1',
-    skip: 'oppure vai via e non saperlo mai',
-    shareLabel: 'Condividi il mistero',
-    ctitle: 'Cosa dicono gli altri',
-    nocomm: 'Sii il primo a commentare.',
-    cftitle: 'Lascia la tua reazione',
-    cwarn: 'Nessuno spoiler. Non rivelare il numero.',
-    csubmit: 'Pubblica reazione',
-    rsub: 'persone hanno pagato prima di te.',
-    sharebtn: 'Mandalo a qualcuno che non pagherà',
-    back: '← Indietro',
-    rmean: 'Cosa significa?',
-    rtext: 'Ora fai parte del numero.<br><span class="accent">La prossima volta che qualcuno paga, sale di 1.</span><br><br>Non sapranno che ci sei anche tu.<br><span class="accent">Mandalo. Guardali chiedersi.</span>',
-    rpayers: 'Chi ha pagato di recente',
-    skip2: 'Sì, preferisco non saperlo.',
-    skip3: 'Ok. Mostrami.',
-    suretitle: 'Sicuro?',
-    sure2: 'Un euro.',
-    sure3: 'Ci penserai.'
+    tag:'UNA DOMANDA. UN EURO.',
+    h1:'QUANTE<br>PERSONE<br><span class="invert">HANNO CEDUTO?</span>',
+    hook:'Scopri quante persone hanno pagato <strong>€1</strong> per scoprire quante persone hanno pagato <strong>€1</strong> per scoprire quante persone hanno pagato <strong>€1</strong>…',
+    locked:'BLOCCATO FINO AL PAGAMENTO',
+    watching:'STANNO GUARDANDO ORA',
+    t1t:'"Non me lo aspettavo."', t1w:'M.R.',
+    t2t:'"Il mio amico non ci credeva. Ha pagato anche lui."', t2w:'A.K.',
+    btn:'PAGA €1 — SCOPRI IL NUMERO',
+    btnsub:'una tantum · accesso immediato · nessun rimborso',
+    skip:'oppure vai via e non saperlo mai',
+    shareLabel:'DIFFONDI LA CURIOSITÀ',
+    footer:'Contenuto digitale · Nessun rimborso',
+    ctitle:'REAZIONI',
+    nocomm:'Sii il primo a reagire.',
+    cftitle:'LASCIA LA TUA REAZIONE',
+    cwarn:'Nessuno spoiler. Non rivelare il numero.',
+    csubmit:'PUBBLICA REAZIONE',
+    rsub:'persone hanno pagato prima di te.',
+    rb1:'Mandalo a qualcuno che non pagherà',
+    rb2:'← Indietro',
+    rlabel:'LA RISPOSTA È',
+    rmean:'Cosa significa?',
+    rtext:'Ora fai parte del numero.<br><span class="accent">La prossima volta che qualcuno paga, sale di 1.</span><br><br>Non sapranno che ci sei anche tu.<br><span class="accent">Mandalo. Guardali chiedersi.</span>',
+    skip2:'Sì, preferisco non saperlo.',
+    skip3:'Ok. Mostrami.',
+    suretitle:'SICURO?',
+    sure2:'UN EURO.',
+    sure3:'Ci penserai.'
   },
   de: {
-    badge: 'Personen haben nachgegeben.',
-    h1a: 'Jede Sekunde', h1b: 'gibt jemand nach.', h1em: 'Hältst du\nstand?',
-    hook: 'Ein Zähler steigt jedes Mal, wenn jemand<br>der Neugier nicht widerstehen kann.<br>Du weißt nicht, wie hoch er ist. <strong>Noch.</strong>',
-    payreveal: 'zahlen um zu sehen',
-    watching: 'schauen gerade zu',
-    t1t: '"Nicht das, was ich erwartet hatte."', t1w: 'M.R.',
-    t2t: '"Mein Freund glaubte mir nicht. Er hat auch gezahlt."', t2w: 'A.K.',
-    btn: 'Zeig mir die Zahl — €1',
-    skip: 'oder geh und wisse es nie',
-    shareLabel: 'Das Rätsel teilen',
-    ctitle: 'Was andere sagten',
-    nocomm: 'Sei der Erste, der kommentiert.',
-    cftitle: 'Hinterlasse deine Reaktion',
-    cwarn: 'Keine Spoiler. Verrate die Zahl nicht.',
-    csubmit: 'Reaktion posten',
-    rsub: 'Personen haben vor dir gezahlt.',
-    sharebtn: 'Sende es jemandem, der nicht zahlt',
-    back: '← Zurück',
-    rmean: 'Was bedeutet das?',
-    rtext: 'Du bist jetzt Teil der Zahl.<br><span class="accent">Das nächste Mal, wenn jemand zahlt, steigt sie um 1.</span><br><br>Sie werden nicht wissen, dass du drin bist.<br><span class="accent">Schick es. Beobachte sie rätseln.</span>',
-    rpayers: 'Letzte Zahler',
-    skip2: 'Ja, ich will es lieber nicht wissen.',
-    skip3: 'Ok, zeig mir es.',
-    suretitle: 'Sicher?',
-    sure2: 'Ein Euro.',
-    sure3: 'Du wirst darüber nachdenken.'
+    tag:'EINE FRAGE. EIN EURO.',
+    h1:'WIE VIELE<br>HABEN<br><span class="invert">NACHGEGEBEN?</span>',
+    hook:'Finde heraus, wie viele Menschen <strong>€1</strong> bezahlt haben, um herauszufinden, wie viele Menschen <strong>€1</strong> bezahlt haben…',
+    locked:'GESPERRT BIS ZUR ZAHLUNG',
+    watching:'SCHAUEN GERADE ZU',
+    t1t:'"Nicht das, was ich erwartet hatte."', t1w:'M.R.',
+    t2t:'"Mein Freund glaubte mir nicht. Er hat auch gezahlt."', t2w:'A.K.',
+    btn:'ZAHLE €1 — SIEH DIE ZAHL',
+    btnsub:'einmalig · sofortiger Zugang · keine Rückerstattung',
+    skip:'oder geh und wisse es nie',
+    shareLabel:'VERBREITE DIE NEUGIER',
+    footer:'Digitaler Inhalt · Keine Rückerstattung',
+    ctitle:'REAKTIONEN',
+    nocomm:'Sei der Erste, der reagiert.',
+    cftitle:'HINTERLASSE DEINE REAKTION',
+    cwarn:'Keine Spoiler. Verrate die Zahl nicht.',
+    csubmit:'REAKTION POSTEN',
+    rsub:'Personen haben vor dir gezahlt.',
+    rb1:'Sende es jemandem, der nicht zahlt',
+    rb2:'← Zurück',
+    rlabel:'DIE ANTWORT IST',
+    rmean:'Was bedeutet das?',
+    rtext:'Du bist jetzt Teil der Zahl.<br><span class="accent">Das nächste Mal steigt sie um 1.</span><br><br>Sie werden nicht wissen, dass du drin bist.<br><span class="accent">Schick es. Beobachte sie rätseln.</span>',
+    skip2:'Ja, ich will es lieber nicht wissen.',
+    skip3:'Ok, zeig mir es.',
+    suretitle:'SICHER?',
+    sure2:'EIN EURO.',
+    sure3:'Du wirst darüber nachdenken.'
   },
   fr: {
-    badge: 'personnes ont cédé.',
-    h1a: 'Chaque seconde', h1b: 'quelqu\'un cède.', h1em: 'Tiendras-tu\nle coup?',
-    hook: 'Un compteur monte chaque fois que quelqu\'un<br>ne peut pas résister à la curiosité.<br>Tu ne sais pas jusqu\'où il est. <strong>Encore.</strong>',
-    payreveal: 'payer pour révéler',
-    watching: 'regardent maintenant',
-    t1t: '"Pas ce à quoi je m\'attendais."', t1w: 'M.R.',
-    t2t: '"Mon ami n\'y croyait pas. Il a payé aussi."', t2w: 'A.K.',
-    btn: 'Montre-moi le nombre — €1',
-    skip: 'ou pars et ne savoir jamais',
-    shareLabel: 'Partager le mystère',
-    ctitle: 'Ce que les autres ont dit',
-    nocomm: 'Sois le premier à commenter.',
-    cftitle: 'Laisse ta réaction',
-    cwarn: 'Pas de spoilers. Ne révèle pas le nombre.',
-    csubmit: 'Poster la réaction',
-    rsub: 'personnes ont payé avant toi.',
-    sharebtn: 'Envoie-le à quelqu\'un qui ne paiera pas',
-    back: '← Retour',
-    rmean: 'Qu\'est-ce que ça signifie?',
-    rtext: 'Tu fais maintenant partie du nombre.<br><span class="accent">La prochaine fois que quelqu\'un paie, il monte de 1.</span><br><br>Ils ne sauront pas que tu es dedans.<br><span class="accent">Envoie-le. Regarde-les se demander.</span>',
-    rpayers: 'Derniers payeurs',
-    skip2: 'Oui, je préfère ne pas savoir.',
-    skip3: 'Ok, montre-moi.',
-    suretitle: 'Sûr?',
-    sure2: 'Un euro.',
-    sure3: 'Tu y penseras.'
+    tag:'UNE QUESTION. UN EURO.',
+    h1:'COMBIEN<br>ONT<br><span class="invert">CÉDÉ?</span>',
+    hook:'Découvrez combien de personnes ont payé <strong>€1</strong> pour savoir combien de personnes ont payé <strong>€1</strong> pour savoir combien…',
+    locked:'VERROUILLÉ JUSQU\'AU PAIEMENT',
+    watching:'REGARDENT MAINTENANT',
+    t1t:'"Pas ce à quoi je m\'attendais."', t1w:'M.R.',
+    t2t:'"Mon ami n\'y croyait pas. Il a payé aussi."', t2w:'A.K.',
+    btn:'PAYER €1 — VOIR LE NOMBRE',
+    btnsub:'unique · accès immédiat · pas de remboursement',
+    skip:'ou pars et ne savoir jamais',
+    shareLabel:'RÉPANDS LA CURIOSITÉ',
+    footer:'Contenu numérique · Pas de remboursement',
+    ctitle:'RÉACTIONS',
+    nocomm:'Sois le premier à réagir.',
+    cftitle:'LAISSE TA RÉACTION',
+    cwarn:'Pas de spoilers. Ne révèle pas le nombre.',
+    csubmit:'POSTER LA RÉACTION',
+    rsub:'personnes ont payé avant toi.',
+    rb1:'Envoie-le à quelqu\'un qui ne paiera pas',
+    rb2:'← Retour',
+    rlabel:'LA RÉPONSE EST',
+    rmean:'Qu\'est-ce que ça signifie?',
+    rtext:'Tu fais maintenant partie du nombre.<br><span class="accent">La prochaine fois il monte de 1.</span><br><br>Ils ne sauront pas que tu es dedans.<br><span class="accent">Envoie-le. Regarde-les se demander.</span>',
+    skip2:'Oui, je préfère ne pas savoir.',
+    skip3:'Ok, montre-moi.',
+    suretitle:'SÛR?',
+    sure2:'UN EURO.',
+    sure3:'Tu y penseras.'
   },
   es: {
-    badge: 'personas cedieron.',
-    h1a: 'Cada segundo', h1b: 'alguien cede.', h1em: '¿Aguantarás\ntú?',
-    hook: 'Un contador sube cada vez que alguien<br>no puede resistir la curiosidad.<br>No sabes lo alto que está. <strong>Todavía.</strong>',
-    payreveal: 'paga para revelar',
-    watching: 'mirando ahora',
-    t1t: '"No era lo que esperaba."', t1w: 'M.R.',
-    t2t: '"Mi amigo no me creyó. También pagó."', t2w: 'A.K.',
-    btn: 'Muéstrame el número — €1',
-    skip: 'o vete y no saberlo nunca',
-    shareLabel: 'Compartir el misterio',
-    ctitle: 'Lo que dijeron otros',
-    nocomm: 'Sé el primero en comentar.',
-    cftitle: 'Deja tu reacción',
-    cwarn: 'Sin spoilers. No reveles el número.',
-    csubmit: 'Publicar reacción',
-    rsub: 'personas pagaron antes que tú.',
-    sharebtn: 'Envíaselo a alguien que no pagará',
-    back: '← Volver',
-    rmean: '¿Qué significa esto?',
-    rtext: 'Ahora eres parte del número.<br><span class="accent">La próxima vez que alguien pague, sube 1.</span><br><br>No sabrán que estás ahí dentro.<br><span class="accent">Envíalo. Míralos preguntarse.</span>',
-    rpayers: 'Pagadores recientes',
-    skip2: 'Sí, prefiero no saber.',
-    skip3: 'Ok, muéstrame.',
-    suretitle: '¿Seguro?',
-    sure2: 'Un euro.',
-    sure3: 'Lo pensarás.'
+    tag:'UNA PREGUNTA. UN EURO.',
+    h1:'¿CUÁNTOS<br>HAN<br><span class="invert">CEDIDO?</span>',
+    hook:'Descubre cuántas personas pagaron <strong>€1</strong> para saber cuántas personas pagaron <strong>€1</strong> para saber cuántas…',
+    locked:'BLOQUEADO HASTA EL PAGO',
+    watching:'MIRANDO AHORA',
+    t1t:'"No era lo que esperaba."', t1w:'M.R.',
+    t2t:'"Mi amigo no me creyó. También pagó."', t2w:'A.K.',
+    btn:'PAGA €1 — VE EL NÚMERO',
+    btnsub:'único · acceso inmediato · sin reembolso',
+    skip:'o vete y no saberlo nunca',
+    shareLabel:'DIFUNDE LA CURIOSIDAD',
+    footer:'Contenido digital · Sin reembolso',
+    ctitle:'REACCIONES',
+    nocomm:'Sé el primero en reaccionar.',
+    cftitle:'DEJA TU REACCIÓN',
+    cwarn:'Sin spoilers. No reveles el número.',
+    csubmit:'PUBLICAR REACCIÓN',
+    rsub:'personas pagaron antes que tú.',
+    rb1:'Envíaselo a alguien que no pagará',
+    rb2:'← Volver',
+    rlabel:'LA RESPUESTA ES',
+    rmean:'¿Qué significa esto?',
+    rtext:'Ahora eres parte del número.<br><span class="accent">La próxima vez sube 1.</span><br><br>No sabrán que estás ahí dentro.<br><span class="accent">Envíalo. Míralos preguntarse.</span>',
+    skip2:'Sí, prefiero no saber.',
+    skip3:'Ok, muéstrame.',
+    suretitle:'¿SEGURO?',
+    sure2:'UN EURO.',
+    sure3:'Lo pensarás.'
   }
 };
 
-function flag(c){return '<img src="https://flagcdn.com/16x12/'+c+'.png" width="16" style="vertical-align:middle;margin-right:5px">';}
-function rnd(a){return a[Math.floor(Math.random()*a.length)];}
-
-function applyLang() {
-  var t = T[lang];
-  document.getElementById('el-h1').innerHTML = t.h1a+'<br>'+t.h1b+'<br><em>'+t.h1em.replace('\n','<br>')+'</em>';
-  document.getElementById('el-hook').innerHTML = t.hook;
-  document.getElementById('el-payreveal').textContent = t.payreveal;
-  document.getElementById('el-watching').textContent = t.watching;
-  document.getElementById('el-t1t').textContent = t.t1t;
-  document.getElementById('el-t1w').textContent = t.t1w;
-  document.getElementById('el-t2t').textContent = t.t2t;
-  document.getElementById('el-t2w').textContent = t.t2w;
-  document.getElementById('el-btn').textContent = t.btn;
-  document.getElementById('el-skip').textContent = t.skip;
-  document.getElementById('el-ctitle').textContent = t.ctitle;
-  document.getElementById('el-nocomm').textContent = t.nocomm;
-  document.getElementById('el-cftitle').textContent = t.cftitle;
-  document.getElementById('el-cwarn').textContent = t.cwarn;
-  document.getElementById('el-csubmit').textContent = t.csubmit;
-  document.getElementById('rb1').textContent = t.sharebtn;
-  document.getElementById('rb2').textContent = t.back;
-  var sl = document.getElementById('el-share-label');
-  if(sl) sl.textContent = t.shareLabel;
+function applyLang(){
+  var t=T[lang];
+  document.getElementById('el-tag').textContent=t.tag;
+  document.getElementById('el-h1').innerHTML=t.h1;
+  document.getElementById('el-hook').innerHTML=t.hook;
+  document.getElementById('el-locked').textContent=t.locked;
+  document.getElementById('el-watching-label').textContent=t.watching;
+  document.getElementById('el-t1t').textContent=t.t1t;
+  document.getElementById('el-t1w').textContent=t.t1w;
+  document.getElementById('el-t2t').textContent=t.t2t;
+  document.getElementById('el-t2w').textContent=t.t2w;
+  document.getElementById('el-btn').textContent=t.btn;
+  document.getElementById('el-btn-sub').textContent=t.btnsub;
+  document.getElementById('el-skip').textContent=t.skip;
+  document.getElementById('el-share-label').textContent=t.shareLabel;
+  document.getElementById('el-footer').textContent=t.footer;
+  document.getElementById('el-ctitle').textContent=t.ctitle;
+  document.getElementById('el-nocomm').textContent=t.nocomm;
+  document.getElementById('el-cftitle').textContent=t.cftitle;
+  document.getElementById('el-cwarn').textContent=t.cwarn;
+  document.getElementById('el-csubmit').textContent=t.csubmit;
+  document.getElementById('rb1').textContent=t.rb1;
+  document.getElementById('rb2').textContent=t.rb2;
+  document.getElementById('rlabel').textContent=t.rlabel;
 }
 
 function changeLang(l){lang=l;applyLang();}
 
-try {
+try{
   var bl=(navigator.language||'en').toLowerCase().split('-')[0];
   if(T[bl]) lang=bl;
-} catch(e){}
-
+}catch(e){}
 applyLang();
 try{document.getElementById('langdrop').value=lang;}catch(e){}
 
-// Firebase: real counter
+// Firebase counter — only update blur, never show number in landing
 db.ref('count').on('value',function(snap){
   var val=snap.val();
-  if(val&&val>0){
-    count=val;
-    var el=document.getElementById('tnum');
-    if(el) el.textContent=count.toLocaleString();
-
-  }
+  if(val&&val>0) count=val;
 });
 
 function qp(k){
-  try{
-    var r=new RegExp('[?&]'+k+'=([^&]*)');
-    var m=location.search.match(r);
-    return m?decodeURIComponent(m[1]):null;
-  }catch(e){return null;}
+  try{var r=new RegExp('[?&]'+k+'=([^&]*)');var m=location.search.match(r);return m?decodeURIComponent(m[1]):null;}catch(e){return null;}
 }
 
 if(qp('paid')==='true'){
-  tier=parseInt(qp('tier')||'0');
   document.getElementById('landing').style.display='none';
-  db.ref('count').transaction(function(current){
-    return (current||2847)+1;
-  },function(err,committed,snap){
+  db.ref('count').transaction(function(c){return(c||2847)+1;},function(err,committed,snap){
     if(!err&&committed) count=snap.val();
     doReveal();
   });
@@ -1003,63 +1028,47 @@ if(qp('paid')==='true'){
   },3100);
 }
 
-function pay(){
-  window.location.href=LINKS[0];
-}
+function pay(){ window.location.href=LINKS[0]; }
 
 function skip(){
   var t=T[lang];
-  var h=document.getElementById('el-h1');
-  h.innerHTML=t.suretitle+'<br><em>'+t.sure2+'</em><br>'+t.sure3;
+  document.getElementById('el-h1').innerHTML=t.suretitle+'<br><span class="invert">'+t.sure2+'</span><br>'+t.sure3;
   var sk=document.getElementById('el-skip');
   sk.textContent=t.skip2;
   setTimeout(function(){
     sk.textContent=t.skip3;
     sk.onclick=pay;
-    sk.style.color='var(--gold)';
+    sk.style.color='#f5e642';
   },2000);
 }
 
 function doReveal(){
-  var revEl=document.getElementById('reveal');
-  revEl.className='on';
-  var c='#f5c842';
-  document.getElementById('rnum').style.color=c;
+  document.getElementById('reveal').className='on';
   document.getElementById('rsub').textContent=count.toLocaleString()+' — '+T[lang].rsub;
-  document.getElementById('rb1').style.background=c;
-
-  setTimeout(function(){document.getElementById('rtag').className='r-tag v';},400);
+  setTimeout(function(){document.getElementById('rtag').className='r-tag v';},300);
   setTimeout(function(){
-    var rn=document.getElementById('rnum');
-    rn.className='r-num v';
-    animNum(count,rn);
+    document.getElementById('rlabel').className='r-label v';
+    document.getElementById('rnum').className='r-num v';
     document.getElementById('rsub').className='r-sub v';
-  },700);
+    animNum(count,document.getElementById('rnum'));
+  },500);
   setTimeout(function(){
-    buildExtras(c);
+    var t=T[lang];
+    document.getElementById('rcardtitle').textContent=t.rmean;
+    document.getElementById('rcontent').innerHTML=t.rtext;
     document.getElementById('rcard').className='r-card v';
-  },2600);
-  setTimeout(function(){
-    document.getElementById('rbtns').className='r-btns v';
-  },3200);
+  },2200);
+  setTimeout(function(){document.getElementById('rbtns').className='r-actions v';},2800);
   setTimeout(function(){
     document.getElementById('csect').className='c-sect v';
     loadComments();
-  },3800);
-}
-
-function buildExtras(c){
-  var t=T[lang];
-  var html='';
-  document.getElementById('rcardtitle').textContent=t.rmean;
-  html=t.rtext;
-  document.getElementById('rcontent').innerHTML=html;
+  },3400);
 }
 
 function animNum(to,el){
   var s=Date.now();
   (function loop(){
-    var p=Math.min((Date.now()-s)/1800,1),e=1-Math.pow(1-p,4);
+    var p=Math.min((Date.now()-s)/1600,1),e=1-Math.pow(1-p,4);
     el.textContent=Math.floor(e*to).toLocaleString();
     if(p<1) requestAnimationFrame(loop);
   })();
@@ -1070,10 +1079,7 @@ function loadComments(){
   db.ref('comments').limitToLast(20).once('value',function(snap){
     var data=snap.val();
     list.innerHTML='';
-    if(!data){
-      list.innerHTML='<div class="c-no-comm" id="el-nocomm">'+T[lang].nocomm+'</div>';
-      return;
-    }
+    if(!data){list.innerHTML='<div class="c-no-comm">'+T[lang].nocomm+'</div>';return;}
     Object.values(data).reverse().forEach(function(c){
       var d=document.createElement('div');
       d.className='c-item';
@@ -1098,78 +1104,53 @@ function submitC(){
   err.style.display='none';
   if(!name||!text){alert('Name and comment required.');return;}
   if(isSpoiler(text)){err.style.display='block';return;}
-  db.ref('comments').push({name:name,country:country,text:text,ts:Date.now()})
-    .then(function(){loadComments();});
+  db.ref('comments').push({name:name,country:country,text:text,ts:Date.now()}).then(function(){loadComments();});
   document.getElementById('c-name').value='';
   document.getElementById('c-country').value='';
   document.getElementById('c-text').value='';
 }
 
 function getShareText(){
-  return count.toLocaleString()+' people gave in. I know the number. You don\'t. #TheNumber '+SU;
+  return 'Find out how many people paid €1 to find out how many people paid €1… #TheNumber '+SU;
 }
 function shrWA(){
-  var txt=getShareText();
-  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+  window.open('https://wa.me/?text='+encodeURIComponent(getShareText()),'_blank');
 }
 function shrX(){
-  var txt=count.toLocaleString()+' people gave in. I know the number. You don\'t. #TheNumber';
-  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(SU),'_blank');
+  window.open('https://x.com/intent/tweet?text='+encodeURIComponent(getShareText()),'_blank');
 }
 function shrCopy(){
   var url=SU;
   if(navigator.clipboard){
-    navigator.clipboard.writeText(url).then(function(){
-      _setCopied('copy-btn','copy-label','Copied!','Copy link');
-    }).catch(function(){ _fallbackCopy(url,'copy-label','Copied!','Copy link'); });
+    navigator.clipboard.writeText(url).then(function(){_setCopied('copy-btn','copy-label','Copied!','Copy link');}).catch(function(){_fallbackCopy(url,'copy-label','Copied!','Copy link');});
   } else { _fallbackCopy(url,'copy-label','Copied!','Copy link'); }
 }
 function shrCopyReveal(){
   var url=SU;
   if(navigator.clipboard){
-    navigator.clipboard.writeText(url).then(function(){
-      _setCopied('copy-btn-r','copy-label-r','Copied!','Copy');
-    }).catch(function(){ _fallbackCopy(url,'copy-label-r','Copied!','Copy'); });
+    navigator.clipboard.writeText(url).then(function(){_setCopied('copy-btn-r','copy-label-r','Copied!','Copy');}).catch(function(){_fallbackCopy(url,'copy-label-r','Copied!','Copy');});
   } else { _fallbackCopy(url,'copy-label-r','Copied!','Copy'); }
 }
 function _setCopied(btnId,labelId,doneText,resetText){
-  var lbl=document.getElementById(labelId);
-  var btn=document.getElementById(btnId);
+  var lbl=document.getElementById(labelId);var btn=document.getElementById(btnId);
   if(lbl) lbl.textContent=doneText;
   if(btn) btn.classList.add('copied');
-  setTimeout(function(){
-    if(lbl) lbl.textContent=resetText;
-    if(btn) btn.classList.remove('copied');
-  },2000);
+  setTimeout(function(){if(lbl)lbl.textContent=resetText;if(btn)btn.classList.remove('copied');},2000);
 }
 function _fallbackCopy(text,labelId,doneText,resetText){
-  var ta=document.createElement('textarea');
-  ta.value=text; ta.style.position='fixed'; ta.style.opacity='0';
-  document.body.appendChild(ta); ta.focus(); ta.select();
-  try{ document.execCommand('copy'); _setCopied(null,labelId,doneText,resetText); }catch(e){}
+  var ta=document.createElement('textarea');ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+  document.body.appendChild(ta);ta.focus();ta.select();
+  try{document.execCommand('copy');_setCopied(null,labelId,doneText,resetText);}catch(e){}
   document.body.removeChild(ta);
 }
-function shr(){
-  var m=T[lang].badge.replace('people know what it is.','people know a number. You don\'t.');
-  var txt="There's a number. "+count.toLocaleString()+" people paid €1 to see it. I know what it is. You don't.";
-  if(navigator.share) navigator.share({title:'The Number',text:txt,url:SU});
-  else window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(txt)+'&url='+encodeURIComponent(SU),'_blank');
-}
-
 function bk(){
   document.getElementById('reveal').className='';
   document.getElementById('landing').style.display='block';
   try{history.replaceState(null,'',SU);}catch(e){}
-  ['rtag','rnum','rsub','rcard','rbtns','csect'].forEach(function(id){
+  ['rtag','rlabel','rnum','rsub','rcard','rbtns','csect'].forEach(function(id){
     var el=document.getElementById(id);
     if(!el) return;
-    el.className=el.className
-      .replace('r-tag v','r-tag')
-      .replace('r-num v','r-num')
-      .replace('r-sub v','r-sub')
-      .replace('r-card v','r-card')
-      .replace('r-btns v','r-btns')
-      .replace('c-sect v','c-sect');
+    el.className=el.className.replace(' v','');
   });
 }
 </script>
