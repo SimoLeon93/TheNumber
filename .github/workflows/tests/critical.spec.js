@@ -6,7 +6,7 @@ test.describe('UI Smoke Tests', () => {
   test('Homepage loads and shows blurred number', async ({ page }) => {
     await page.goto(SITE_URL, { waitUntil: 'networkidle' });
     await expect(page.locator('h1')).toBeVisible();
-    const teaserEl = page.locator('.t-num').first();
+    const teaserEl = page.locator('#tnum, .lock-number').first();
     await expect(teaserEl).toBeVisible();
   });
 
