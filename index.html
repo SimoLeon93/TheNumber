@@ -1013,12 +1013,24 @@ function qp(k){
   try{var r=new RegExp('[?&]'+k+'=([^&]*)');var m=location.search.match(r);return m?decodeURIComponent(m[1]):null;}catch(e){return null;}
 }
 
-if(qp('paid')==='true'){
+var sessionId=qp('session_id');
+if(sessionId){
   document.getElementById('landing').style.display='none';
-  db.ref('count').transaction(function(c){return(c||2847)+1;},function(err,committed,snap){
-    if(!err&&committed) count=snap.val();
-    doReveal();
-  });
+  fetch('https://thenumber-webhook.simoneleonelli93.workers.dev/verify?session_id='+encodeURIComponent(sessionId))
+    .then(function(r){return r.json();})
+    .then(function(data){
+      if(data.valid){
+        db.ref('count').once('value',function(snap){
+          count=snap.val()||0;
+          doReveal();
+        });
+      } else {
+        window.location.href='https://thenumber.lol';
+      }
+    })
+    .catch(function(){
+      window.location.href='https://thenumber.lol';
+    });
 } else {
   setInterval(function(){
     var w=parseInt(document.getElementById('wcount').textContent)||20;
