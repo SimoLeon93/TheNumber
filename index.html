@@ -691,22 +691,15 @@ h1 .invert {
 
     <div class="watching-bar">
       <span id="el-watching-label">WATCHING RIGHT NOW</span>
-      <span><strong id="wcount">23</strong></span>
+      <span><strong id="wcount">—</strong></span>
     </div>
 
     <div class="testis">
       <div class="testi">
-        <span class="testi-idx">1</span>
+        <span class="testi-idx">?</span>
         <div>
-          <div class="testi-text" id="el-t1t">"Not what I expected."</div>
-          <div class="testi-name" id="el-t1w">M.R.</div>
-        </div>
-      </div>
-      <div class="testi">
-        <span class="testi-idx">2</span>
-        <div>
-          <div class="testi-text" id="el-t2t">"My friend didn't believe me. He paid too."</div>
-          <div class="testi-name" id="el-t2w">A.K.</div>
+          <div class="testi-text" id="el-t1t">"Pay. Then you'll understand."</div>
+          <div class="testi-name" id="el-t1w">— Anonymous</div>
         </div>
       </div>
     </div>
@@ -812,7 +805,7 @@ var LINKS = [
 ];
 var SU = 'https://thenumber.lol';
 var SPOILERS = ['thousand','hundred','million','billion','mille','cento','mila','tausend','hundert','scores','dozens','hundreds','thousands','millions'];
-var count = 2847;
+var count = 0;
 var lang = 'en';
 
 var T = {
@@ -822,8 +815,7 @@ var T = {
     hook:'Find out how many people paid <strong>€1</strong> to find out how many people paid <strong>€1</strong>.',
     locked:'LOCKED UNTIL YOU PAY',
     watching:'WATCHING RIGHT NOW',
-    t1t:'"Not what I expected."', t1w:'M.R.',
-    t2t:'"My friend didn\'t believe me. He paid too."', t2w:'A.K.',
+    t1t:'"Pay. Then you\'ll understand."', t1w:'— ANONYMOUS',
     btn:'PAY €1 — SEE THE NUMBER',
     btnsub:'one-time · instant access',
     skip:'or leave and never know',
@@ -852,8 +844,7 @@ var T = {
     hook:'Scopri quante persone hanno pagato <strong>€1</strong> per scoprire quante persone hanno pagato <strong>€1</strong>.',
     locked:'BLOCCATO FINO AL PAGAMENTO',
     watching:'STANNO GUARDANDO ORA',
-    t1t:'"Non me lo aspettavo."', t1w:'M.R.',
-    t2t:'"Il mio amico non ci credeva. Ha pagato anche lui."', t2w:'A.K.',
+    t1t:'"Paga. Poi capirai."', t1w:'— ANONIMO',
     btn:'PAGA €1 — SCOPRI IL NUMERO',
     btnsub:'una tantum · accesso immediato',
     skip:'oppure vai via e non saperlo mai',
@@ -882,8 +873,7 @@ var T = {
     hook:'Finde heraus, wie viele Menschen <strong>€1</strong> bezahlt haben, um herauszufinden, wie viele Menschen <strong>€1</strong> bezahlt haben.',
     locked:'GESPERRT BIS ZUR ZAHLUNG',
     watching:'SCHAUEN GERADE ZU',
-    t1t:'"Nicht das, was ich erwartet hatte."', t1w:'M.R.',
-    t2t:'"Mein Freund glaubte mir nicht. Er hat auch gezahlt."', t2w:'A.K.',
+    t1t:'"Zahle. Dann wirst du es verstehen."', t1w:'— ANONYM',
     btn:'ZAHLE €1 — SIEH DIE ZAHL',
     btnsub:'einmalig · sofortiger Zugang',
     skip:'oder geh und wisse es nie',
@@ -912,8 +902,7 @@ var T = {
     hook:'Découvrez combien de personnes ont payé <strong>€1</strong> pour savoir combien de personnes ont payé <strong>€1</strong>.',
     locked:'VERROUILLÉ JUSQU\'AU PAIEMENT',
     watching:'REGARDENT MAINTENANT',
-    t1t:'"Pas ce à quoi je m\'attendais."', t1w:'M.R.',
-    t2t:'"Mon ami n\'y croyait pas. Il a payé aussi."', t2w:'A.K.',
+    t1t:'"Paye. Alors tu comprendras."', t1w:'— ANONYME',
     btn:'PAYER €1 — VOIR LE NOMBRE',
     btnsub:'unique · accès immédiat',
     skip:'ou pars et ne savoir jamais',
@@ -942,8 +931,7 @@ var T = {
     hook:'Descubre cuántas personas pagaron <strong>€1</strong> para saber cuántas personas pagaron <strong>€1</strong>.',
     locked:'BLOQUEADO HASTA EL PAGO',
     watching:'MIRANDO AHORA',
-    t1t:'"No era lo que esperaba."', t1w:'M.R.',
-    t2t:'"Mi amigo no me creyó. También pagó."', t2w:'A.K.',
+    t1t:'"Paga. Entonces entenderás."', t1w:'— ANÓNIMO',
     btn:'PAGA €1 — VE EL NÚMERO',
     btnsub:'único · acceso inmediato',
     skip:'o vete y no saberlo nunca',
@@ -977,8 +965,6 @@ function applyLang(){
   document.getElementById('el-watching-label').textContent=t.watching;
   document.getElementById('el-t1t').textContent=t.t1t;
   document.getElementById('el-t1w').textContent=t.t1w;
-  document.getElementById('el-t2t').textContent=t.t2t;
-  document.getElementById('el-t2w').textContent=t.t2w;
   document.getElementById('el-btn').textContent=t.btn;
   document.getElementById('el-btn-sub').textContent=t.btnsub;
   document.getElementById('el-skip').textContent=t.skip;
@@ -1003,10 +989,17 @@ try{
 applyLang();
 try{document.getElementById('langdrop').value=lang;}catch(e){}
 
-// Firebase counter — only update blur, never show number in landing
+// Firebase counter
 db.ref('count').on('value',function(snap){
   var val=snap.val();
   if(val&&val>0) count=val;
+});
+
+// Firebase sessions — watching now (reale)
+db.ref('sessions').on('value',function(snap){
+  var val=snap.val();
+  var w=val?Object.keys(val).length:0;
+  document.getElementById('wcount').textContent=w>0?w:'—';
 });
 
 function qp(k){
@@ -1031,13 +1024,6 @@ if(sessionId){
     .catch(function(){
       window.location.href='https://thenumber.lol';
     });
-} else {
-  setInterval(function(){
-    var w=parseInt(document.getElementById('wcount').textContent)||20;
-    w+=Math.random()>.5?1:-1;
-    w=Math.max(9,Math.min(46,w));
-    document.getElementById('wcount').textContent=Math.round(w);
-  },3100);
 }
 
 function pay(){ window.location.href=LINKS[0]; }
