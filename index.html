@@ -1120,8 +1120,9 @@ function loadLandingComments(){
   db.ref('comments').limitToLast(20).once('value',function(snap){
     var data=snap.val();
     list.innerHTML='';
-    if(!data){list.innerHTML='<div class="landing-no-comm">No reactions yet. Be the first.</div>';return;}
+    if(!data){list.innerHTML='<div class="landing-no-comm">No reactions yet. Be the first. [db:empty]</div>';return;}
     var items=Object.values(data).sort(function(a,b){return (b.ts||0)-(a.ts||0);});
+    if(items.length===0){list.innerHTML='<div class="landing-no-comm">No reactions yet. [items:0]</div>';return;}
     items.forEach(function(c){
       var d=document.createElement('div');
       d.className='landing-c-item';
@@ -1135,6 +1136,8 @@ function loadLandingComments(){
       d.innerHTML='<span class="landing-c-meta">'+label+'</span> <span class="landing-c-text">'+textHtml+'</span>';
       list.appendChild(d);
     });
+  },function(err){
+    list.innerHTML='<div class="landing-no-comm">[error: '+err.code+']</div>';
   });
 }
 loadLandingComments();
