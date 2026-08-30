@@ -1117,11 +1117,11 @@ db.ref('count').on('value',function(snap){
 // Landing comments
 function loadLandingComments(){
   var list=document.getElementById('landing-clist');
-  db.ref('comments').orderByChild('ts').limitToLast(20).once('value',function(snap){
+  db.ref('comments').limitToLast(20).once('value',function(snap){
     var data=snap.val();
     list.innerHTML='';
     if(!data){list.innerHTML='<div class="landing-no-comm">No reactions yet. Be the first.</div>';return;}
-    var items=Object.values(data).sort(function(a,b){return b.ts-a.ts;});
+    var items=Object.values(data).sort(function(a,b){return (b.ts||0)-(a.ts||0);});
     items.forEach(function(c){
       var d=document.createElement('div');
       d.className='landing-c-item';
@@ -1218,11 +1218,11 @@ function animNum(to,el){
 
 function loadComments(){
   var list=document.getElementById('clist');
-  db.ref('comments').orderByChild('ts').limitToLast(20).once('value',function(snap){
+  db.ref('comments').limitToLast(20).once('value',function(snap){
     var data=snap.val();
     list.innerHTML='';
     if(!data){list.innerHTML='<div class="c-no-comm">'+T[lang].nocomm+'</div>';return;}
-    var items=Object.values(data).sort(function(a,b){return b.ts-a.ts;});
+    var items=Object.values(data).sort(function(a,b){return (b.ts||0)-(a.ts||0);});
     items.forEach(function(c){
       var d=document.createElement('div');
       d.className='c-item';
