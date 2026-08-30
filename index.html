@@ -347,6 +347,51 @@ h1 .invert {
 .s-btn:hover { border-color: var(--white); color: var(--white); }
 .s-btn.copied { border-color: var(--yellow); color: var(--yellow); }
 
+/* LANDING COMMENTS */
+.landing-comments {
+  margin-bottom: 32px;
+}
+.landing-comments-title {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 13px;
+  letter-spacing: .3em;
+  color: var(--gray);
+  text-transform: uppercase;
+  padding: 12px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 16px;
+}
+.landing-c-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.landing-c-item-name {
+  font-size: 9px;
+  letter-spacing: .2em;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.landing-c-item-text {
+  font-size: 13px;
+  color: var(--white);
+  line-height: 1.6;
+  font-style: italic;
+}
+.landing-c-item-text.censored {
+  color: var(--border);
+  letter-spacing: .15em;
+  font-style: normal;
+  user-select: none;
+}
+.landing-no-comm {
+  font-size: 11px;
+  color: var(--gray);
+  padding: 20px 0;
+  letter-spacing: .1em;
+}
+
 /* BOTTOM BAR */
 .bottombar {
   padding: 16px 0;
@@ -713,6 +758,11 @@ h1 .invert {
 
     <span class="skip-link" id="el-skip" onclick="skip()">or leave and never know</span>
 
+    <div class="landing-comments">
+      <div class="landing-comments-title" id="el-lctitle">REACTIONS</div>
+      <div id="landing-clist"><div class="landing-no-comm" id="el-lnocomm">No reactions yet. Be the first.</div></div>
+    </div>
+
     <div class="share-sect">
       <div class="share-label" id="el-share-label">SPREAD THE CURIOSITY</div>
       <div class="share-btns">
@@ -995,6 +1045,27 @@ db.ref('count').on('value',function(snap){
   if(val&&val>0) count=val;
 });
 
+// Landing comments
+function loadLandingComments(){
+  var list=document.getElementById('landing-clist');
+  db.ref('comments').limitToLast(5).once('value',function(snap){
+    var data=snap.val();
+    list.innerHTML='';
+    if(!data){list.innerHTML='<div class="landing-no-comm">'+T[lang].nocomm+'</div>';return;}
+    Object.values(data).reverse().forEach(function(c){
+      var d=document.createElement('div');
+      d.className='landing-c-item';
+      var isSpoil=isSpoiler(c.text);
+      var textHtml=isSpoil
+        ? '<div class="landing-c-item-text censored">[ reaction hidden — no spoilers ]</div>'
+        : '<div class="landing-c-item-text">&ldquo;'+c.text+'&rdquo;</div>';
+      d.innerHTML='<div class="landing-c-item-name">'+(c.country?c.country+' ':'')+c.name+'</div>'+textHtml;
+      list.appendChild(d);
+    });
+  });
+}
+loadLandingComments();
+
 // Firebase sessions — watching now (reale)
 db.ref('sessions').on('value',function(snap){
   var val=snap.val();
@@ -1154,3 +1225,4 @@ function bk(){
 </script>
 </body>
 </html>
+
