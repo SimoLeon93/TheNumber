@@ -363,27 +363,24 @@ h1 .invert {
   margin-bottom: 16px;
 }
 .landing-c-item {
-  padding: 14px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border);
-}
-.landing-c-item-name {
-  font-size: 9px;
-  letter-spacing: .2em;
-  color: var(--gray);
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.landing-c-item-text {
-  font-size: 13px;
-  color: var(--white);
+  font-size: 12px;
   line-height: 1.6;
+}
+.landing-c-meta {
+  color: var(--gray);
+  letter-spacing: .05em;
+  margin-right: 4px;
+}
+.landing-c-text {
+  color: var(--white);
   font-style: italic;
 }
-.landing-c-item-text.censored {
+.landing-c-censored {
   color: var(--border);
-  letter-spacing: .15em;
   font-style: normal;
-  user-select: none;
+  letter-spacing: .1em;
 }
 .landing-no-comm {
   font-size: 11px;
@@ -758,11 +755,6 @@ h1 .invert {
 
     <span class="skip-link" id="el-skip" onclick="skip()">or leave and never know</span>
 
-    <div class="landing-comments">
-      <div class="landing-comments-title" id="el-lctitle">REACTIONS</div>
-      <div id="landing-clist"><div class="landing-no-comm" id="el-lnocomm">No reactions yet. Be the first.</div></div>
-    </div>
-
     <div class="share-sect">
       <div class="share-label" id="el-share-label">SPREAD THE CURIOSITY</div>
       <div class="share-btns">
@@ -779,6 +771,11 @@ h1 .invert {
           <span id="copy-label">Copy link</span>
         </button>
       </div>
+    </div>
+
+    <div class="landing-comments">
+      <div class="landing-comments-title" id="el-lctitle">REACTIONS</div>
+      <div id="landing-clist"><div class="landing-no-comm" id="el-lnocomm">No reactions yet. Be the first.</div></div>
     </div>
 
   </div>
@@ -835,7 +832,63 @@ h1 .invert {
         <div class="c-form-warn" id="el-cwarn">No spoilers. Do not reveal the number.</div>
         <div class="c-row">
           <input class="c-input" type="text" id="c-name" placeholder="Name" maxlength="30"/>
-          <input class="c-input" type="text" id="c-country" placeholder="Country" maxlength="20"/>
+          <select class="c-input" id="c-country" style="cursor:pointer;">
+            <option value="">— Country —</option>
+            <option value="🇦🇫 Afghanistan">🇦🇫 Afghanistan</option>
+            <option value="🇦🇱 Albania">🇦🇱 Albania</option>
+            <option value="🇩🇿 Algeria">🇩🇿 Algeria</option>
+            <option value="🇦🇷 Argentina">🇦🇷 Argentina</option>
+            <option value="🇦🇺 Australia">🇦🇺 Australia</option>
+            <option value="🇦🇹 Austria">🇦🇹 Austria</option>
+            <option value="🇧🇪 Belgium">🇧🇪 Belgium</option>
+            <option value="🇧🇷 Brazil">🇧🇷 Brazil</option>
+            <option value="🇧🇬 Bulgaria">🇧🇬 Bulgaria</option>
+            <option value="🇨🇦 Canada">🇨🇦 Canada</option>
+            <option value="🇨🇱 Chile">🇨🇱 Chile</option>
+            <option value="🇨🇳 China">🇨🇳 China</option>
+            <option value="🇨🇴 Colombia">🇨🇴 Colombia</option>
+            <option value="🇭🇷 Croatia">🇭🇷 Croatia</option>
+            <option value="🇨🇿 Czech Republic">🇨🇿 Czech Republic</option>
+            <option value="🇩🇰 Denmark">🇩🇰 Denmark</option>
+            <option value="🇪🇬 Egypt">🇪🇬 Egypt</option>
+            <option value="🇫🇮 Finland">🇫🇮 Finland</option>
+            <option value="🇫🇷 France">🇫🇷 France</option>
+            <option value="🇩🇪 Germany">🇩🇪 Germany</option>
+            <option value="🇬🇷 Greece">🇬🇷 Greece</option>
+            <option value="🇭🇺 Hungary">🇭🇺 Hungary</option>
+            <option value="🇮🇳 India">🇮🇳 India</option>
+            <option value="🇮🇩 Indonesia">🇮🇩 Indonesia</option>
+            <option value="🇮🇷 Iran">🇮🇷 Iran</option>
+            <option value="🇮🇪 Ireland">🇮🇪 Ireland</option>
+            <option value="🇮🇱 Israel">🇮🇱 Israel</option>
+            <option value="🇮🇹 Italy">🇮🇹 Italy</option>
+            <option value="🇯🇵 Japan">🇯🇵 Japan</option>
+            <option value="🇯🇴 Jordan">🇯🇴 Jordan</option>
+            <option value="🇰🇷 South Korea">🇰🇷 South Korea</option>
+            <option value="🇲🇽 Mexico">🇲🇽 Mexico</option>
+            <option value="🇳🇱 Netherlands">🇳🇱 Netherlands</option>
+            <option value="🇳🇿 New Zealand">🇳🇿 New Zealand</option>
+            <option value="🇳🇴 Norway">🇳🇴 Norway</option>
+            <option value="🇵🇰 Pakistan">🇵🇰 Pakistan</option>
+            <option value="🇵🇱 Poland">🇵🇱 Poland</option>
+            <option value="🇵🇹 Portugal">🇵🇹 Portugal</option>
+            <option value="🇷🇴 Romania">🇷🇴 Romania</option>
+            <option value="🇷🇺 Russia">🇷🇺 Russia</option>
+            <option value="🇸🇦 Saudi Arabia">🇸🇦 Saudi Arabia</option>
+            <option value="🇷🇸 Serbia">🇷🇸 Serbia</option>
+            <option value="🇸🇬 Singapore">🇸🇬 Singapore</option>
+            <option value="🇸🇰 Slovakia">🇸🇰 Slovakia</option>
+            <option value="🇿🇦 South Africa">🇿🇦 South Africa</option>
+            <option value="🇪🇸 Spain">🇪🇸 Spain</option>
+            <option value="🇸🇪 Sweden">🇸🇪 Sweden</option>
+            <option value="🇨🇭 Switzerland">🇨🇭 Switzerland</option>
+            <option value="🇹🇷 Turkey">🇹🇷 Turkey</option>
+            <option value="🇺🇦 Ukraine">🇺🇦 Ukraine</option>
+            <option value="🇦🇪 UAE">🇦🇪 UAE</option>
+            <option value="🇬🇧 United Kingdom">🇬🇧 United Kingdom</option>
+            <option value="🇺🇸 United States">🇺🇸 United States</option>
+            <option value="🇻🇳 Vietnam">🇻🇳 Vietnam</option>
+          </select>
         </div>
         <textarea class="c-input" id="c-text" rows="3" placeholder="Your reaction..." maxlength="200"></textarea>
         <div class="c-err" id="cerr">No spoilers allowed.</div>
@@ -1028,6 +1081,32 @@ function applyLang(){
   document.getElementById('rb1').textContent=t.rb1;
   document.getElementById('rb2').textContent=t.rb2;
   document.getElementById('rlabel').textContent=t.rlabel;
+  // Reveal static elements
+  try{document.getElementById('rtag').textContent='✦ ACCESS GRANTED ✦';}catch(e){}
+  try{document.getElementById('rsub').textContent=t.rsub;}catch(e){}
+  try{document.getElementById('rcardtitle').textContent=t.rmean;}catch(e){}
+  try{document.getElementById('rb2').textContent=t.rb2;}catch(e){}
+  // Reveal form placeholders
+  try{
+    var nameEl=document.getElementById('c-name');
+    var textEl=document.getElementById('c-text');
+    if(lang==='it'){
+      if(nameEl) nameEl.placeholder='Nome';
+      if(textEl) textEl.placeholder='La tua reazione...';
+    } else if(lang==='de'){
+      if(nameEl) nameEl.placeholder='Name';
+      if(textEl) textEl.placeholder='Deine Reaktion...';
+    } else if(lang==='fr'){
+      if(nameEl) nameEl.placeholder='Nom';
+      if(textEl) textEl.placeholder='Ta réaction...';
+    } else if(lang==='es'){
+      if(nameEl) nameEl.placeholder='Nombre';
+      if(textEl) textEl.placeholder='Tu reacción...';
+    } else {
+      if(nameEl) nameEl.placeholder='Name';
+      if(textEl) textEl.placeholder='Your reaction...';
+    }
+  }catch(e){}
 }
 
 function changeLang(l){lang=l;applyLang();}
@@ -1048,18 +1127,22 @@ db.ref('count').on('value',function(snap){
 // Landing comments
 function loadLandingComments(){
   var list=document.getElementById('landing-clist');
-  db.ref('comments').limitToLast(5).once('value',function(snap){
+  db.ref('comments').orderByChild('ts').limitToLast(20).once('value',function(snap){
     var data=snap.val();
     list.innerHTML='';
-    if(!data){list.innerHTML='<div class="landing-no-comm">'+T[lang].nocomm+'</div>';return;}
-    Object.values(data).reverse().forEach(function(c){
+    if(!data){list.innerHTML='<div class="landing-no-comm">No reactions yet. Be the first.</div>';return;}
+    var items=Object.values(data).sort(function(a,b){return b.ts-a.ts;});
+    items.forEach(function(c){
       var d=document.createElement('div');
       d.className='landing-c-item';
       var isSpoil=isSpoiler(c.text);
+      var flag=c.country?c.country.split(' ')[0]:'';
+      var name=c.name||'Anonymous';
+      var label=flag?flag+' — '+name:name;
       var textHtml=isSpoil
-        ? '<div class="landing-c-item-text censored">[ reaction hidden — no spoilers ]</div>'
-        : '<div class="landing-c-item-text">&ldquo;'+c.text+'&rdquo;</div>';
-      d.innerHTML='<div class="landing-c-item-name">'+(c.country?c.country+' ':'')+c.name+'</div>'+textHtml;
+        ? '<span class="landing-c-censored">[ spoiler hidden ]</span>'
+        : '&ldquo;'+c.text+'&rdquo;';
+      d.innerHTML='<span class="landing-c-meta">'+label+'</span> <span class="landing-c-text">'+textHtml+'</span>';
       list.appendChild(d);
     });
   });
@@ -1145,14 +1228,18 @@ function animNum(to,el){
 
 function loadComments(){
   var list=document.getElementById('clist');
-  db.ref('comments').limitToLast(20).once('value',function(snap){
+  db.ref('comments').orderByChild('ts').limitToLast(20).once('value',function(snap){
     var data=snap.val();
     list.innerHTML='';
     if(!data){list.innerHTML='<div class="c-no-comm">'+T[lang].nocomm+'</div>';return;}
-    Object.values(data).reverse().forEach(function(c){
+    var items=Object.values(data).sort(function(a,b){return b.ts-a.ts;});
+    items.forEach(function(c){
       var d=document.createElement('div');
       d.className='c-item';
-      d.innerHTML='<div class="c-item-name">'+(c.country?c.country+' ':'')+c.name+'</div><div class="c-item-text">&ldquo;'+c.text+'&rdquo;</div>';
+      var flag=c.country?c.country.split(' ')[0]:'';
+      var name=c.name||'Anonymous';
+      var label=flag?flag+' — '+name:name;
+      d.innerHTML='<div class="c-item-name">'+label+'</div><div class="c-item-text">&ldquo;'+c.text+'&rdquo;</div>';
       list.appendChild(d);
     });
   });
@@ -1225,4 +1312,3 @@ function bk(){
 </script>
 </body>
 </html>
-
