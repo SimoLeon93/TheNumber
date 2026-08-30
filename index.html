@@ -1136,9 +1136,9 @@ function loadLandingComments(){
       var d=document.createElement('div');
       d.className='landing-c-item';
       var isSpoil=isSpoiler(c.text);
-      var flag=c.country?c.country.split(' ')[0]:'';
+      var country=c.country||'';
       var name=c.name||'Anonymous';
-      var label=flag?flag+' — '+name:name;
+      var label=country?country+' — '+name:name;
       var textHtml=isSpoil
         ? '<span class="landing-c-censored">[ spoiler hidden ]</span>'
         : '&ldquo;'+c.text+'&rdquo;';
@@ -1236,9 +1236,9 @@ function loadComments(){
     items.forEach(function(c){
       var d=document.createElement('div');
       d.className='c-item';
-      var flag=c.country?c.country.split(' ')[0]:'';
+      var country=c.country||'';
       var name=c.name||'Anonymous';
-      var label=flag?flag+' — '+name:name;
+      var label=country?country+' — '+name:name;
       d.innerHTML='<div class="c-item-name">'+label+'</div><div class="c-item-text">&ldquo;'+c.text+'&rdquo;</div>';
       list.appendChild(d);
     });
