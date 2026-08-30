@@ -1113,7 +1113,12 @@ db.ref('count').on('value',function(snap){
   if(val&&val>0) count=val;
 });
 
-// Landing comments
+// Load landing comments after Firebase ready
+db.ref('.info/connected').on('value', function(snap){
+  if(snap.val()===true){
+    loadLandingComments();
+  }
+});
 function loadLandingComments(){
   var list=document.getElementById('landing-clist');
   list.innerHTML='<div class="landing-no-comm">[loading...]</div>';
@@ -1128,8 +1133,6 @@ function loadLandingComments(){
     list.innerHTML='<div class="landing-no-comm">[firebase error:'+err.code+' '+err.message+']</div>';
   });
 }
-loadLandingComments();
-
 // Firebase sessions — watching now (reale)
 db.ref('sessions').on('value',function(snap){
   var val=snap.val();
